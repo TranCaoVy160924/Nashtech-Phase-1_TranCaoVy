@@ -1,0 +1,7 @@
+add-migration InitialIdentityServerMigration -c PersistedGrantDbContext
+add-migration InitialIdentityServerMigration -c ConfigurationDbContext
+update-database -Context PersistedGrantDbContext
+update-database -Context ConfigurationDbContext
+
+Add-Migration InitialAspNetIdentityMigration -Context AspNetIdentityDbContext
+update-database -Context AspNetIdentityDbContext
