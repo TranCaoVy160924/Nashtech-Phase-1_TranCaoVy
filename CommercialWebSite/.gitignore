@@ -1,1 +1,3 @@
-CommercialWebSite\BackendServerApi\bin
+CommercialWebSite/BackendServerApi/bin
+CommercialWebSite/BackendServerApi/obj
+CommercialWebSite/DataAccess/obj
