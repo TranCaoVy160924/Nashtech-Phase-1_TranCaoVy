@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AuthHelper\AuthHelper.csproj" />
     <ProjectReference Include="..\DataRepositoryInterface\DataRepositoryInterface.csproj" />
   </ItemGroup>
 

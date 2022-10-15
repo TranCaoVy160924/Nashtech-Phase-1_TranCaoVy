@@ -15,8 +15,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AuthHelper\AuthHelper.csproj" />
-  </ItemGroup>
-
 </Project>

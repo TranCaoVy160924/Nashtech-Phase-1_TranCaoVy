@@ -1,5 +1,4 @@
-﻿using AuthHelper.Auth;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,15 @@ namespace DataRepositoryInterface
 
         void SetConfig(IConfiguration configuration);
 
-        Task<List<Claim>>? AuthenticateLogin(LoginModel model);
+        Task<List<Claim>>? AuthenticateLoginAsync(string username, string password);
+
+        Task<Boolean> IsExistedAsync(string username);
+
+        Task<IdentityUser> RegisterNewUserAsync(
+            string username, string email, string password);
+
+        Task InitialUserRoleAsync(string role);
+
+        Task AddRoleToUserAsync(IdentityUser user, string role);
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221014112411_InitialTestMigration")]
-    partial class InitialTestMigration
+    [Migration("20221015091756_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,59 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("DataAccess.DataModel.Good", b =>
+                {
+                    b.Property<int>("GoodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GoodId"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoodName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoodPicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoodType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberInStorage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OnlineShopId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("UserRate")
+                        .HasColumnType("int");
+
+                    b.HasKey("GoodId");
+
+                    b.HasIndex("OnlineShopId");
+
+                    b.ToTable("Goods");
+                });
+
             modelBuilder.Entity("DataAccess.DataModel.OnlineShop", b =>
                 {
-                    b.Property<string>("OnlineShopId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ShopAddress")
@@ -37,9 +87,44 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OnlineShopId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId")
+                        .IsUnique();
 
                     b.ToTable("OnlineShops");
+                });
+
+            modelBuilder.Entity("DataAccess.DataModel.Receipt", b =>
+                {
+                    b.Property<int>("ReceiptId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReceiptId"), 1L, 1);
+
+                    b.Property<string>("BuyerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("GoodId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCheckedOut")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NumOfGood")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.HasKey("ReceiptId");
+
+                    b.HasIndex("BuyerId");
+
+                    b.HasIndex("GoodId");
+
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -250,13 +335,65 @@ namespace DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("OnlineShopId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("OnlineShopId");
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("UserAccount");
+                });
+
+            modelBuilder.Entity("DataAccess.DataModel.Good", b =>
+                {
+                    b.HasOne("DataAccess.DataModel.OnlineShop", "OnlineShop")
+                        .WithMany("Goods")
+                        .HasForeignKey("OnlineShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OnlineShop");
+                });
+
+            modelBuilder.Entity("DataAccess.DataModel.OnlineShop", b =>
+                {
+                    b.HasOne("DataAccess.DataModel.UserAccount", "Owner")
+                        .WithOne("OnlineShop")
+                        .HasForeignKey("DataAccess.DataModel.OnlineShop", "OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("DataAccess.DataModel.Receipt", b =>
+                {
+                    b.HasOne("DataAccess.DataModel.UserAccount", "Buyer")
+                        .WithMany("Receipts")
+                        .HasForeignKey("BuyerId");
+
+                    b.HasOne("DataAccess.DataModel.Good", "Good")
+                        .WithMany("Receipts")
+                        .HasForeignKey("GoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
+
+                    b.Navigation("Good");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -310,15 +447,21 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DataAccess.DataModel.Good", b =>
+                {
+                    b.Navigation("Receipts");
+                });
+
+            modelBuilder.Entity("DataAccess.DataModel.OnlineShop", b =>
+                {
+                    b.Navigation("Goods");
+                });
+
             modelBuilder.Entity("DataAccess.DataModel.UserAccount", b =>
                 {
-                    b.HasOne("DataAccess.DataModel.OnlineShop", "OnlineShop")
-                        .WithMany()
-                        .HasForeignKey("OnlineShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("OnlineShop");
+
+                    b.Navigation("Receipts");
                 });
 #pragma warning restore 612, 618
         }

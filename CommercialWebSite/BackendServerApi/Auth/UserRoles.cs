@@ -1,4 +1,4 @@
-﻿namespace AuthHelper.Auth
+﻿namespace BackendServerAPI.Auth
 {
     public static class UserRoles
     {
