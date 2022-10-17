@@ -1,0 +1,30 @@
+﻿@using CommercialWebSiteClient.Models
+@model RegisterRequestModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form method="post" asp-controller="Auth" asp-action="Register">
+    <label asp-for="Username"></label>
+    <input asp-for="Username" />
+    <span asp-validation-for="Username" class="text-danger"></span>
+
+    <br />
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+    
+    <br />
+    <label asp-for="Email"></label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <br />
+    <input type="submit" title="Register" />
+    <br />
+    @*@Html.ValidationSummary()*@
+    <span class="text-danger" style="color:red">@TempData["ErrorMessage"]</span>  
+</form>

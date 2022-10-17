@@ -5,3 +5,7 @@ update-database -Context ConfigurationDbContext
 
 Add-Migration InitialAspNetIdentityMigration -Context AspNetIdentityDbContext
 update-database -Context AspNetIdentityDbContext
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Tool
+dotnet add package Microsoft.EntityFrameworkCore.Design

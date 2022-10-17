@@ -16,8 +16,6 @@ namespace DataAccess.DataModel
         public string ProfilePicture { get; set; }
         public string UserAddress { get; set; }
 
-        public virtual OnlineShop? OnlineShop { get; set; }
-
-        public virtual List<Receipt>? Receipts { get; set; }
+        public virtual List<Order>? Orders { get; set; }
     }
 }
