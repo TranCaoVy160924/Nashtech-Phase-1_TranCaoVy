@@ -12,6 +12,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

@@ -1,6 +1,16 @@
-﻿@{
-    if (true)
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var session = HttpContextAccessor.HttpContext.Session;
+    string jwtAuthToken = session.GetString("JwtAuthToken");
+
+    if (jwtAuthToken == null)
     {
-        Layout = "_Layout";
+        Layout = "_LayoutUnauthorize";
+    } 
+    else
+    {
+        Layout = "_LayoutAuthorized";
     }
 }

@@ -2,6 +2,7 @@
 //using CommercialWebSiteClient.Models;
 using AuthModels.Auth;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace CommercialWebSiteClient.RefitClient
 {
@@ -9,5 +10,8 @@ namespace CommercialWebSiteClient.RefitClient
     {
         [Post("/Authenticate/Register")]
         Task Register([Body] RegisterRequestModel model);
+
+        [Post("/Authenticate/Login")]
+        Task<string> Login([Body] LoginRequestModel model);
     }
 }

@@ -20,18 +20,18 @@ namespace CommercialWebSiteAPI.Controllers
         private readonly IAuthenticationRepository _authRepository;
 
         // Common response
-        private static Response ExistedUserError = new Response
+        private static StatusResponse ExistedUserError = new StatusResponse
         {
             Status = "Error",
             Message = "User already exists!"
         };
-        private static Response CreateUserFailed = new Response
+        private static StatusResponse CreateUserFailed = new StatusResponse
         {
             Status = "Error",
             Message = "User creation failed! "
                 + "Please check user details and try again."
         };
-        private static Response CreateUserSucceeded = new Response
+        private static StatusResponse CreateUserSucceeded = new StatusResponse
         {
             Status = "Success",
             Message = "User created successfully!"
@@ -53,7 +53,7 @@ namespace CommercialWebSiteAPI.Controllers
         }
 
         [HttpPost]
-        [Post("/login")]
+        [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestModel model)
         {
             var authClaim = await _authRepository
@@ -65,9 +65,15 @@ namespace CommercialWebSiteAPI.Controllers
 
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    Expiration = token.ValidTo
                 });
+
+                //return Ok(new JwtResponseToken
+                //{
+                //    Token = token,
+                //    Expiration = token.ValidTo
+                //});
             }
             return Unauthorized();
         }
