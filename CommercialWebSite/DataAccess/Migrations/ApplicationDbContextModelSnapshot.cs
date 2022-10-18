@@ -37,6 +37,13 @@ namespace DataAccess.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Clothes"
+                        });
                 });
 
             modelBuilder.Entity("DataAccess.DataModel.Order", b =>
@@ -87,7 +94,9 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
                     b.Property<int>("AgregateUserRate")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -100,7 +109,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberInStorage")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -121,6 +132,96 @@ namespace DataAccess.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(456),
+                            Description = "Product 1",
+                            Price = 10000.0,
+                            ProductName = "Product 1",
+                            ProductPicture = "./images/product-1.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(468)
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(510),
+                            Description = "Product 2",
+                            Price = 10000.0,
+                            ProductName = "Product 2",
+                            ProductPicture = "./images/product-2.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(511)
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(532),
+                            Description = "Product 3",
+                            Price = 10000.0,
+                            ProductName = "Product 3",
+                            ProductPicture = "./images/product-3.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(533)
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(552),
+                            Description = "Product 4",
+                            Price = 10000.0,
+                            ProductName = "Product 4",
+                            ProductPicture = "./images/product-4.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(552)
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(570),
+                            Description = "Product 5",
+                            Price = 10000.0,
+                            ProductName = "Product 5",
+                            ProductPicture = "./images/product-5.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(571)
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(595),
+                            Description = "Product 6",
+                            Price = 10000.0,
+                            ProductName = "Product 6",
+                            ProductPicture = "./images/product-6.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(595)
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(705),
+                            Description = "Product 7",
+                            Price = 10000.0,
+                            ProductName = "Product 7",
+                            ProductPicture = "./images/product-7.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(707)
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(732),
+                            Description = "Product 8",
+                            Price = 10000.0,
+                            ProductName = "Product 8",
+                            ProductPicture = "./images/product-8.png",
+                            UpdateDate = new DateTime(2022, 10, 18, 14, 12, 45, 834, DateTimeKind.Local).AddTicks(732)
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

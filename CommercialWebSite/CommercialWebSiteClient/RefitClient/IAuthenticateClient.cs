@@ -1,6 +1,6 @@
 ﻿using Refit;
 //using CommercialWebSiteClient.Models;
-using AuthModels.Auth;
+using ShareModelsDTO.Auth;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 

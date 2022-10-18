@@ -13,6 +13,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
@@ -32,6 +33,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseDeveloperExceptionPage();
 
 app.MapControllerRoute(
     name: "default",

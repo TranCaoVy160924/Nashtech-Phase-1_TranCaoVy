@@ -21,6 +21,5 @@ namespace DataAccess.DataModel
         public virtual Category Category { get; set; }
 
         public virtual List<Order>? Orders { get; set; }
-        
     }
 }

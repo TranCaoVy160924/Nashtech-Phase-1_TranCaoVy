@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CommercialWebSiteClient.RefitClient;
 using Refit;
-using AuthModels.Auth;
 using Newtonsoft.Json;
 using CommercialWebSiteClient.Models;
+using ShareModelsDTO.Business;
 
 namespace ClientSite.Controllers
 {
@@ -37,7 +37,14 @@ namespace ClientSite.Controllers
                 _logger.LogInformation("Weather: " + weather);
             }
 
-            return View();
+            IProductClient productClient = RestService.For<IProductClient>(baseUrl);
+            List<ProductModel> products = await productClient.GetAllProductAsync();
+            products.ForEach(p =>
+            {
+                _logger.LogInformation(p.ProductName + ", Category: " + p.CategoryId);
+            });
+
+            return View(products);
         }
 
         public IActionResult Privacy()

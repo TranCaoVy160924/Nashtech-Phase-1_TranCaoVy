@@ -1,4 +1,4 @@
-﻿using AuthModels.Auth;
+﻿using ShareModelsDTO.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;

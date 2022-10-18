@@ -1,5 +1,5 @@
 ﻿//using CommercialWebSiteClient.Models;
-using AuthModels.Auth;
+using ShareModelsDTO.Auth;
 using CommercialWebSiteClient.RefitClient;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -90,6 +90,15 @@ namespace CommercialWebSiteClient.Controllers
             }
 
             return View("Register");
+        }
+
+        [HttpGet]
+
+        public IActionResult Logout()
+        {
+            var session = Request.HttpContext.Session;
+            session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

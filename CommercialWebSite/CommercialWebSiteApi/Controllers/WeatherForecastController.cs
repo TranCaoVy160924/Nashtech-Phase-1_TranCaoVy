@@ -1,4 +1,4 @@
-using AuthModels.Auth;
+using ShareModelsDTO.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace CommercialWebSiteAPI.Controllers;

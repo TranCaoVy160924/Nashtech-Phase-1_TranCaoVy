@@ -2,15 +2,5 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    var session = HttpContextAccessor.HttpContext.Session;
-    string jwtAuthToken = session.GetString("JwtAuthToken");
-
-    if (jwtAuthToken == null)
-    {
-        Layout = "_LayoutUnauthorize";
-    } 
-    else
-    {
-        Layout = "_LayoutAuthorized";
-    }
+    Layout = "_MainLayout";
 }

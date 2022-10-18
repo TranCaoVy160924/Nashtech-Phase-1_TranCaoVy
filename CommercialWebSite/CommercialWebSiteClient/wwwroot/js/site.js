@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let numOfCardItem = document.getElementById("num-of-card-item")
+console.log(numOfCardItem)
 
-// Write your JavaScript code.
+const onItemClick = (item) => {
+    console.log(item);
+    numOfCardItem.innerHTML++;
+};
+
+
+// TODO 1: Change css for Product Items
+
+// TODO 2: Generate dynamic "Men Products"
+
+// TODO 3: Handle Add to cart event
+

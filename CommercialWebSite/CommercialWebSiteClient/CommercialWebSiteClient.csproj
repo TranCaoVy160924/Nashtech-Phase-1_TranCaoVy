@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AuthModels\AuthModels.csproj" />
+    <ProjectReference Include="..\ShareModelsDTO\ShareModelsDTO.csproj" />
   </ItemGroup>
 
 </Project>
