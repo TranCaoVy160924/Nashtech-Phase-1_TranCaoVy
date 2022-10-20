@@ -7,5 +7,11 @@ namespace CommercialWebSite.Client.RefitClient
     {
         [Get("/Product")]
         Task<List<ProductModel>> GetAllProductAsync();
+
+        [Get("/Product/Feature")]
+        Task<List<ProductModel>> GetFeatureProductAsync();
+
+        [Get("/Product/{id}")]
+        Task<ProductModel> GetProductByIdAsync(int id);
     }
 }

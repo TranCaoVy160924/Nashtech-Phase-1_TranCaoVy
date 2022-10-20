@@ -18,11 +18,31 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<List<ProductModel>> GetAll()
+        public async Task<List<ProductModel>> GetAllAsync()
         {
             List<ProductModel> allProducts = await _productRepository.GetAllProductAsync();
             
             return allProducts;
         }
+
+        [HttpGet]
+        [Route("Feature")]
+        public async Task<List<ProductModel>> GetFeatureProductAsync()
+        {
+            List<ProductModel> allProducts = await _productRepository.GetFeatureProductAsync();
+
+            return allProducts;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ProductModel> GetProductByIdAsync(int id)
+        {
+            ProductModel product = await _productRepository.GetProductByIdAsync(id);
+
+            return product;
+        }
+
+
     }
 }

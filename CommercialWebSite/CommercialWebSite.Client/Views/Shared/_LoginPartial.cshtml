@@ -1,5 +1,10 @@
 ﻿@using CommercialWebSite.ShareDTO.Auth
 @model LoginRequestModel
+@using static System.Diagnostics.Debug;
+
+@{
+    string errorMessage = (string)TempData["LoginErrorMessage"];
+}
 
 <!-- Login Form Start -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,10 +31,11 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </form>
+                <span class="text-danger">@errorMessage</span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="loginFrm">Login</button>
+                <input type="submit" class="btn btn-primary" form="loginFrm"></input>
             </div>
         </div>
     </div>

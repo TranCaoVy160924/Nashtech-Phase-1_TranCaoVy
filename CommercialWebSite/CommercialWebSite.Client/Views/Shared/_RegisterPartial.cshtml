@@ -16,7 +16,7 @@
                         <label class="col-form-label"
                                asp-for=Username>Username:</label>
                         <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Username>Username>
+                               id="recipient-name" asp-for=Username>
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
@@ -33,11 +33,12 @@
                                id="recipient-name" asp-for=Email>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
+                    <input type="submit" class="btn btn-primary"></input>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="registerFrm">Login</button>
+                @*<button type="submit" class="btn btn-primary" form="registerFrm">Login</button>*@
             </div>
         </div>
     </div>

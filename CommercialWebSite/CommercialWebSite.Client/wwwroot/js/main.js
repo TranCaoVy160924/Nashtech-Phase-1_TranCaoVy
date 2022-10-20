@@ -101,8 +101,3 @@
     });
     
 })(jQuery);
-
-window.onload = () => {
-    $('#loginModal').modal('show');
-}
-

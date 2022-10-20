@@ -13,5 +13,6 @@ namespace CommercialWebSite.ShareDTO
         public LoginRequestModel LoginRequestModel { get; set; }
         public RegisterRequestModel RegisterRequestModel { get; set; }
         public List<ProductModel> ProductModels { get; set; }
+        public ProductModel ProductDetail { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CommercialWebSite.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,7 +238,9 @@ namespace CommercialWebSite.Data.Migrations
                     { 1, "Clothes" },
                     { 2, "Household" },
                     { 3, "Electronic" },
-                    { 4, "Beauty" }
+                    { 4, "Beauty" },
+                    { 5, "Book" },
+                    { 6, "Pet" }
                 });
 
             migrationBuilder.InsertData(
@@ -246,19 +248,19 @@ namespace CommercialWebSite.Data.Migrations
                 columns: new[] { "ProductId", "CategoryId", "CreateDate", "Description", "Price", "ProductName", "ProductPicture", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, 4, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(7956), "Product 1", 2000.0, "Product 1", "./img/product-1.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(7968) },
-                    { 2, 4, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8008), "Product 2", 2000.0, "Product 2", "./img/product-2.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8008) },
-                    { 3, 1, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8031), "Product 3", 10000.0, "Product 3", "./img/product-3.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8032) },
-                    { 4, 1, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8051), "Product 4", 10000.0, "Product 4", "./img/product-4.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8052) },
-                    { 5, 1, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8069), "Product 5", 10000.0, "Product 5", "./img/product-5.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8070) },
-                    { 6, 1, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8092), "Product 6", 10000.0, "Product 6", "./img/product-6.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8092) },
-                    { 7, 1, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8111), "Product 7", 10000.0, "Product 7", "./img/product-7.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8112) },
-                    { 8, 3, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8131), "Product 8", 2300.0, "Product 8", "./img/product-8.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8132) },
-                    { 9, 3, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8150), "Product 9", 2300.0, "Product 9", "./img/product-9.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8151) },
-                    { 10, 3, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8173), "Product 10", 2300.0, "Product 10", "./img/product-10.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8174) },
-                    { 11, 3, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8191), "Product 11", 2300.0, "Product 11", "./img/product-11.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8192) },
-                    { 12, 2, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8210), "Product 12", 30000.0, "Product 12", "./img/product-12.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8211) },
-                    { 13, 2, new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8228), "Product 13", 30000.0, "Product 13", "./img/product-13.jpg", new DateTime(2022, 10, 19, 20, 9, 31, 274, DateTimeKind.Local).AddTicks(8229) }
+                    { 1, 4, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3811), "Product 1", 2000.0, "Product 1", "product-1.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3820) },
+                    { 2, 4, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3840), "Product 2", 2000.0, "Product 2", "product-2.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3841) },
+                    { 3, 1, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3853), "Product 3", 10000.0, "Product 3", "product-3.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3854) },
+                    { 4, 1, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3864), "Product 4", 10000.0, "Product 4", "product-4.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3865) },
+                    { 5, 1, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3875), "Product 5", 10000.0, "Product 5", "product-5.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3876) },
+                    { 6, 1, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3888), "Product 6", 10000.0, "Product 6", "product-6.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3889) },
+                    { 7, 1, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3899), "Product 7", 10000.0, "Product 7", "product-7.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3900) },
+                    { 8, 3, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3911), "Product 8", 2300.0, "Product 8", "product-8.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3911) },
+                    { 9, 3, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3922), "Product 9", 2300.0, "Product 9", "product-9.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3922) },
+                    { 10, 3, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3935), "Product 10", 2300.0, "Product 10", "product-10.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3936) },
+                    { 11, 3, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3946), "Product 11", 2300.0, "Product 11", "product-11.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3946) },
+                    { 12, 2, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3958), "Product 12", 30000.0, "Product 12", "product-12.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3958) },
+                    { 13, 2, new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(4013), "Product 13", 30000.0, "Product 13", "product-13.jpg", new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(4013) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -40,6 +40,18 @@ namespace CommercialWebSite.Data.Repository
             return ConvertProductCollection(rawProducts).ToList();
         }
 
+        public async Task<List<ProductModel>> GetFeatureProductAsync()
+        {
+            ApplicationDbContext _appDbContext = new ApplicationDbContext();
+            List<Product> rawProducts =
+                await _appDbContext.Products
+                .Include(p => p.Category)
+                .Take(8)
+                .ToListAsync();
+
+            return ConvertProductCollection(rawProducts).ToList();
+        }
+
         public async Task<List<ProductModel>> GetProductByCategoryAsync(int categoryId)
         {
             ApplicationDbContext _appDbContext = new ApplicationDbContext();

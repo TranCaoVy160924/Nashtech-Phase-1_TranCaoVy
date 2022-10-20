@@ -77,6 +77,20 @@ namespace CommercialWebSite.Data.DataModel
                     CategoryId = 4,
                     CategoryName = "Beauty"
                 });
+            builder.Entity<Category>()
+                .HasData(
+                new Category
+                {
+                    CategoryId = 5,
+                    CategoryName = "Book"
+                });
+            builder.Entity<Category>()
+                .HasData(
+                new Category
+                {
+                    CategoryId = 6,
+                    CategoryName = "Pet"
+                });
         }
 
         private void SeedProduct(ModelBuilder builder)
@@ -89,7 +103,7 @@ namespace CommercialWebSite.Data.DataModel
                     ProductId = i,
                     ProductName = "Product " + i,
                     Description = "Product " + i,
-                    ProductPicture = $"./img/product-{i}.jpg",
+                    ProductPicture = $"product-{i}.jpg",
                     Price = (Double)2000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
@@ -105,7 +119,7 @@ namespace CommercialWebSite.Data.DataModel
                     ProductId = i,
                     ProductName = "Product " + i,
                     Description = "Product " + i,
-                    ProductPicture = $"./img/product-{i}.jpg",
+                    ProductPicture = $"product-{i}.jpg",
                     Price = (Double)10000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
@@ -121,7 +135,7 @@ namespace CommercialWebSite.Data.DataModel
                     ProductId = i,
                     ProductName = "Product " + i,
                     Description = "Product " + i,
-                    ProductPicture = $"./img/product-{i}.jpg",
+                    ProductPicture = $"product-{i}.jpg",
                     Price = (Double)2300,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
@@ -137,7 +151,7 @@ namespace CommercialWebSite.Data.DataModel
                     ProductId = i,
                     ProductName = "Product " + i,
                     Description = "Product " + i,
-                    ProductPicture = $"./img/product-{i}.jpg",
+                    ProductPicture = $"product-{i}.jpg",
                     Price = (Double)30000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,

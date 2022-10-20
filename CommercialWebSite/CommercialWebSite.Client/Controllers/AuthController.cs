@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Refit;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using CommercialWebSite.ShareDTO;
 
 namespace CommercialWebSite.Client.Controllers
 {
@@ -52,9 +53,15 @@ namespace CommercialWebSite.Client.Controllers
             catch (ApiException ex)
             {
                 _logger.LogError(ex.Message);
+                TempData["LoginErrorMessage"] = "Password or Username is invalid";
             }
 
-            return RedirectToAction("Index", "Home");
+            ViewModel viewModel = new ViewModel
+            {
+                LoginRequestModel = model
+            };
+
+            return RedirectToAction("Index", "Home", viewModel);
         }
 
         public IActionResult Register()
@@ -70,7 +77,6 @@ namespace CommercialWebSite.Client.Controllers
                 if (ModelState.IsValid)
                 {
                     await _authClient.Register(model);
-                    return View("Login");
                 }
             }
             catch (ApiException ex)
@@ -86,7 +92,7 @@ namespace CommercialWebSite.Client.Controllers
                 _logger.LogError(ex.Content);
             }
 
-            return View("Register");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
