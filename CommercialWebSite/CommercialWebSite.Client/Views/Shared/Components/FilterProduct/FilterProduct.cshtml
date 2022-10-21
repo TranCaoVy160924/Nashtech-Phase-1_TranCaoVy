@@ -1,0 +1,47 @@
+﻿@using CommercialWebSite.ShareDTO.Business;
+
+@{
+    List<CategoryModel> categories = (List<CategoryModel>)ViewData["Categories"];
+}
+
+<!-- Shop Sidebar Start -->
+<div class="col-lg-3 col-md-4">
+    <form>
+        <!-- Category Start -->
+        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+        <div class="bg-light p-4 mb-30">
+            @{
+                foreach (CategoryModel cat in categories)
+                {
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" id="@cat.CategoryId" class="custom-control-input"
+                           name="category" value="@cat.CategoryId">
+                        <label class="custom-control-label" for="@cat.CategoryId">@cat.CategoryName</label>
+                    </div>
+                }
+            }
+        </div>
+        <!-- Category End -->
+        <!-- Search Name Start -->
+        <div class="bg-light p-4 mb-30">
+            <div class="text-left">
+                <div class="input-group">
+                    <input type="text" name="prodName" class="form-control" value="" placeholder="Enter Product Name">
+                </div>
+            </div>
+        </div>
+        <!-- Search Name End -->
+        <!-- Money Start-->
+        <div class="bg-light p-4 mb-30">
+            <label for="moneyRange" class="form-label">Example range</label>
+            <label for="moneyRange" class="form-label">Example range</label>
+            <input type="range" class="form-range"  min="0" max="100000" id="moneyRange">
+        </div>
+        <!-- Money End -->
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary form="loginFrm">Search For Product</button>
+        </div>
+    </form>
+</div>
+<!-- Shop Sidebar End -->

@@ -6,9 +6,9 @@ namespace CommercialWebSite.Client.RefitClient
     public interface ICategoryClient
     {
         [Get("/Category")]
-        Task<List<CategoryModel>> GetAllProductAsync();
+        Task<List<CategoryModel>> GetAllCategoryAsync();
 
         [Get("/Category/Feature")]
-        Task<List<CategoryModel>> GetFeatureProductAsync();
+        Task<List<CategoryModel>> GetFeatureCategoryAsync();
     }
 }

@@ -17,7 +17,7 @@ namespace CommercialWebSite.Client.Views.Shared.Components.FeatureCategory
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ICategoryClient categoryClient = RestService.For<ICategoryClient>(baseUrl);
-            var model = await categoryClient.GetAllProductAsync();
+            var model = await categoryClient.GetAllCategoryAsync();
 
             return await Task.FromResult((IViewComponentResult)View("CategoryDropdown", model));
         }
