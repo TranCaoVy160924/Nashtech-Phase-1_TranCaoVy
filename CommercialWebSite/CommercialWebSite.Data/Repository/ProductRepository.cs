@@ -76,6 +76,18 @@ namespace CommercialWebSite.Data.Repository
             return ConvertProduct(rawProduct);
         }
 
+        public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
+        {
+            ApplicationDbContext _appDbContext = new ApplicationDbContext();
+            List<Product> rawProducts =
+                await _appDbContext.Products
+                .Include(p => p.Category)
+                .Where(p => p.ProductName.Contains(prodName))
+                .ToListAsync();
+
+            return ConvertProductCollection(rawProducts).ToList();
+        }
+
         // Helper method
         private IEnumerable<ProductModel> ConvertProductCollection(IEnumerable<Product> rawProducts)
         {

@@ -20,18 +20,18 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<List<ProductModel>> GetAllAsync()
         {
-            List<ProductModel> allProducts = await _productRepository.GetAllProductAsync();
+            List<ProductModel> products = await _productRepository.GetAllProductAsync();
             
-            return allProducts;
+            return products;
         }
 
         [HttpGet]
         [Route("Feature")]
         public async Task<List<ProductModel>> GetFeatureProductAsync()
         {
-            List<ProductModel> allProducts = await _productRepository.GetFeatureProductAsync();
+            List<ProductModel> products = await _productRepository.GetFeatureProductAsync();
 
-            return allProducts;
+            return products;
         }
 
         [HttpGet]
@@ -43,6 +43,22 @@ namespace CommercialWebSite.API.Controllers
             return product;
         }
 
+        [HttpGet]
+        [Route("ByCat/{catId}")]
+        public async Task<List<ProductModel>> GetProductByCategoryAsync(int catId)
+        {
+            List<ProductModel> product = await _productRepository.GetProductByCategoryAsync(catId);
 
+            return product;
+        }
+
+        [HttpGet]
+        [Route("ByName/{prodName}")]
+        public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
+        {
+            List<ProductModel> product = await _productRepository.GetProductByNameAsync(prodName);
+
+            return product;
+        }
     }
 }

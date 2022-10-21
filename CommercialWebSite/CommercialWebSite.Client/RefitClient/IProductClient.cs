@@ -13,5 +13,11 @@ namespace CommercialWebSite.Client.RefitClient
 
         [Get("/Product/{id}")]
         Task<ProductModel> GetProductByIdAsync(int id);
+
+        [Get("/Product/ByCat/{catId}")]
+        Task<List<ProductModel>> GetProductByCategoryAsync(int catId);
+
+        [Get("/Product/ByName/{prodName}")]
+        Task<List<ProductModel>> GetProductByNameAsync(string prodName);
     }
 }

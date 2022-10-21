@@ -34,6 +34,10 @@ namespace CommercialWebSite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CategoryPicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
@@ -42,32 +46,38 @@ namespace CommercialWebSite.Data.Migrations
                         new
                         {
                             CategoryId = 1,
-                            CategoryName = "Clothes"
+                            CategoryName = "Clothes",
+                            CategoryPicture = "cat-1.jpg"
                         },
                         new
                         {
                             CategoryId = 2,
-                            CategoryName = "Household"
+                            CategoryName = "Household",
+                            CategoryPicture = "cat-2.jpg"
                         },
                         new
                         {
                             CategoryId = 3,
-                            CategoryName = "Electronic"
+                            CategoryName = "Electronic",
+                            CategoryPicture = "cat-3.jpg"
                         },
                         new
                         {
                             CategoryId = 4,
-                            CategoryName = "Beauty"
+                            CategoryName = "Beauty",
+                            CategoryPicture = "cat-4.jpg"
                         },
                         new
                         {
                             CategoryId = 5,
-                            CategoryName = "Book"
+                            CategoryName = "Book",
+                            CategoryPicture = "cat-5.jpg"
                         },
                         new
                         {
                             CategoryId = 6,
-                            CategoryName = "Pet"
+                            CategoryName = "Pet",
+                            CategoryPicture = "cat-6.jpg"
                         });
                 });
 
@@ -163,144 +173,144 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3811),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1901),
                             Description = "Product 1",
                             Price = 2000.0,
                             ProductName = "Product 1",
                             ProductPicture = "product-1.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3820)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1909)
                         },
                         new
                         {
                             ProductId = 2,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3840),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1958),
                             Description = "Product 2",
                             Price = 2000.0,
                             ProductName = "Product 2",
                             ProductPicture = "product-2.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3841)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1960)
                         },
                         new
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3853),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1990),
                             Description = "Product 3",
                             Price = 10000.0,
                             ProductName = "Product 3",
                             ProductPicture = "product-3.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3854)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1991)
                         },
                         new
                         {
                             ProductId = 4,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3864),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2010),
                             Description = "Product 4",
                             Price = 10000.0,
                             ProductName = "Product 4",
                             ProductPicture = "product-4.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3865)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2011)
                         },
                         new
                         {
                             ProductId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3875),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2029),
                             Description = "Product 5",
                             Price = 10000.0,
                             ProductName = "Product 5",
                             ProductPicture = "product-5.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3876)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2030)
                         },
                         new
                         {
                             ProductId = 6,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3888),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2050),
                             Description = "Product 6",
                             Price = 10000.0,
                             ProductName = "Product 6",
                             ProductPicture = "product-6.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3889)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2051)
                         },
                         new
                         {
                             ProductId = 7,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3899),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2069),
                             Description = "Product 7",
                             Price = 10000.0,
                             ProductName = "Product 7",
                             ProductPicture = "product-7.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3900)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2069)
                         },
                         new
                         {
                             ProductId = 8,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3911),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2089),
                             Description = "Product 8",
                             Price = 2300.0,
                             ProductName = "Product 8",
                             ProductPicture = "product-8.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3911)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2090)
                         },
                         new
                         {
                             ProductId = 9,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3922),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2286),
                             Description = "Product 9",
                             Price = 2300.0,
                             ProductName = "Product 9",
                             ProductPicture = "product-9.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3922)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2287)
                         },
                         new
                         {
                             ProductId = 10,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3935),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2313),
                             Description = "Product 10",
                             Price = 2300.0,
                             ProductName = "Product 10",
                             ProductPicture = "product-10.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3936)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2314)
                         },
                         new
                         {
                             ProductId = 11,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3946),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2331),
                             Description = "Product 11",
                             Price = 2300.0,
                             ProductName = "Product 11",
                             ProductPicture = "product-11.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3946)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2332)
                         },
                         new
                         {
                             ProductId = 12,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3958),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2351),
                             Description = "Product 12",
                             Price = 30000.0,
                             ProductName = "Product 12",
                             ProductPicture = "product-12.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(3958)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2351)
                         },
                         new
                         {
                             ProductId = 13,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(4013),
+                            CreateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2369),
                             Description = "Product 13",
                             Price = 30000.0,
                             ProductName = "Product 13",
                             ProductPicture = "product-13.jpg",
-                            UpdateDate = new DateTime(2022, 10, 20, 16, 48, 4, 74, DateTimeKind.Local).AddTicks(4013)
+                            UpdateDate = new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2370)
                         });
                 });
 

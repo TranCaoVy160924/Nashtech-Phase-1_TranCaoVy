@@ -54,42 +54,48 @@ namespace CommercialWebSite.Data.DataModel
                 new Category
                 {
                     CategoryId = 1,
-                    CategoryName = "Clothes"
+                    CategoryName = "Clothes",
+                    CategoryPicture = "cat-1.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
                 new Category
                 {
                     CategoryId = 2,
-                    CategoryName = "Household"
+                    CategoryName = "Household",
+                    CategoryPicture = "cat-2.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
                 new Category
                 {
                     CategoryId = 3,
-                    CategoryName = "Electronic"
+                    CategoryName = "Electronic",
+                    CategoryPicture = "cat-3.jpg",
                 });
             builder.Entity<Category>()
                 .HasData(
                 new Category
                 {
                     CategoryId = 4,
-                    CategoryName = "Beauty"
+                    CategoryName = "Beauty",
+                    CategoryPicture = "cat-4.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
                 new Category
                 {
                     CategoryId = 5,
-                    CategoryName = "Book"
+                    CategoryName = "Book",
+                    CategoryPicture = "cat-5.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
                 new Category
                 {
                     CategoryId = 6,
-                    CategoryName = "Pet"
+                    CategoryName = "Pet",
+                    CategoryPicture = "cat-6.jpg"
                 });
         }
 
