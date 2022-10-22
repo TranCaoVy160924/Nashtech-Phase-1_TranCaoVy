@@ -52,7 +52,6 @@ namespace CommercialWebSite.Client.Controllers
             List<ProductModel> products = requestViewModel.ProductModels;
             if (products == null)
             {
-                _logger.LogInformation("Display all product");
                 products = await _productClient.GetAllProductAsync();
             }
 
@@ -78,7 +77,7 @@ namespace CommercialWebSite.Client.Controllers
             if (categoryId == 0)
             {
                 products = await _productClient.GetAllProductAsync();
-            } 
+            }
             else
             {
                 products = await _productClient.GetProductByCategoryAsync(categoryId);
@@ -95,14 +94,59 @@ namespace CommercialWebSite.Client.Controllers
         public async Task<IActionResult> SearchProductByName(IFormCollection formFields)
         {
             string prodName = formFields["prodName"];
-            List<ProductModel> products;
-            if (prodName.Trim().Equals(""))
+            List<ProductModel> products =
+                await _productClient.GetProductByNameAsync(prodName.Trim());
+
+            ViewModel viewModel = new ViewModel
             {
-                products = await _productClient.GetAllProductAsync();
+                ProductModels = products
+            };
+
+            return await Shop(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FilterProduct(ViewModel model)
+        {
+            FilterProductModel filter = model.FilterProductModel;
+            List<ProductModel> products = new List<ProductModel>();
+            try
+            {
+                // Check category
+                // If none chosen, get all category
+                if (filter.CategoriesSelection.Any(c => c.IsSelected))
+                {
+                    // If any chosen, get the one chosen
+                    filter.CategoriesSelection =
+                        filter.CategoriesSelection.Where(c => c.IsSelected).ToList();
+                }
+
+                // Check Product Name
+                _logger.LogInformation("name: " + filter.ProductName);
+                if (filter.ProductName == null)
+                {
+                    filter.ProductName = "";
+                }
+                filter.ProductName = filter.ProductName.Trim();
+
+                // Check Price
+                _logger.LogInformation("min: " + filter.MinPrice + ", max: " + filter.MaxPrice);
+                if (filter.MaxPrice == null || filter.MaxPrice == 0)
+                {
+                    filter.MaxPrice = 100000;
+                }
+                if (filter.MinPrice == null)
+                {
+                    filter.MinPrice = 0;
+                }
+
+                // Call API
+                products =
+                    await _productClient.FilterProductAsync(filter);
             }
-            else
+            catch (ApiException ex)
             {
-                products = await _productClient.GetProductByNameAsync(prodName);
+                _logger.LogInformation(ex.Content);
             }
 
             ViewModel viewModel = new ViewModel

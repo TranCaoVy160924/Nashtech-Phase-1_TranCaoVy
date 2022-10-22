@@ -1,4 +1,5 @@
-﻿using CommercialWebSite.ShareDTO.Business;
+﻿using CommercialWebSite.ShareDTO;
+using CommercialWebSite.ShareDTO.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<List<ProductModel>> GetProductByCategoryAsync(int categoryId);
         Task<ProductModel> GetProductByIdAsync(int id);
         Task<List<ProductModel>> GetProductByNameAsync(string prodName);
+        Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter);
     }
 }

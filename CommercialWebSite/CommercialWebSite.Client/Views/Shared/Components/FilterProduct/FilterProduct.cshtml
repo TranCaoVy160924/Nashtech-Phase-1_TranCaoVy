@@ -1,24 +1,40 @@
-﻿@using CommercialWebSite.ShareDTO.Business;
+﻿@using CommercialWebSite.ShareDTO
+@using CommercialWebSite.ShareDTO.Business;
+@model ViewModel
 
 @{
     List<CategoryModel> categories = (List<CategoryModel>)ViewData["Categories"];
+    Model.FilterProductModel = new FilterProductModel()
+            {
+                CategoriesSelection = new List<CategorySelectionModel>()
+            };
+    categories.ForEach(
+        c => Model.FilterProductModel.CategoriesSelection.Add(new CategorySelectionModel
+                {
+                    CategoryId = c.CategoryId,
+                    CategoryName = c.CategoryName,
+                    IsSelected = false
+                })
+    );
 }
 
 <!-- Shop Sidebar Start -->
 <div class="col-lg-3 col-md-4">
-    <form>
+    <form asp-controller="Home" asp-action="FilterProduct" method="post">
         <!-- Category Start -->
         <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
         <div class="bg-light p-4 mb-30">
-            @{
-                foreach (CategoryModel cat in categories)
-                {
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" id="@cat.CategoryId" class="custom-control-input"
-                           name="category" value="@cat.CategoryId">
-                        <label class="custom-control-label" for="@cat.CategoryId">@cat.CategoryName</label>
-                    </div>
-                }
+            @for (var i = 0; i < Model.FilterProductModel.CategoriesSelection.Count; i++)
+            {
+                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    <input type="checkbox" asp-for="FilterProductModel.CategoriesSelection[i].IsSelected"
+                       class="custom-control-input" />
+                    <label asp-for="FilterProductModel.CategoriesSelection[i].IsSelected" class="custom-control-label">
+                        @Model.FilterProductModel.CategoriesSelection[i].CategoryName
+                    </label>
+                    <input type="hidden" asp-for="FilterProductModel.CategoriesSelection[i].CategoryId" />
+                    <input type="hidden" asp-for="FilterProductModel.CategoriesSelection[i].CategoryName" />
+                </div>
             }
         </div>
         <!-- Category End -->
@@ -26,21 +42,37 @@
         <div class="bg-light p-4 mb-30">
             <div class="text-left">
                 <div class="input-group">
-                    <input type="text" name="prodName" class="form-control" value="" placeholder="Enter Product Name">
+                    <input type="text" asp-for="FilterProductModel.ProductName"
+                           class="form-control" value="" placeholder="Enter Product Name">
                 </div>
             </div>
         </div>
         <!-- Search Name End -->
         <!-- Money Start-->
         <div class="bg-light p-4 mb-30">
-            <label for="moneyRange" class="form-label">Example range</label>
-            <label for="moneyRange" class="form-label">Example range</label>
-            <input type="range" class="form-range"  min="0" max="100000" id="moneyRange">
+            <p class="text-left inline">
+                <div class="input-group">
+                    <input id="minPriceFilter" type="text"
+                           asp-for="FilterProductModel.MinPrice" class="form-control"
+                           placeholder="Enter Min Price" min="0" max="100000"
+                           onchange="setMinValue(minPriceFilter, maxPriceFilter)">
+                    <span asp-validation-for="FilterProductModel.MinPrice" class="text-danger"></span>
+                </div>
+            </p>
+            <p class="text-left inline">
+                <div class="input-group">
+                    <input id="maxPriceFilter" type="text"
+                           asp-for="FilterProductModel.MaxPrice" class="form-control"
+                           placeholder="Enter Max Price" min="0" max="100000"
+                           onchange="setMaxValue(minPriceFilter, maxPriceFilter)">
+                    <span asp-validation-for="FilterProductModel.MaxPrice" class="text-danger"></span>
+                </div>
+            </p>
         </div>
         <!-- Money End -->
 
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary form="loginFrm">Search For Product</button>
+            <button type="submit" value="submit" class="btn btn-primary">Search For Product</button>
         </div>
     </form>
 </div>

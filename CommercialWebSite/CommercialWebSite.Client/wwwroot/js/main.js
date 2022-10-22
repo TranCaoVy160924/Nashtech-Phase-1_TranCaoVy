@@ -106,3 +106,17 @@ function submitForm(formId) {
     var form = document.getElementById(formId);
     form.submit();
 }
+
+function setMinValue(minId, maxId) {
+    var max = document.getElementById(maxId);
+    var min = document.getElementById(minId);
+    max.min = min.value;
+    alert("set min: ", min.value);
+}
+
+function setMaxValue(minId, maxId) {
+    var max = document.getElementById(maxId);
+    var min = document.getElementById(minId);
+    min.max = max.value;
+    alert("set max: ", max.value);
+}

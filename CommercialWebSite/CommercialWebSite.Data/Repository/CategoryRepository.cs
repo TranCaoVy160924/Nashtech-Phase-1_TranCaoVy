@@ -35,7 +35,7 @@ namespace CommercialWebSite.Data.Repository
             _appDbContext = new ApplicationDbContext();
             var categories = await _appDbContext.Categories.ToListAsync();
 
-            return _categoryMapper.MapCollection(categories);
+            return _categoryMapper.MapCollection(categories).ToList();
         }
 
         public async Task<List<CategoryModel>> GetFeatureCategoryAsync()
@@ -46,7 +46,7 @@ namespace CommercialWebSite.Data.Repository
                 .OrderByDescending(c => c.Products.Count())
                 .Take(4).ToListAsync();
 
-            return _categoryMapper.MapCollection(categories);
+            return _categoryMapper.MapCollection(categories).ToList();
         }
     }
 }

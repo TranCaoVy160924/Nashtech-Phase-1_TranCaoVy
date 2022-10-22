@@ -8,13 +8,15 @@ using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO.Business;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using CommercialWebSite.Data.AutoMapperHelper;
+using CommercialWebSite.ShareDTO;
 
 namespace CommercialWebSite.Data.Repository
 {
-    public class ProductRepository: IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private ApplicationDbContext _appDbContext;
-        private IMapper _mapper;
+        private MapperHelper<Product, ProductModel> _productMapper;
 
         public ProductRepository()
         {
@@ -24,82 +26,89 @@ namespace CommercialWebSite.Data.Repository
                     dest => dest.CategoryId,
                     act => act.MapFrom(src => src.Category.CategoryId)
                 ));
-            _mapper = new Mapper(config);
+            _productMapper = new MapperHelper<Product, ProductModel>(config);
         }
 
 
         // Implement Interface method
         public async Task<List<ProductModel>> GetAllProductAsync()
         {
-            ApplicationDbContext _appDbContext = new ApplicationDbContext();
-            List<Product> rawProducts = 
+            _appDbContext = new ApplicationDbContext();
+            List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .ToListAsync();
 
-            return ConvertProductCollection(rawProducts).ToList();
+            return _productMapper.MapCollection(rawProducts).ToList();
         }
 
         public async Task<List<ProductModel>> GetFeatureProductAsync()
         {
-            ApplicationDbContext _appDbContext = new ApplicationDbContext();
+            _appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .Take(8)
                 .ToListAsync();
 
-            return ConvertProductCollection(rawProducts).ToList();
+            return _productMapper.MapCollection(rawProducts).ToList();
         }
 
         public async Task<List<ProductModel>> GetProductByCategoryAsync(int categoryId)
         {
-            ApplicationDbContext _appDbContext = new ApplicationDbContext();
+            _appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .Where(p => p.Category.CategoryId == categoryId)
                 .ToListAsync();
 
-            return ConvertProductCollection(rawProducts).ToList();
+            return _productMapper.MapCollection(rawProducts).ToList();
         }
 
         public async Task<ProductModel> GetProductByIdAsync(int id)
         {
-            ApplicationDbContext _appDbContext = new ApplicationDbContext();
-            Product rawProduct = 
+            _appDbContext = new ApplicationDbContext();
+            Product rawProduct =
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .Where(p => p.ProductId == id)
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
-            return ConvertProduct(rawProduct);
+            return _productMapper.MapSingleObject(rawProduct);
         }
 
         public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
         {
-            ApplicationDbContext _appDbContext = new ApplicationDbContext();
+            _appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .Where(p => p.ProductName.Contains(prodName))
                 .ToListAsync();
 
-            return ConvertProductCollection(rawProducts).ToList();
+            return _productMapper.MapCollection(rawProducts).ToList();
         }
 
-        // Helper method
-        private IEnumerable<ProductModel> ConvertProductCollection(IEnumerable<Product> rawProducts)
+        public async Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter)
         {
-            List<ProductModel> products =
-                rawProducts.Select(p => _mapper.Map<ProductModel>(p)).ToList();
-            return products;
-        }
+            _appDbContext = new ApplicationDbContext();
+            List<Product> filteredRawProducts = new List<Product>();
+            foreach (CategorySelectionModel categorySelection in filter.CategoriesSelection)
+            {
+                List<Product> rawProducts =
+                    await _appDbContext.Products
+                    .Include(p => p.Category)
+                    .Where(p =>
+                        p.Category.CategoryId == categorySelection.CategoryId &&
+                        p.ProductName.Contains(filter.ProductName) &&
+                        p.Price >= filter.MinPrice &&
+                        p.Price <= filter.MaxPrice)
+                    .ToListAsync();
+                filteredRawProducts = filteredRawProducts.Concat(rawProducts).ToList();
+            }
 
-        private ProductModel ConvertProduct(Product rawProduct)
-        {
-            ProductModel product = _mapper.Map<ProductModel>(rawProduct);
-            return product;
+            return _productMapper.MapCollection(filteredRawProducts).ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommercialWebSite.DataRepositoryInterface;
+using CommercialWebSite.ShareDTO;
 using CommercialWebSite.ShareDTO.Business;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,15 @@ namespace CommercialWebSite.API.Controllers
         public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
         {
             List<ProductModel> product = await _productRepository.GetProductByNameAsync(prodName);
+
+            return product;
+        }
+
+        [HttpGet]
+        [Route("Filter")]
+        public async Task<List<ProductModel>> FilterProduct([FromBody] FilterProductModel filter)
+        {
+            List<ProductModel> product = await _productRepository.FilterProductAsync(filter);
 
             return product;
         }

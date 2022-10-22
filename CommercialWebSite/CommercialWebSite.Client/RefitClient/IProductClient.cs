@@ -1,5 +1,6 @@
 ﻿using Refit;
 using CommercialWebSite.ShareDTO.Business;
+using CommercialWebSite.ShareDTO;
 
 namespace CommercialWebSite.Client.RefitClient
 {
@@ -19,5 +20,8 @@ namespace CommercialWebSite.Client.RefitClient
 
         [Get("/Product/ByName/{prodName}")]
         Task<List<ProductModel>> GetProductByNameAsync(string prodName);
+
+        [Get("/Product/Filter")]
+        Task<List<ProductModel>> FilterProductAsync([Body] FilterProductModel filter);
     }
 }
