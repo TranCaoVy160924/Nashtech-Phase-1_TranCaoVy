@@ -27,13 +27,13 @@ namespace CommercialWebSite.Data.Repository
                     act => act.MapFrom(src => src.Category.CategoryId)
                 ));
             _productMapper = new MapperHelper<Product, ProductModel>(config);
+            _appDbContext = new ApplicationDbContext();
         }
-
 
         // Implement Interface method
         public async Task<List<ProductModel>> GetAllProductAsync()
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -44,7 +44,7 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> GetFeatureProductAsync()
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -56,7 +56,7 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> GetProductByCategoryAsync(int categoryId)
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -68,7 +68,7 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<ProductModel> GetProductByIdAsync(int id)
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             Product rawProduct =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -80,7 +80,7 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -92,7 +92,7 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter)
         {
-            _appDbContext = new ApplicationDbContext();
+            //_appDbContext = new ApplicationDbContext();
             List<Product> filteredRawProducts = new List<Product>();
             foreach (CategorySelectionModel categorySelection in filter.CategoriesSelection)
             {

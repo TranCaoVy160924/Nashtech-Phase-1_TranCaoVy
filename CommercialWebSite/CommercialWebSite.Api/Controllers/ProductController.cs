@@ -1,5 +1,7 @@
-﻿using CommercialWebSite.DataRepositoryInterface;
+﻿using CommercialWebSite.Data.DataModel;
+using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO;
+using CommercialWebSite.ShareDTO.Auth;
 using CommercialWebSite.ShareDTO.Business;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +13,13 @@ namespace CommercialWebSite.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+
+        // Common response
+        private static StatusResponse NoContent = new StatusResponse
+        {
+            Status = "Error",
+            Message = "No Content Found!"
+        };
 
         public ProductController(IProductRepository productRepository)
         {
@@ -37,11 +46,17 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ProductModel> GetProductByIdAsync(int id)
+        public async Task<IActionResult> GetProductByIdAsync(int id)
         {
-            ProductModel product = await _productRepository.GetProductByIdAsync(id);
-
-            return product;
+            try
+            {
+                ProductModel product = await _productRepository.GetProductByIdAsync(id);
+                return Ok(product);
+            }
+            catch(NullReferenceException ex)
+            {
+                return NoContent();
+            }
         }
 
         [HttpGet]

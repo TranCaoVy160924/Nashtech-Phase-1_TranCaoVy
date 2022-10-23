@@ -26,13 +26,25 @@ namespace CommercialWebSite.Data.Repository
                     act => act.MapFrom(src => src.Products.Count)
                 ));
             _categoryMapper = new MapperHelper<Category, CategoryModel>(config);
+            _appDbContext = new ApplicationDbContext();
         }
 
+        // Constructor for testing
+        public CategoryRepository(ApplicationDbContext applicationDbContext)
+        {
+            var config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Category, CategoryModel>()
+                .ForMember(
+                    dest => dest.ProductCount,
+                    act => act.MapFrom(src => src.Products.Count)
+                ));
+            _categoryMapper = new MapperHelper<Category, CategoryModel>(config);
+            _appDbContext = applicationDbContext;
+        }
 
         // Implement interface method
         public async Task<List<CategoryModel>> GetAllCategoryAsync()
         {
-            _appDbContext = new ApplicationDbContext();
             var categories = await _appDbContext.Categories.ToListAsync();
 
             return _categoryMapper.MapCollection(categories).ToList();
@@ -40,7 +52,6 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<CategoryModel>> GetFeatureCategoryAsync()
         {
-            _appDbContext = new ApplicationDbContext();
             var categories = await _appDbContext.Categories
                 .Include(c => c.Products)
                 .OrderByDescending(c => c.Products.Count())
