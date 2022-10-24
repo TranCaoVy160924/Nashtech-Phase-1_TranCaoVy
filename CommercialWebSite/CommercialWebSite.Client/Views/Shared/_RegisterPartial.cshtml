@@ -2,6 +2,10 @@
 @using CommercialWebSite.ShareDTO;
 @model RegisterRequestModel;
 
+@{
+    string errorMessage = (string)TempData["RegisterErrorMessage"];
+}
+
 <!-- Register Form Start -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -11,34 +15,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="registerFrm" method="post" asp-controller="Auth" asp-action="Register">
+                <form id="registerFrm" method="post" asp-controller="Auth"
+                      asp-action="Register" enctype="multipart/form-data">
+
                     <div class="mb-3">
                         <label class="col-form-label"
                                asp-for=Username>Username:</label>
                         <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Username>
+                               id="register-name" asp-for=Username>
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label class="col-form-label"
                                asp-for=Password>Password:</label>
-                        <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Password>
+                        <input type="password" class="form-control"
+                               id="register-password" asp-for=Password>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label class="col-form-label"
                                asp-for=Email>Email:</label>
                         <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Email>
+                               id="register-email" asp-for=Email>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                    <input type="submit" class="btn btn-primary"></input>
                 </form>
+                <span class="text-danger">@errorMessage</span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                @*<button type="submit" class="btn btn-primary" form="registerFrm">Login</button>*@
+                <button type="submit" class="btn btn-primary" form="registerFrm">Register</button>
             </div>
         </div>
     </div>

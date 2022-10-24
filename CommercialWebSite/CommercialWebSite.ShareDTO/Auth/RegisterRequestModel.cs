@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace CommercialWebSite.ShareDTO.Auth
 {
@@ -12,6 +14,9 @@ namespace CommercialWebSite.ShareDTO.Auth
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
+            ErrorMessage = "Password must be at least 8 character with " +
+            "lower and uppercase, number and special character")]
         public string? Password { get; set; }
     }
 }

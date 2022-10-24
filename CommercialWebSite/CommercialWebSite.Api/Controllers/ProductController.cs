@@ -14,13 +14,6 @@ namespace CommercialWebSite.API.Controllers
     {
         private readonly IProductRepository _productRepository;
 
-        // Common response
-        private static StatusResponse NoContent = new StatusResponse
-        {
-            Status = "Error",
-            Message = "No Content Found!"
-        };
-
         public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -28,20 +21,18 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<List<ProductModel>> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
             List<ProductModel> products = await _productRepository.GetAllProductAsync();
-            
-            return products;
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("Feature")]
-        public async Task<List<ProductModel>> GetFeatureProductAsync()
+        public async Task<IActionResult> GetFeatureProductAsync()
         {
             List<ProductModel> products = await _productRepository.GetFeatureProductAsync();
-
-            return products;
+            return Ok(products);
         }
 
         [HttpGet]
@@ -53,7 +44,7 @@ namespace CommercialWebSite.API.Controllers
                 ProductModel product = await _productRepository.GetProductByIdAsync(id);
                 return Ok(product);
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 return NoContent();
             }
@@ -61,29 +52,26 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("ByCat/{catId}")]
-        public async Task<List<ProductModel>> GetProductByCategoryAsync(int catId)
+        public async Task<IActionResult> GetProductByCategoryAsync(int catId)
         {
             List<ProductModel> product = await _productRepository.GetProductByCategoryAsync(catId);
-
-            return product;
+            return Ok(product);
         }
 
         [HttpGet]
         [Route("ByName/{prodName}")]
-        public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
+        public async Task<IActionResult> GetProductByNameAsync(string prodName)
         {
-            List<ProductModel> product = await _productRepository.GetProductByNameAsync(prodName);
-
-            return product;
+            List<ProductModel> products = await _productRepository.GetProductByNameAsync(prodName);
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("Filter")]
-        public async Task<List<ProductModel>> FilterProduct([FromBody] FilterProductModel filter)
+        public async Task<IActionResult> FilterProductAsync([FromBody] FilterProductModel filter)
         {
-            List<ProductModel> product = await _productRepository.FilterProductAsync(filter);
-
-            return product;
+            List<ProductModel> products = await _productRepository.FilterProductAsync(filter);
+            return Ok(products);
         }
     }
 }

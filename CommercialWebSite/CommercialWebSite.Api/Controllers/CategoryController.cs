@@ -17,22 +17,22 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<List<CategoryModel>> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
             List<CategoryModel> categories = 
                 await _categoryRepository.GetAllCategoryAsync();
 
-            return categories;
+            return Ok(categories);
         }
 
         [HttpGet]
         [Route("Feature")]
-        public async Task<List<CategoryModel>> GetFeatureProductAsync()
+        public async Task<IActionResult> GetFeatureCategoryAsync()
         {
             List<CategoryModel> categories = 
                 await _categoryRepository.GetFeatureCategoryAsync();
 
-            return categories;
+            return Ok(categories);
         }
     }
 }

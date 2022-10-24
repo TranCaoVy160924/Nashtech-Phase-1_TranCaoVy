@@ -53,13 +53,18 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestModel model)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequestModel model)
         {
-            var authClaim = await _authRepository
-                .AuthenticateLoginAsync(model.Username, model.Password);
-
-            if (authClaim != null)
+            try
             {
+                var authClaim = await _authRepository
+                .AuthenticateLoginAsync(model.Username, model.Password);
+                
+                if (authClaim == null)
+                {
+                    throw new NullReferenceException();
+                }
+                
                 var token = GetToken(authClaim);
 
                 return Ok(new
@@ -67,19 +72,16 @@ namespace CommercialWebSite.API.Controllers
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     Expiration = token.ValidTo
                 });
-
-                //return Ok(new JwtResponseToken
-                //{
-                //    Token = token,
-                //    Expiration = token.ValidTo
-                //});
             }
-            return Unauthorized();
+            catch(NullReferenceException)
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequestModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequestModel model)
         {
             string username = model.Username;
             string email = model.Email;
@@ -90,12 +92,17 @@ namespace CommercialWebSite.API.Controllers
                     StatusCodes.Status500InternalServerError,
                     ExistedUserError);
 
-            IdentityUser user = await _authRepository
+            try
+            {
+                IdentityUser user = await _authRepository
                 .RegisterNewUserAsync(username, email, password);
-            if (user == null)
+            }
+            catch (NullReferenceException)
+            {
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     CreateUserFailed);
+            }
 
             return Ok(CreateUserSucceeded);
         }

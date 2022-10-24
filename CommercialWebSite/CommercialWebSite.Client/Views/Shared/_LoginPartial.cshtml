@@ -20,14 +20,14 @@
                         <label class="col-form-label"
                                asp-for=Username>Username:</label>
                         <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Username>
+                               id="login-name" asp-for=Username>
                         <span asp-validation-for="Username" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label class="col-form-label"
                                asp-for=Password>Password:</label>
-                        <input type="text" class="form-control"
-                               id="recipient-name" asp-for=Password>
+                        <input type="password" class="form-control"
+                               id="login-password" asp-for=Password>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                 </form>

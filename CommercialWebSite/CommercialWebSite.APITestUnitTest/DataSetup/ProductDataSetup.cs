@@ -1,5 +1,6 @@
 ﻿using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,46 +11,6 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
 {
     public class ProductDataSetup
     {
-        public void SeedCategory(ApplicationDbContext appDbContext)
-        {
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 1,
-                CategoryName = "Clothes",
-                CategoryPicture = "cat-1.jpg"
-            });
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 2,
-                CategoryName = "Household",
-                CategoryPicture = "cat-2.jpg"
-            });
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 3,
-                CategoryName = "Electronic",
-                CategoryPicture = "cat-3.jpg",
-            });
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 4,
-                CategoryName = "Beauty",
-                CategoryPicture = "cat-4.jpg"
-            });
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 5,
-                CategoryName = "Book",
-                CategoryPicture = "cat-5.jpg"
-            });
-            appDbContext.Categories.Add(new Category
-            {
-                CategoryId = 6,
-                CategoryName = "Pet",
-                CategoryPicture = "cat-6.jpg"
-            });
-        }
-
         public async static Task<List<ProductModel>> CollectionAsync()
         {
             List<ProductModel> products = new List<ProductModel>();
@@ -71,7 +32,7 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
             return products;
         }
 
-        public static ProductModel ProductModel()
+        public async static Task<ProductModel> ProductModel()
         {
             ProductModel model = new ProductModel
             {
@@ -93,10 +54,5 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
             List<ProductModel> products = new List<ProductModel>();
             return products;
         }
-
-        //public async static Task NullResultAsync()
-        //{
-        //    return null;
-        //}
     }
 }

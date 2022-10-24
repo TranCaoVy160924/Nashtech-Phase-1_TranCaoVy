@@ -6,6 +6,7 @@ using Refit;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using CommercialWebSite.ShareDTO;
+using System.Web;
 
 namespace CommercialWebSite.Client.Controllers
 {
@@ -78,21 +79,30 @@ namespace CommercialWebSite.Client.Controllers
                 {
                     await _authClient.Register(model);
                 }
+                else
+                {
+                    TempData["RegisterErrorMessage"] = "All field is required in correct format";
+                }
             }
             catch (ApiException ex)
             {
-                if (ex.Content.Contains("User already exists!")) 
-                { 
-                    TempData["ErrorMessage"] = "User already exists!";
+                if (ex.Content.Contains("User already exists!"))
+                {
+                    TempData["RegisterErrorMessage"] = "User already exists!";
                 }
                 if (ex.Content.Contains("User creation failed"))
                 {
-                    TempData["ErrorMessage"] = "Password must contain letter, capital letter, number and special character";
+                    TempData["RegisterErrorMessage"] = "Password must contain letter, capital letter, number and special character";
                 }
                 _logger.LogError(ex.Content);
             }
 
-            return RedirectToAction("Index", "Home");
+            ViewModel viewModel = new ViewModel
+            {
+                RegisterRequestModel = model
+            };
+
+            return RedirectToAction("Index", "Home", viewModel);
         }
 
         [HttpGet]

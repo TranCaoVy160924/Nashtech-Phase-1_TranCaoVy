@@ -8,6 +8,7 @@
     ISession session = HttpContextAccessor.HttpContext.Session;
     string jwtAuthToken = session.GetString("JwtAuthToken");
     string loginErrorMessage = (string)TempData["LoginErrorMessage"];
+    string registerErrorMessage = (string)TempData["RegisterErrorMessage"];
 }
 
 <!DOCTYPE html>
@@ -17,8 +18,6 @@
     <meta charset="utf-8">
     <title>MultiShop - Online Shop Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
     <link href="~/img/favicon.ico" rel="icon">
@@ -73,6 +72,16 @@
             <script type="text/javascript">
                 window.addEventListener('DOMContentLoaded', (event) => {
                     $('#loginModal').modal('show');
+                });
+            </script>
+        }
+    }
+    @{
+        if (registerErrorMessage != null)
+        {
+            <script type="text/javascript">
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    $('#registerModal').modal('show');
                 });
             </script>
         }
