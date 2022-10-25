@@ -87,5 +87,33 @@
         }
     }
 
+    <script type="text/javascript">
+        var $star_rating = $('.star-rating-input .fa-star');
+
+        var SetRatingStar = function () {
+            return $star_rating.each(function () {
+                if (parseInt($star_rating.siblings('input.rating-value-input').val()) >= parseInt($(this).data('rating'))) {
+                    return $(this).removeClass('far fa-star').addClass('fas fa-star');
+                } else {
+                    return $(this).removeClass('fas fa-star').addClass('far fa-star');
+                }
+            });
+        };
+
+        $star_rating.on('click', function () {
+            $star_rating.siblings('input.rating-value-input').val($(this).data('rating'));
+            console.log($star_rating.siblings('input.rating-value-input').val())
+            return SetRatingStar();
+        });
+
+        SetRatingStar();
+        $(document).ready(function () {
+
+        });
+
+        console.log("haha");
+    </script>
+
+
 </body>
 </html>

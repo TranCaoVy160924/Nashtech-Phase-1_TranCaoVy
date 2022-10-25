@@ -1,3 +1,6 @@
+window.username = 'conga';
+console.log(window.username);
+
 (function ($) {
     "use strict";
     
@@ -120,3 +123,4 @@ function setMaxValue(minId, maxId) {
     min.max = max.value;
     alert("set max: ", max.value);
 }
+

@@ -23,6 +23,7 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
+            Console.WriteLine(HttpContext.ToString());
             List<ProductModel> products = await _productRepository.GetAllProductAsync();
             return Ok(products);
         }

@@ -7,12 +7,24 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CommercialWebSite.Data.Repository;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:7281",
+                              "http://localhost:3000");
+                      });
+});
+
 // For Entity Framework
 builder.Services
-    .AddDbContext<ApplicationDbContext>(options => 
+    .AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(configuration.GetConnectionString("ConnStr")));
 
 // For Identity
@@ -63,6 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 // Authentication & Authorization
 app.UseAuthentication();
