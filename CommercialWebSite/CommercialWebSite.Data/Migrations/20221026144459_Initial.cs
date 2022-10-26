@@ -183,7 +183,6 @@ namespace CommercialWebSite.Data.Migrations
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AgregateUserRate = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     NumberInStorage = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Price = table.Column<double>(type: "float", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -210,8 +209,6 @@ namespace CommercialWebSite.Data.Migrations
                     NumOfGood = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
                     IsCheckedOut = table.Column<bool>(type: "bit", nullable: false),
-                    UserRating = table.Column<int>(type: "int", nullable: false),
-                    Review = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BuyerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -225,6 +222,33 @@ namespace CommercialWebSite.Data.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductReviews",
+                columns: table => new
+                {
+                    ProductReviewId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductRating = table.Column<int>(type: "int", nullable: false),
+                    Review = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    UserAccountId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductReviews", x => x.ProductReviewId);
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_AspNetUsers_UserAccountId",
+                        column: x => x.UserAccountId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductReviews_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "ProductId",
@@ -249,19 +273,19 @@ namespace CommercialWebSite.Data.Migrations
                 columns: new[] { "ProductId", "CategoryId", "CreateDate", "Description", "Price", "ProductName", "ProductPicture", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, 4, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1901), "Product 1", 2000.0, "Product 1", "product-1.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1909) },
-                    { 2, 4, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1958), "Product 2", 2000.0, "Product 2", "product-2.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1960) },
-                    { 3, 1, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1990), "Product 3", 10000.0, "Product 3", "product-3.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(1991) },
-                    { 4, 1, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2010), "Product 4", 10000.0, "Product 4", "product-4.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2011) },
-                    { 5, 1, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2029), "Product 5", 10000.0, "Product 5", "product-5.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2030) },
-                    { 6, 1, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2050), "Product 6", 10000.0, "Product 6", "product-6.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2051) },
-                    { 7, 1, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2069), "Product 7", 10000.0, "Product 7", "product-7.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2069) },
-                    { 8, 3, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2089), "Product 8", 2300.0, "Product 8", "product-8.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2090) },
-                    { 9, 3, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2286), "Product 9", 2300.0, "Product 9", "product-9.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2287) },
-                    { 10, 3, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2313), "Product 10", 2300.0, "Product 10", "product-10.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2314) },
-                    { 11, 3, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2331), "Product 11", 2300.0, "Product 11", "product-11.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2332) },
-                    { 12, 2, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2351), "Product 12", 30000.0, "Product 12", "product-12.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2351) },
-                    { 13, 2, new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2369), "Product 13", 30000.0, "Product 13", "product-13.jpg", new DateTime(2022, 10, 21, 11, 54, 16, 353, DateTimeKind.Local).AddTicks(2370) }
+                    { 1, 4, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8858), "Product 1", 2000.0, "Product 1", "product-1.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8868) },
+                    { 2, 4, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8908), "Product 2", 2000.0, "Product 2", "product-2.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8909) },
+                    { 3, 1, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8930), "Product 3", 10000.0, "Product 3", "product-3.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8931) },
+                    { 4, 1, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8948), "Product 4", 10000.0, "Product 4", "product-4.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8949) },
+                    { 5, 1, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8967), "Product 5", 10000.0, "Product 5", "product-5.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8968) },
+                    { 6, 1, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8988), "Product 6", 10000.0, "Product 6", "product-6.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8988) },
+                    { 7, 1, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9007), "Product 7", 10000.0, "Product 7", "product-7.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9007) },
+                    { 8, 3, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9029), "Product 8", 2300.0, "Product 8", "product-8.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9030) },
+                    { 9, 3, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9048), "Product 9", 2300.0, "Product 9", "product-9.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9049) },
+                    { 10, 3, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9072), "Product 10", 2300.0, "Product 10", "product-10.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9073) },
+                    { 11, 3, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9091), "Product 11", 2300.0, "Product 11", "product-11.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9092) },
+                    { 12, 2, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9110), "Product 12", 30000.0, "Product 12", "product-12.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9111) },
+                    { 13, 2, new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9129), "Product 13", 30000.0, "Product 13", "product-13.jpg", new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9130) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -314,6 +338,16 @@ namespace CommercialWebSite.Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductReviews_ProductId",
+                table: "ProductReviews",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductReviews_UserAccountId",
+                table: "ProductReviews",
+                column: "UserAccountId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -338,6 +372,9 @@ namespace CommercialWebSite.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "ProductReviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

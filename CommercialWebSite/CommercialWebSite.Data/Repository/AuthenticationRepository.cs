@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.DataRepositoryInterface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

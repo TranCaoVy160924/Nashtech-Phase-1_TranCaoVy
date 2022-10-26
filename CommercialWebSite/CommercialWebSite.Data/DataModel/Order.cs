@@ -13,8 +13,6 @@ namespace CommercialWebSite.Data.DataModel
         public double TotalPrice { get; set; }
         // Unchecked out order is in cart
         public Boolean IsCheckedOut { get; set; }
-        public int UserRating { get; set; }
-        public string Review { get; set; }
 
         public virtual UserAccount Buyer { get; set; }
 

@@ -17,17 +17,17 @@ namespace CommercialWebSite.Data.Repository
     {
         private ApplicationDbContext _appDbContext;
         private MapperHelper<Product, ProductModel> _productMapper;
+        private MapperHelper<ProductReview, ProductReviewModel> _reviewMapper;
+        private IMapperProvider _mapperProvider;
 
-        public ProductRepository()
+        public ProductRepository(
+            ApplicationDbContext appDbContext, 
+            IMapperProvider mapperProvider)
         {
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<Product, ProductModel>()
-                .ForMember(
-                    dest => dest.CategoryId,
-                    act => act.MapFrom(src => src.Category.CategoryId)
-                ));
-            _productMapper = new MapperHelper<Product, ProductModel>(config);
-            _appDbContext = new ApplicationDbContext();
+            _mapperProvider = mapperProvider;
+            _reviewMapper = _mapperProvider.CreateReviewMapper();
+            _productMapper = _mapperProvider.CreateProductMapper();
+            _appDbContext = appDbContext;
         }
 
         // Implement Interface method
@@ -68,10 +68,10 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<ProductModel> GetProductByIdAsync(int id)
         {
-            //_appDbContext = new ApplicationDbContext();
             Product rawProduct =
                 await _appDbContext.Products
                 .Include(p => p.Category)
+                .Include(p => p.ProductReviews)
                 .Where(p => p.ProductId == id)
                 .FirstOrDefaultAsync();
 
@@ -80,7 +80,6 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> GetProductByNameAsync(string prodName)
         {
-            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
@@ -92,7 +91,6 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter)
         {
-            //_appDbContext = new ApplicationDbContext();
             List<Product> filteredRawProducts = new List<Product>();
             foreach (CategorySelectionModel categorySelection in filter.CategoriesSelection)
             {

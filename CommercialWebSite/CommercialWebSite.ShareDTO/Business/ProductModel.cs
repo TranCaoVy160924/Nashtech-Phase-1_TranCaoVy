@@ -19,5 +19,6 @@ namespace CommercialWebSite.ShareDTO.Business
         public DateTime UpdateDate { get; set; }
 
         public int CategoryId { get; set; }
+        public List<ProductReviewModel>? Reviews { get; set; }
     }
 }

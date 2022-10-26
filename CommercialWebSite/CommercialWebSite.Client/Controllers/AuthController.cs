@@ -37,15 +37,10 @@ namespace CommercialWebSite.Client.Controllers
                     var session = Request.HttpContext.Session;
 
                     // Get and decrypt jwt token
-                    JwtResponseToken responseToken = JsonConvert.DeserializeObject<JwtResponseToken>(await _authClient.Login(model));
-                    var handler = new JwtSecurityTokenHandler();
-                    JwtSecurityToken secureToken = handler.ReadJwtToken(responseToken.Token);
-
-                    string userId = secureToken.Claims.Where(c => c.Type == ClaimTypes.Sid).SingleOrDefault().Value.ToString();
-
-                    _logger.LogInformation("Raw token: " + responseToken.Token.ToString());
-                    _logger.LogInformation("Secure token: " + secureToken);
-                    _logger.LogInformation("User Id: " + userId);
+                    JwtResponseToken responseToken = 
+                        JsonConvert.DeserializeObject<JwtResponseToken>(
+                            await _authClient.Login(model)
+                        );
 
                     // Add token to session
                     session.SetString("JwtAuthToken", responseToken.Token);

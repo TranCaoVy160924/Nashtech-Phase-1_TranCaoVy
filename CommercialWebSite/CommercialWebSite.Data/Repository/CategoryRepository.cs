@@ -16,30 +16,15 @@ namespace CommercialWebSite.Data.Repository
     {
         private ApplicationDbContext _appDbContext;
         private MapperHelper<Category, CategoryModel> _categoryMapper;
+        private IMapperProvider _mapperProvider;
 
-        public CategoryRepository()
+        public CategoryRepository(
+            ApplicationDbContext appDbContext,
+            IMapperProvider mapperProvider)
         {
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<Category, CategoryModel>()
-                .ForMember(
-                    dest => dest.ProductCount,
-                    act => act.MapFrom(src => src.Products.Count)
-                ));
-            _categoryMapper = new MapperHelper<Category, CategoryModel>(config);
+            _mapperProvider = mapperProvider;
+            _categoryMapper =_mapperProvider.CreateCategoryMapper();
             _appDbContext = new ApplicationDbContext();
-        }
-
-        // Constructor for testing
-        public CategoryRepository(ApplicationDbContext applicationDbContext)
-        {
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<Category, CategoryModel>()
-                .ForMember(
-                    dest => dest.ProductCount,
-                    act => act.MapFrom(src => src.Products.Count)
-                ));
-            _categoryMapper = new MapperHelper<Category, CategoryModel>(config);
-            _appDbContext = applicationDbContext;
         }
 
         // Implement interface method

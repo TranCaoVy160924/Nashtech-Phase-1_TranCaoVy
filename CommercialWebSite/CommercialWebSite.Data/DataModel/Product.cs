@@ -12,7 +12,6 @@ namespace CommercialWebSite.Data.DataModel
         public string ProductName { get; set; }
         public string Description { get; set; }
         public string ProductPicture { get; set; }
-        public int AgregateUserRate { get; set; }
         public int NumberInStorage { get; set; }
         public double Price { get; set; }
         public DateTime CreateDate { get; set; }
@@ -21,5 +20,6 @@ namespace CommercialWebSite.Data.DataModel
         public virtual Category Category { get; set; }
 
         public virtual List<Order>? Orders { get; set; }
+        public virtual List<ProductReview>? ProductReviews { get; set; }
     }
 }

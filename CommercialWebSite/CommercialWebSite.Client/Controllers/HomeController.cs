@@ -14,11 +14,13 @@ namespace CommercialWebSite.Client.Controllers
         private readonly ILogger<HomeController> _logger;
         private static readonly string baseUrl = "https://localhost:7281";
         private readonly IProductClient _productClient;
+        private readonly IReviewClient _reviewClient;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
             _productClient = RestService.For<IProductClient>(baseUrl);
+            _reviewClient = RestService.For<IReviewClient>(baseUrl);
         }
 
         public async Task<IActionResult> Index()
@@ -67,7 +69,7 @@ namespace CommercialWebSite.Client.Controllers
             ViewModel viewModel = new ViewModel();
             viewModel.ProductDetail = product;
 
-            return View(viewModel);
+            return View("ProductDetail", viewModel);
         }
 
         public async Task<IActionResult> SearchProductByCategory(string catId)
@@ -155,6 +157,29 @@ namespace CommercialWebSite.Client.Controllers
             };
 
             return await Shop(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostProductReview(ViewModel model)
+        {
+            ProductReviewModel reviewModel = model.ProductReviewInputModel;
+
+            // Validate
+            if (reviewModel.Review == null)
+            {
+                reviewModel.Review = "";
+            }
+
+            try
+            {
+                await _reviewClient.PostReviewAsync(reviewModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
+
+            return RedirectToAction("ProductDetail", new { id = reviewModel.ProductId });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

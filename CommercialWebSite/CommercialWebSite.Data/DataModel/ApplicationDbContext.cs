@@ -22,6 +22,7 @@ namespace CommercialWebSite.Data.DataModel
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,9 +37,6 @@ namespace CommercialWebSite.Data.DataModel
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Product>()
-                .Property(p => p.AgregateUserRate)
-                .HasDefaultValue(0);
             builder.Entity<Product>()
                 .Property(p => p.NumberInStorage)
                 .HasDefaultValue(0);
