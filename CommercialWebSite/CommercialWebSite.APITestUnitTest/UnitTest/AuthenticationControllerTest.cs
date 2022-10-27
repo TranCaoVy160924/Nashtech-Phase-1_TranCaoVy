@@ -1,5 +1,6 @@
 ﻿using CommercialWebSite.API.Controllers;
 using CommercialWebSite.APITestUnitTest.DataSetup;
+using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO.Auth;
 using FluentAssertions;
@@ -20,7 +21,7 @@ using static CommercialWebSite.APITestUnitTest.TestHelper.ConverterFromIActionRe
 namespace CommercialWebSite.APITestUnitTest.UnitTest
 {
     public class AuthenticationControllerTest
-    { 
+    {
         // Common response
         private static StatusResponse ExistedUserError = new StatusResponse
         {
@@ -58,7 +59,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
         public async Task Register_ValidRequest_ReturnSucceedStatusResponse()
         {
             // Arrange
-            var mock = new Mock<IAuthenticationRepository>();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
             mock.Setup(
                 m => m.IsExistedAsync(userRegister.Username)).Returns(Task.FromResult(false));
             mock.Setup(
@@ -82,7 +83,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
         public async Task Register_UserExisted_ReturnExistedUserResponse()
         {
             // Arrange
-            var mock = new Mock<IAuthenticationRepository>();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
             mock.Setup(
                 m => m.IsExistedAsync(userRegister.Username))
                 .Returns(Task.FromResult(true));
@@ -107,7 +108,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
         public async Task Register_BadRequest_ReturnCreateUserFailedResponse()
         {
             // Arrange
-            var mock = new Mock<IAuthenticationRepository>();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
             mock.Setup(
                 m => m.IsExistedAsync(userRegister.Username))
                 .Returns(Task.FromResult(false));
@@ -135,7 +136,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
         {
             // Arrange
             IConfiguration config = InitConfiguration();
-            var mock = new Mock<IAuthenticationRepository>();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
             mock.Setup(
                 m => m.AuthenticateLoginAsync(userLogin.Username, userLogin.Password))
                 .Returns(AuthDataSetup.GetClaimAsync());
@@ -154,7 +155,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
         {
             // Arrange
             IConfiguration config = InitConfiguration();
-            var mock = new Mock<IAuthenticationRepository>();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
             mock.Setup(
                 m => m.AuthenticateLoginAsync(userLogin.Username, userLogin.Password))
                 .Returns<List<Claim>>(null);

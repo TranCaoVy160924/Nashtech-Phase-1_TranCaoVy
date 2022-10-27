@@ -12,6 +12,7 @@ namespace CommercialWebSite.ShareDTO.Business
         [Required(ErrorMessage = "Rating is required")]
         public int ProductRating { get; set; }
         public string? Review { get; set; }
+        public DateTime? PostedDate { get; set; }
 
         public int ProductId { get; set; }
         public string UserAccountId { get; set; }

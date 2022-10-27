@@ -93,18 +93,21 @@ namespace CommercialWebSite.Client.Controllers
             return await Shop(viewModel);
         }
 
-        public async Task<IActionResult> SearchProductByName(IFormCollection formFields)
+        public async Task<IActionResult> SearchProductByName(string prodName)
         {
-            string prodName = formFields["prodName"];
-            List<ProductModel> products =
-                await _productClient.GetProductByNameAsync(prodName.Trim());
+            List<ProductModel> products = new List<ProductModel>();
+            if (prodName != null)
+            {
+                products =
+                    await _productClient.GetProductByNameAsync(prodName);
+            }
 
             ViewModel viewModel = new ViewModel
             {
                 ProductModels = products
             };
 
-            return await Shop(viewModel);
+            return RedirectToAction("Shop", new { requestViewModel = viewModel });
         }
 
         [HttpPost]

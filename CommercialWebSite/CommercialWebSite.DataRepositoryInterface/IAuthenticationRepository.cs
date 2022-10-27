@@ -9,23 +9,17 @@ using System.Threading.Tasks;
 
 namespace CommercialWebSite.DataRepositoryInterface
 {
-    public interface IAuthenticationRepository
-    {
-        void SetManager(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager);
-
-        void SetConfig(IConfiguration configuration);
-
+    public interface IAuthenticationRepository<T>
+    { 
         Task<List<Claim>>? AuthenticateLoginAsync(string username, string password);
 
         Task<Boolean> IsExistedAsync(string username);
 
-        Task<IdentityUser> RegisterNewUserAsync(
+        Task<T> RegisterNewUserAsync(
             string username, string email, string password);
 
         Task InitialUserRoleAsync(string role);
 
-        Task AddRoleToUserAsync(IdentityUser user, string role);
+        Task AddRoleToUserAsync(T user, string role);
     }
 }

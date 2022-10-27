@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CommercialWebSite.Data.DataModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,17 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
 {
     public static class AuthDataSetup
     {
-        public static async Task<IdentityUser> UserAccountAsync()
+        public static async Task<UserAccount> UserAccountAsync()
         {
-            IdentityUser user = new IdentityUser
+            UserAccount user = new UserAccount
             {
-                Id = "0001",
-                UserName = "conga",
-                Email = "m0untW3as3l@",
+                Email = "1@gmail.com",
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = "cong ga",
+                FirstName = "asdsa",
+                LastName = "dsfdsfsd",
+                Birthday = DateTime.Today,
+                UserAddress = "dsfdsfa"
             };
 
             return user;

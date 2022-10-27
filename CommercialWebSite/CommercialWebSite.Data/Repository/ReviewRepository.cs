@@ -18,12 +18,12 @@ namespace CommercialWebSite.Data.Repository
         private ApplicationDbContext _appDbContext;
         private MapperHelper<ProductReview, ProductReviewModel> _reviewMapper;
         private IMapperProvider _mapperProvider;
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<UserAccount> _userManager;
 
         public ReviewRepository(
             ApplicationDbContext appDbContext,
             IMapperProvider mapperProvider,
-            UserManager<IdentityUser> userManager)
+            UserManager<UserAccount> userManager)
         {
             _mapperProvider = mapperProvider;
             _appDbContext = appDbContext;
@@ -37,24 +37,38 @@ namespace CommercialWebSite.Data.Repository
             Product reviewedProduct =
                 await _appDbContext.Products
                 .Where(p => p.ProductId == reviewModel.ProductId)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             UserAccount reviewer =
                 await _appDbContext.UserAccounts
                 .Where(u => u.UserName.Equals(reviewModel.UserName))
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             ProductReview review = new ProductReview
             {
                 ProductRating = reviewModel.ProductRating,
                 Review = reviewModel.Review,
+                PostedDate = DateTime.Today,
                 Product = reviewedProduct,
-                UserAccount = new UserAccount()
+                UserAccount = reviewer
             };
-
+            
             try
             {
-                _appDbContext.Add(review);
+                if (reviewedProduct.ProductReviews == null)
+                {
+                    reviewedProduct.ProductReviews = new List<ProductReview>();
+                }
+                reviewedProduct.ProductReviews.Add(review);
+
+                if (reviewer.ProductReviews == null)
+                {
+                    reviewer.ProductReviews = new List<ProductReview>();
+                }
+                reviewer.ProductReviews.Add(review);
+
+
+                _appDbContext.ProductReviews.Add(review);
                 _appDbContext.SaveChanges();
             }
             catch (Exception)

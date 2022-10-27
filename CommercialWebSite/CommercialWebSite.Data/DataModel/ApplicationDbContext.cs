@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CommercialWebSite.Data.DataModel
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<UserAccount>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

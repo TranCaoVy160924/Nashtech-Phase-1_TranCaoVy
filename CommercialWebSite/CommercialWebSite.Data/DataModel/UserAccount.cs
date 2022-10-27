@@ -13,7 +13,6 @@ namespace CommercialWebSite.Data.DataModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday { get; set; }
-        public string ProfilePicture { get; set; }
         public string UserAddress { get; set; }
 
         public virtual List<Order>? Orders { get; set; }

@@ -12,24 +12,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace CommercialWebSite.Data.Repository
 {
-    public class AuthenticationRepository: IAuthenticationRepository
+    public class AuthenticationRepository: IAuthenticationRepository<UserAccount>
     {
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<UserAccount> _userManager;
         private RoleManager<IdentityRole> _roleManager;
-        private IConfiguration _configuration;
 
         // Implement interface function
-        public void SetManager(
-            UserManager<IdentityUser> userManager,
+        public AuthenticationRepository(
+            UserManager<UserAccount> userManager,
             RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-        }
-
-        public void SetConfig(IConfiguration configuration)
-        {
-            _configuration = configuration;
         }
 
         public async Task<List<Claim>>? AuthenticateLoginAsync(
@@ -56,14 +50,18 @@ namespace CommercialWebSite.Data.Repository
             return false;
         }
 
-        public async Task<IdentityUser>? RegisterNewUserAsync(
+        public async Task<UserAccount>? RegisterNewUserAsync(
             string username, string email, string password)
         {
-            IdentityUser user = new()
+            UserAccount user = new()
             {
                 Email = email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = username
+                UserName = username,
+                FirstName = "asdsa",
+                LastName = "dsfdsfsd",
+                Birthday = DateTime.Today,
+                UserAddress = "dsfdsfa"
             };
             var result = await _userManager.CreateAsync(user, password);
 
@@ -82,7 +80,7 @@ namespace CommercialWebSite.Data.Repository
                 await _roleManager.CreateAsync(new IdentityRole(role));
         }
 
-        public async Task AddRoleToUserAsync(IdentityUser user, string role)
+        public async Task AddRoleToUserAsync(UserAccount user, string role)
         {
             if (await _roleManager.RoleExistsAsync(role))
             {
@@ -91,21 +89,21 @@ namespace CommercialWebSite.Data.Repository
         }
 
         // Helper function
-        private async Task<IdentityUser>? FindUserByNameAsync(string username)
+        private async Task<UserAccount>? FindUserByNameAsync(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             return user;
         }
 
         private async Task<Boolean> IsValidLoginAsync(
-            IdentityUser user, string password)
+            UserAccount user, string password)
         {
             Boolean isValid = user != null 
                 && await _userManager.CheckPasswordAsync(user, password);
             return isValid;
         }
 
-        private async Task<List<Claim>> GetUserClaimAsync(IdentityUser user)
+        private async Task<List<Claim>> GetUserClaimAsync(UserAccount user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
 

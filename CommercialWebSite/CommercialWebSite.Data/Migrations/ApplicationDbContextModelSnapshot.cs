@@ -161,144 +161,144 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8858),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3090),
                             Description = "Product 1",
                             Price = 2000.0,
                             ProductName = "Product 1",
                             ProductPicture = "product-1.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8868)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3101)
                         },
                         new
                         {
                             ProductId = 2,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8908),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3142),
                             Description = "Product 2",
                             Price = 2000.0,
                             ProductName = "Product 2",
                             ProductPicture = "product-2.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8909)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3143)
                         },
                         new
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8930),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3164),
                             Description = "Product 3",
                             Price = 10000.0,
                             ProductName = "Product 3",
                             ProductPicture = "product-3.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8931)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3164)
                         },
                         new
                         {
                             ProductId = 4,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8948),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3182),
                             Description = "Product 4",
                             Price = 10000.0,
                             ProductName = "Product 4",
                             ProductPicture = "product-4.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8949)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3183)
                         },
                         new
                         {
                             ProductId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8967),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3199),
                             Description = "Product 5",
                             Price = 10000.0,
                             ProductName = "Product 5",
                             ProductPicture = "product-5.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8968)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3200)
                         },
                         new
                         {
                             ProductId = 6,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8988),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3220),
                             Description = "Product 6",
                             Price = 10000.0,
                             ProductName = "Product 6",
                             ProductPicture = "product-6.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(8988)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3220)
                         },
                         new
                         {
                             ProductId = 7,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9007),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3237),
                             Description = "Product 7",
                             Price = 10000.0,
                             ProductName = "Product 7",
                             ProductPicture = "product-7.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9007)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3237)
                         },
                         new
                         {
                             ProductId = 8,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9029),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3256),
                             Description = "Product 8",
                             Price = 2300.0,
                             ProductName = "Product 8",
                             ProductPicture = "product-8.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9030)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3256)
                         },
                         new
                         {
                             ProductId = 9,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9048),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3274),
                             Description = "Product 9",
                             Price = 2300.0,
                             ProductName = "Product 9",
                             ProductPicture = "product-9.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9049)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3275)
                         },
                         new
                         {
                             ProductId = 10,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9072),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3294),
                             Description = "Product 10",
                             Price = 2300.0,
                             ProductName = "Product 10",
                             ProductPicture = "product-10.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9073)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3295)
                         },
                         new
                         {
                             ProductId = 11,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9091),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3384),
                             Description = "Product 11",
                             Price = 2300.0,
                             ProductName = "Product 11",
                             ProductPicture = "product-11.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9092)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3385)
                         },
                         new
                         {
                             ProductId = 12,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9110),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3412),
                             Description = "Product 12",
                             Price = 30000.0,
                             ProductName = "Product 12",
                             ProductPicture = "product-12.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9111)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3412)
                         },
                         new
                         {
                             ProductId = 13,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9129),
+                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3430),
                             Description = "Product 13",
                             Price = 30000.0,
                             ProductName = "Product 13",
                             ProductPicture = "product-13.jpg",
-                            UpdateDate = new DateTime(2022, 10, 26, 21, 44, 59, 117, DateTimeKind.Local).AddTicks(9130)
+                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3430)
                         });
                 });
 
@@ -309,6 +309,9 @@ namespace CommercialWebSite.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductReviewId"), 1L, 1);
+
+                    b.Property<DateTime?>("PostedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -329,6 +332,86 @@ namespace CommercialWebSite.Data.Migrations
                     b.HasIndex("UserAccountId");
 
                     b.ToTable("ProductReviews");
+                });
+
+            modelBuilder.Entity("CommercialWebSite.Data.DataModel.UserAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -381,77 +464,6 @@ namespace CommercialWebSite.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -535,32 +547,6 @@ namespace CommercialWebSite.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CommercialWebSite.Data.DataModel.UserAccount", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfilePicture")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("UserAccount");
-                });
-
             modelBuilder.Entity("CommercialWebSite.Data.DataModel.Order", b =>
                 {
                     b.HasOne("CommercialWebSite.Data.DataModel.UserAccount", "Buyer")
@@ -617,7 +603,7 @@ namespace CommercialWebSite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CommercialWebSite.Data.DataModel.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -626,7 +612,7 @@ namespace CommercialWebSite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CommercialWebSite.Data.DataModel.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -641,7 +627,7 @@ namespace CommercialWebSite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CommercialWebSite.Data.DataModel.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -650,7 +636,7 @@ namespace CommercialWebSite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("CommercialWebSite.Data.DataModel.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -11,17 +11,10 @@ namespace CommercialWebSite.API.Controllers
     public class ReviewController : ControllerBase
     {
         private readonly IReviewRepository _reviewRepository;
-        private ILogger<ReviewController> _logger;
-        private IUserAccountRepository _userAccountRepository;
 
-        public ReviewController(
-            IReviewRepository reviewRepository, 
-            ILogger<ReviewController> logger, 
-            IUserAccountRepository userAccountRepository)
+        public ReviewController(IReviewRepository reviewRepository)
         {
             _reviewRepository = reviewRepository;
-            _logger = logger;
-            _userAccountRepository = userAccountRepository;
         }
 
         [HttpPost]
@@ -29,7 +22,7 @@ namespace CommercialWebSite.API.Controllers
         public async Task<IActionResult> PostReviewAsync([FromBody] ProductReviewModel reviewModel)
         {
             bool isSucceeded = await _reviewRepository.PostReviewAsync(reviewModel);
-            if (!isSucceeded)
+            if (isSucceeded)
             {
                 return StatusCode(StatusCodes.Status201Created);
             }

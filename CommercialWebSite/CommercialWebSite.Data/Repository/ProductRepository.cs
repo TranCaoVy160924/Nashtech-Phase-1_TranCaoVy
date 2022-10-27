@@ -72,6 +72,7 @@ namespace CommercialWebSite.Data.Repository
                 await _appDbContext.Products
                 .Include(p => p.Category)
                 .Include(p => p.ProductReviews)
+                .ThenInclude(r => r.UserAccount)
                 .Where(p => p.ProductId == id)
                 .FirstOrDefaultAsync();
 

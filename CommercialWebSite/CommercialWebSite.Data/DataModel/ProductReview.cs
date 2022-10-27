@@ -11,6 +11,7 @@ namespace CommercialWebSite.Data.DataModel
         public int ProductReviewId { get; set; }
         public int ProductRating { get; set; }
         public string? Review { get; set; }
+        public DateTime? PostedDate { get; set; }
 
         public Product Product { get; set; }
         public UserAccount UserAccount { get; set; }

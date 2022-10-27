@@ -14,10 +14,10 @@ namespace CommercialWebSite.API.Controllers
     [Route("[controller]")]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<UserAccount> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
-        private readonly IAuthenticationRepository _authRepository;
+        private readonly IAuthenticationRepository<UserAccount> _authRepository;
 
         // Common response
         private static StatusResponse ExistedUserError = new StatusResponse
@@ -38,18 +38,15 @@ namespace CommercialWebSite.API.Controllers
         };
 
         public AuthenticateController(
-            UserManager<IdentityUser> userManager,
+            UserManager<UserAccount> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
-            IAuthenticationRepository authenticationRepository)
+            IAuthenticationRepository<UserAccount> authenticationRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _authRepository = authenticationRepository;
-
-            _authRepository.SetManager(_userManager, _roleManager);
-            _authRepository.SetConfig(_configuration);
         }
 
         [HttpPost]
@@ -95,7 +92,7 @@ namespace CommercialWebSite.API.Controllers
 
             try
             {
-                IdentityUser user = await _authRepository
+                UserAccount user = await _authRepository
                 .RegisterNewUserAsync(username, email, password);
             }
             catch (NullReferenceException)
@@ -121,7 +118,7 @@ namespace CommercialWebSite.API.Controllers
                     StatusCodes.Status500InternalServerError,
                     ExistedUserError);
 
-            IdentityUser user = await _authRepository
+            UserAccount user = await _authRepository
                 .RegisterNewUserAsync(username, email, password);
             if (user == null)
                 return StatusCode(

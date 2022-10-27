@@ -37,7 +37,7 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                         .Average()))
                 .ForMember(
                     dest => dest.Reviews,
-                    act => act.MapFrom(src => 
+                    act => act.MapFrom(src =>
                         _reviewMapper
                         .MapCollection(src.ProductReviews)
                         .ToList()))
@@ -57,6 +57,10 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                 .ForMember(
                     dest => dest.UserAccountId,
                     act => act.MapFrom(src => src.UserAccount.Id)
+                )
+                .ForMember(
+                    dest => dest.UserName,
+                    act => act.MapFrom(src => src.UserAccount.UserName)
                 ));
             _reviewMapper = new MapperHelper<ProductReview, ProductReviewModel>(reviewConfig);
 
