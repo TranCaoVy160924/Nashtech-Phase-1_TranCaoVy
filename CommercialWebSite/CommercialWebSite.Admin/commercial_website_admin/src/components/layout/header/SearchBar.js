@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useContext } from "react";
+import { AppContext } from "../../../App";
 
-const SearchBar = ({ onSubmitProductNameForm }) => {
+const SearchBar = () => {
    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-   const onSubmitForm = onSubmitProductNameForm;
+   const context = useContext(AppContext);
+   const onSubmitForm = context.onSubmitProductNameForm;
 
    return (
       <div className="container-fluid">

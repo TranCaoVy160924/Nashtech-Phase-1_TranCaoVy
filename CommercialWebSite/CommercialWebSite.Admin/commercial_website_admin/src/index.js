@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './resource/css/style.css';
 import './resource/lib/animate/animate.min.css';
 import './resource/lib/owlcarousel/assets/owl.carousel.min.css';

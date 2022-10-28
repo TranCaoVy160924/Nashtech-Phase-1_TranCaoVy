@@ -2,11 +2,11 @@ import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import React from "react";
 
-const Header = ({ headerStateControl }) => {
+const Header = () => {
    return (
       <React.Fragment>
-         <SearchBar onSubmitProductNameForm={headerStateControl.onSubmitProductNameForm}/>
-         <NavBar setCatChoice={headerStateControl.setCatChoice}/>
+         <SearchBar />
+         <NavBar />
       </React.Fragment>
    )
 }

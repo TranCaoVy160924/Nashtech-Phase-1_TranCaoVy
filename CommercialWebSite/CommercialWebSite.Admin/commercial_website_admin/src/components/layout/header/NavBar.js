@@ -1,12 +1,12 @@
 import CategoryDropdown from "./CategoryDropdown";
 import { Link } from "react-router-dom";
 
-const NavBar = ({ setCatChoice }) => {
+const NavBar = () => {
    return (
       <div className="sticky-top">
          <div className="container-fluid bg-dark mb-30">
             <div className="row px-xl-5">
-               <CategoryDropdown setCatChoice={setCatChoice}/>
+               <CategoryDropdown />
                <div className="col-lg-9">
                   <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                      <Link to="/" className="text-decoration-none d-block d-lg-none">
