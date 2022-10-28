@@ -3,7 +3,7 @@
 
 <div class="product-item bg-light mb-4">
     <div class="product-img position-relative overflow-hidden">
-        <img class="img-fluid w-100" src="~/img/@Model.ProductPicture" alt="">
+        <img class="img-fluid w-100" src="@Model.ProductPicture" alt="">
         <div class="product-action">
             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
             <form id="productDetailForm-@(Model.ProductId)" asp-controller="Home" asp-action="ProductDetail">

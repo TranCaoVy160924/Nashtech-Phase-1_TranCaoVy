@@ -53,7 +53,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 1,
                     CategoryName = "Clothes",
-                    CategoryPicture = "cat-1.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854127/cat-1_veobee.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -61,7 +61,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 2,
                     CategoryName = "Household",
-                    CategoryPicture = "cat-2.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-2_thblkg.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -69,7 +69,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 3,
                     CategoryName = "Electronic",
-                    CategoryPicture = "cat-3.jpg",
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-3_dvyjbe.jpg",
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -77,7 +77,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 4,
                     CategoryName = "Beauty",
-                    CategoryPicture = "cat-4.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-4_ymnplq.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -85,7 +85,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 5,
                     CategoryName = "Book",
-                    CategoryPicture = "cat-5.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-5_ijcxzw.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -93,75 +93,233 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 6,
                     CategoryName = "Pet",
-                    CategoryPicture = "cat-6.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-6_s3afnw.jpg"
                 });
         }
 
         private void SeedProduct(ModelBuilder builder)
         {
-            for (int i = 1; i <= 2; i++)
-            {
-                builder.Entity<Product>().HasData(
+            builder.Entity<Product>().HasData(
                 new
                 {
-                    ProductId = i,
-                    ProductName = "Product " + i,
-                    Description = "Product " + i,
-                    ProductPicture = $"product-{i}.jpg",
+                    ProductId = 1,
+                    ProductName = "Product " + 1,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-1_iyqgel.jpg",
                     Price = (Double)2000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
                     CategoryId = 4
                 });
-            }
-
-            for (int i = 3; i <= 7; i++)
-            {
-                builder.Entity<Product>().HasData(
+            builder.Entity<Product>().HasData(
                 new
                 {
-                    ProductId = i,
-                    ProductName = "Product " + i,
-                    Description = "Product " + i,
-                    ProductPicture = $"product-{i}.jpg",
+                    ProductId = 2,
+                    ProductName = "Product " + 2,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-2_wds2xq.jpg",
+                    Price = (Double)2000,
+                    CreateDate = DateTime.Today,
+                    UpdateDate = DateTime.Today,
+                    CategoryId = 4
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 3,
+                    ProductName = "Product " + 3,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-3_ysbo6f.jpg",
                     Price = (Double)10000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
                     CategoryId = 1
                 });
-            }
-
-            for (int i = 8; i <= 11; i++)
-            {
-                builder.Entity<Product>().HasData(
+            builder.Entity<Product>().HasData(
                 new
                 {
-                    ProductId = i,
-                    ProductName = "Product " + i,
-                    Description = "Product " + i,
-                    ProductPicture = $"product-{i}.jpg",
+                    ProductId = 4,
+                    ProductName = "Product " + 4,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-4_w2yb1f.jpg",
+                    Price = (Double)10000,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 1
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 5,
+                    ProductName = "Product " + 5,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-5_nhbfgf.jpg",
+                    Price = (Double)10000,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 1
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 6,
+                    ProductName = "Product " + 6,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-6_rsti5j.jpg",
+                    Price = (Double)10000,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 1
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 7,
+                    ProductName = "Product " + 7,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-7_ykpjce.jpg",
+                    Price = (Double)10000,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 1
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 8,
+                    ProductName = "Product " + 8,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-8_wu5jzf.jpg",
                     Price = (Double)2300,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
                     CategoryId = 3
                 });
-            }
-
-            for (int i = 12; i <= 13; i++)
-            {
-                builder.Entity<Product>().HasData(
+            builder.Entity<Product>().HasData(
                 new
                 {
-                    ProductId = i,
-                    ProductName = "Product " + i,
-                    Description = "Product " + i,
-                    ProductPicture = $"product-{i}.jpg",
+                    ProductId = 9,
+                    ProductName = "Product " + 9,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-9_pik3wm.jpg",
+                    Price = (Double)2300,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 3
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 10,
+                    ProductName = "Product " + 10,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-10_buoi29.jpg",
+                    Price = (Double)2300,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 3
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 11,
+                    ProductName = "Product " + 11,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-11_zpxzs7.jpg",
+                    Price = (Double)2300,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 3
+                });
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 12,
+                    ProductName = "Product " + 12,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-12_s0abhz.jpg",
                     Price = (Double)30000,
                     CreateDate = DateTime.Now,
                     UpdateDate = DateTime.Now,
                     CategoryId = 2
                 });
-            }
+            builder.Entity<Product>().HasData(
+                new
+                {
+                    ProductId = 13,
+                    ProductName = "Product " + 13,
+                    Description = "Open your door to the world " +
+                        "of grilling with the sleek Spirit II E-210 gas grill." +
+                        " This two burner grill is built to fit small spaces, and packed " +
+                        "with features such as the powerful GS4 grilling system, iGrill " +
+                        "capability, and convenient side tables for placing serving trays." +
+                        " Welcome to the Weber family.",
+                    ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-13_p3fpxz.jpg",
+                    Price = (Double)30000,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now,
+                    CategoryId = 2
+                });
         }
     }
 }

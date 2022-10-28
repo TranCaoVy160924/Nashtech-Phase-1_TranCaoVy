@@ -47,37 +47,37 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             CategoryId = 1,
                             CategoryName = "Clothes",
-                            CategoryPicture = "cat-1.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854127/cat-1_veobee.jpg"
                         },
                         new
                         {
                             CategoryId = 2,
                             CategoryName = "Household",
-                            CategoryPicture = "cat-2.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-2_thblkg.jpg"
                         },
                         new
                         {
                             CategoryId = 3,
                             CategoryName = "Electronic",
-                            CategoryPicture = "cat-3.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-3_dvyjbe.jpg"
                         },
                         new
                         {
                             CategoryId = 4,
                             CategoryName = "Beauty",
-                            CategoryPicture = "cat-4.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-4_ymnplq.jpg"
                         },
                         new
                         {
                             CategoryId = 5,
                             CategoryName = "Book",
-                            CategoryPicture = "cat-5.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-5_ijcxzw.jpg"
                         },
                         new
                         {
                             CategoryId = 6,
                             CategoryName = "Pet",
-                            CategoryPicture = "cat-6.jpg"
+                            CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-6_s3afnw.jpg"
                         });
                 });
 
@@ -161,144 +161,144 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3090),
-                            Description = "Product 1",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6061),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2000.0,
                             ProductName = "Product 1",
-                            ProductPicture = "product-1.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3101)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-1_iyqgel.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6071)
                         },
                         new
                         {
                             ProductId = 2,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3142),
-                            Description = "Product 2",
+                            CreateDate = new DateTime(2022, 10, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2000.0,
                             ProductName = "Product 2",
-                            ProductPicture = "product-2.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3143)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-2_wds2xq.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 0, 0, 0, 0, DateTimeKind.Local)
                         },
                         new
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3164),
-                            Description = "Product 3",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6113),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 10000.0,
                             ProductName = "Product 3",
-                            ProductPicture = "product-3.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3164)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-3_ysbo6f.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6113)
                         },
                         new
                         {
                             ProductId = 4,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3182),
-                            Description = "Product 4",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6123),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 10000.0,
                             ProductName = "Product 4",
-                            ProductPicture = "product-4.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3183)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-4_w2yb1f.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6124)
                         },
                         new
                         {
                             ProductId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3199),
-                            Description = "Product 5",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6134),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 10000.0,
                             ProductName = "Product 5",
-                            ProductPicture = "product-5.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3200)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-5_nhbfgf.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6135)
                         },
                         new
                         {
                             ProductId = 6,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3220),
-                            Description = "Product 6",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6147),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 10000.0,
                             ProductName = "Product 6",
-                            ProductPicture = "product-6.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3220)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-6_rsti5j.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6147)
                         },
                         new
                         {
                             ProductId = 7,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3237),
-                            Description = "Product 7",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6158),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 10000.0,
                             ProductName = "Product 7",
-                            ProductPicture = "product-7.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3237)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-7_ykpjce.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6159)
                         },
                         new
                         {
                             ProductId = 8,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3256),
-                            Description = "Product 8",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6169),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2300.0,
                             ProductName = "Product 8",
-                            ProductPicture = "product-8.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3256)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-8_wu5jzf.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6169)
                         },
                         new
                         {
                             ProductId = 9,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3274),
-                            Description = "Product 9",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6180),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2300.0,
                             ProductName = "Product 9",
-                            ProductPicture = "product-9.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3275)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-9_pik3wm.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6181)
                         },
                         new
                         {
                             ProductId = 10,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3294),
-                            Description = "Product 10",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6194),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2300.0,
                             ProductName = "Product 10",
-                            ProductPicture = "product-10.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3295)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-10_buoi29.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6194)
                         },
                         new
                         {
                             ProductId = 11,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3384),
-                            Description = "Product 11",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6205),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 2300.0,
                             ProductName = "Product 11",
-                            ProductPicture = "product-11.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3385)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-11_zpxzs7.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6206)
                         },
                         new
                         {
                             ProductId = 12,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3412),
-                            Description = "Product 12",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6276),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 30000.0,
                             ProductName = "Product 12",
-                            ProductPicture = "product-12.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3412)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-12_s0abhz.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6277)
                         },
                         new
                         {
                             ProductId = 13,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3430),
-                            Description = "Product 13",
+                            CreateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6292),
+                            Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             Price = 30000.0,
                             ProductName = "Product 13",
-                            ProductPicture = "product-13.jpg",
-                            UpdateDate = new DateTime(2022, 10, 27, 9, 14, 15, 469, DateTimeKind.Local).AddTicks(3430)
+                            ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-13_p3fpxz.jpg",
+                            UpdateDate = new DateTime(2022, 10, 27, 20, 20, 57, 642, DateTimeKind.Local).AddTicks(6293)
                         });
                 });
 

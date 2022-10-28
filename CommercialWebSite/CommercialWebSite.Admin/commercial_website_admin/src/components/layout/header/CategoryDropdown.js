@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import CategoryService from '../../../services/category'
 
-const CategoryDropdown = () => {
+const CategoryDropdown = ({ setCatChoice }) => {
    const [categories, setCategories] = useState([]);
 
    useEffect(() => {
       CategoryService.getAllAsync()
          .then(data => {
-            console.log("api data response ", data);
+            console.log("api category response ", data);
             setCategories(data)
          })
    }, []);
@@ -22,12 +22,12 @@ const CategoryDropdown = () => {
          <nav className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
             id="navbar-vertical" style={{ width: 'calc(100% - 30px)', zIndex: 999 }}>
             <div className="navbar-nav w-100">
-               <a href="Home/SearchProductByCategory?catId=0" className="nav-item nav-link">
+               <a href="#/" onClick={() => {setCatChoice(0)}} className="nav-item nav-link">
                   All Category
                </a>
                {categories.map(c => (
                   <React.Fragment key={c.categoryId}>
-                     <a href="https://localhost:7263/Home/SearchProductByCategory?catId=@cat.CategoryId" className="nav-item nav-link">
+                     <a href="#/" onClick={() => {setCatChoice(c.categoryId)}} className="nav-item nav-link">
                         {c.categoryName}
                      </a>
                   </React.Fragment>

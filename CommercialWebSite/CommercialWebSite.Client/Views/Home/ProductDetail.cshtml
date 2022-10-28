@@ -26,7 +26,7 @@
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 mb-30">
-            <img class="w-100 h-100" src="~/img/@product.ProductPicture" alt="Image">
+            <img class="w-100 h-100" src="@product.ProductPicture" alt="Image">
         </div>
 
         <div class="col-lg-7 h-auto mb-30">
@@ -85,17 +85,10 @@
         <div class="col">
             <div class="bg-light p-30">
                 <div class="nav nav-tabs mb-4">
-                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Reviews (@product.Reviews.Count)</a>
+                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Reviews (@product.Reviews.Count)</a>
                 </div>
                 <div class="tab-content">
-                    <!-- Product description start -->
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
-                        <p>@product.Description</p>
-                    </div>
-                    <!-- Product description end -->
-                    <div class="tab-pane fade" id="tab-pane-2">
                         <div class="row">
                             <div class="col-md-6">
                                 @{
