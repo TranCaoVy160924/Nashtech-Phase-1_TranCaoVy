@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../../App';
+import { Link } from 'react-router-dom';
 
 const CategoryDropdown = () => {
    const context = useContext(AppContext);
@@ -21,9 +22,9 @@ const CategoryDropdown = () => {
                </a>
                {categories.map(c => (
                   <React.Fragment key={c.categoryId}>
-                     <a href="#/" onClick={() => { setCatChoice(c.categoryId) }} className="nav-item nav-link">
+                     <Link to="/" onClick={() => { setCatChoice(c.categoryId) }} className="nav-item nav-link">
                         {c.categoryName}
-                     </a>
+                     </Link>
                   </React.Fragment>
                ))}
             </div>

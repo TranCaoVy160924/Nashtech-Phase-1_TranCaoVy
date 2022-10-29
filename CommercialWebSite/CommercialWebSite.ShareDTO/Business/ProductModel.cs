@@ -15,8 +15,8 @@ namespace CommercialWebSite.ShareDTO.Business
         public int AgregateUserRate { get; set; }
         public int NumberInStorage { get; set; }
         public double Price { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        //public DateTime CreateDate { get; set; }
+        //public DateTime UpdateDate { get; set; }
 
         public int CategoryId { get; set; }
         public List<ProductReviewModel>? Reviews { get; set; }

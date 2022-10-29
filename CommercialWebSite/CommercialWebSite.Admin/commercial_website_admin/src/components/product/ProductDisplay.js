@@ -5,7 +5,7 @@ const ProductDisplay = ({ product }) => {
       <div className="col-lg-3 col-md-4 col-sm-6 pb-1">
          <div className="product-item bg-light mb-4">
             <div className="product-img position-relative overflow-hidden">
-               <img className="img-fluid w-100" src={product.productPicture} alt="" />
+               <img className="img-fluid w-100" src={product.productPicture} width="150px" height="150px" alt="" />
                <div className="product-action">
                   <form id="productDetailForm-@(Model.ProductId)">
                      <input type="hidden" name="id" value="@Model.ProductId" />

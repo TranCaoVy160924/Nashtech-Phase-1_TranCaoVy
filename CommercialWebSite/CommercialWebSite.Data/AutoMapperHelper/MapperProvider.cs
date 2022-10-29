@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.ShareDTO.Business;
 using System;

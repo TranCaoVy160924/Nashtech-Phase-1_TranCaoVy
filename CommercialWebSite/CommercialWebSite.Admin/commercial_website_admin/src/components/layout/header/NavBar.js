@@ -18,8 +18,8 @@ const NavBar = () => {
                      </button>
                      <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div className="navbar-nav mr-auto py-0">
-                           <Link to="/" className="nav-item nav-link active">Home</Link>
-                           <a href="index.html" className="nav-item nav-link">Shop</a>
+                           <Link to="/" className="nav-item nav-link">Home</Link>
+                           <Link to="newProduct" className="nav-item nav-link">Add New Product</Link>
                         </div>
                      </div>
                   </nav>

@@ -16,5 +16,7 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<ProductModel> GetProductByIdAsync(int id);
         Task<List<ProductModel>> GetProductByNameAsync(string prodName);
         Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter);
+        Task<ProductModel> UpdateProductAsync(ProductModel patchProduct);
+        Task<ProductModel> AddProductAsync(ProductModel newProduct);
     }
 }

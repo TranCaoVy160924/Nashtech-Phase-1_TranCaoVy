@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as yup from "yup";
 const baseUrl = "https://localhost:7281/Product";
 
 const getAllAsync = async () => {
@@ -15,9 +16,48 @@ const getByIdAsync = async (id) => {
    return product;
 }
 
+const updateAsync = async (patchProduct) => {
+   let id = patchProduct.productId
+   console.log("ProductService_ axios patch: ", `${baseUrl}/${id}`);
+   const response = await axios.patch(`${baseUrl}/${id}`, patchProduct);
+   const data = response.data;
+   return data;
+}
+
+const addAsync = async (newProduct) => {
+   console.log("ProductService_ axios post: ", `${baseUrl}`);
+   const response = await axios.post(`${baseUrl}`, newProduct);
+   const data = response.data;
+   return data;
+}
+
+const productSchema = yup.object({
+   productImage: yup.mixed()
+      .required("file is required"),
+   productCategory: yup.number()
+      .positive("Category is required"),
+   productName: yup.string()
+      .required("Name is required"),
+   productPrice: yup.number()
+      .typeError("Price must be a number")
+      .positive("Price must be positive")
+      .required("Price is required"),
+   numberInStorage: yup.number()
+      .typeError("Number in storage  must be a number")
+      .min(0, "Number in storage must be positive")
+      .required("Number in storage is required"),
+   description: yup.string()
+      .required("Description is required"),
+}).required();
+
 const exportObject = {
    getAllAsync,
-   getByIdAsync
+   getByIdAsync,
+   updateAsync,
+   addAsync,
+   productSchema
 };
+
+
 
 export default exportObject

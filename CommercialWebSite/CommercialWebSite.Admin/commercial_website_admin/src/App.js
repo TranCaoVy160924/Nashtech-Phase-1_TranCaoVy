@@ -9,6 +9,7 @@ import {
    Routes,
    Route
 } from "react-router-dom";
+import AddNewProductForm from "./components/product/AddNewProductForm";
 
 export const AppContext = React.createContext();
 
@@ -47,6 +48,7 @@ const App = () => {
             <Routes>
                <Route path="/" element={<Shop productName={productName} catChoice={catChoice} />} />
                <Route path="product/:productId" element={<ProductDetail />} />
+               <Route path="newProduct" element={<AddNewProductForm />} />
             </Routes>
          </AppContext.Provider>
          <Footer />

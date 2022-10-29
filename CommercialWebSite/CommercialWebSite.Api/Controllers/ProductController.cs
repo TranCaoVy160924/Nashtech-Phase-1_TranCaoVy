@@ -73,5 +73,35 @@ namespace CommercialWebSite.API.Controllers
             List<ProductModel> products = await _productRepository.FilterProductAsync(filter);
             return Ok(products);
         }
+
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateProductAsync(ProductModel patchProduct)
+        {
+            try
+            {
+                var product = await _productRepository.UpdateProductAsync(patchProduct);
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddProductAsync(ProductModel newProduct)
+        {
+            try
+            {
+                var product = await _productRepository.AddProductAsync(newProduct);
+                return Ok(newProduct);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
