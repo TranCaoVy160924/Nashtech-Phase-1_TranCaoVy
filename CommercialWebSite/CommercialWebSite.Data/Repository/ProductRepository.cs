@@ -179,6 +179,24 @@ namespace CommercialWebSite.Data.Repository
             }
         }
 
+        public async Task DeleteProductAsync(int id)
+        {
+            try
+            {
+                Product product =
+                await _appDbContext.Products
+                .Where(p => p.ProductId == id)
+                .FirstOrDefaultAsync();
+
+                _appDbContext.Products.Remove(product);
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Image transform helper
         private static string TransformImage(string image)
         {

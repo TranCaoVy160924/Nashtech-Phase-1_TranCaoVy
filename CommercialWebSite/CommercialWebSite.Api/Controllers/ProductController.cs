@@ -103,5 +103,20 @@ namespace CommercialWebSite.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteProductAsync(int id)
+        {
+            try
+            {
+                await _productRepository.DeleteProductAsync(id);
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

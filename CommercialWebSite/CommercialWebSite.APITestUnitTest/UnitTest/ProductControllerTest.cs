@@ -263,5 +263,121 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             Assert.Equal(expectedResult, result);
         }
         #endregion 
+
+        #region DeleteProductAsync
+        [Fact]
+        public async Task DeleteProductAsync_Success_ReturnDeletetedProductId()
+        {
+            // Arrange
+            FilterProductModel filter = new FilterProductModel();
+            var mock = new Mock<IProductRepository>();
+            
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<int>(
+                await controller.DeleteProductAsync(1));
+
+            string expectedResult = "1";
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task DeleteProductAsync_Fail_ReturnNotFoundStatusCode()
+        {
+            // Arrange
+            FilterProductModel filter = new FilterProductModel();
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.DeleteProductAsync(0))
+                .Throws(new Exception("haha"));
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = await controller.DeleteProductAsync(0);
+
+            // Assert
+            result.Should().BeOfType<NotFoundObjectResult>();
+        }
+        #endregion 
+
+        #region UpdateProductAsync
+        [Fact]
+        public async Task UpdateProductAsync_Success_ReturnUpdatedProduct()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            ProductModel productModel = await ProductDataSetup.ProductModel();
+            mock.Setup(m => m.UpdateProductAsync(productModel))
+                .Returns(ProductDataSetup.ProductModel());
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<ProductModel>(
+                await controller.UpdateProductAsync(productModel));
+
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.ProductModel());
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task UpdateProductAsync_Fail_ReturnBadRequestStatusCode()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            ProductModel productModel = await ProductDataSetup.ProductModel();
+            mock.Setup(m => m.UpdateProductAsync(productModel))
+                .Throws(new Exception("blabla"));
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var actualResult = await controller.UpdateProductAsync(productModel);
+
+            // Assert
+            actualResult.Should().BeOfType<BadRequestObjectResult>();
+        }
+        #endregion 
+
+        #region AddProductAsync
+        [Fact]
+        public async Task AddProductAsync_Success_ReturnUpdatedProduct()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            ProductModel productModel = await ProductDataSetup.ProductModel();
+            mock.Setup(m => m.AddProductAsync(productModel))
+                .Returns(ProductDataSetup.ProductModel());
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<ProductModel>(
+                await controller.AddProductAsync(productModel));
+
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.ProductModel());
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task AddProductAsync_Fail_ReturnBadRequestStatusCode()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            ProductModel productModel = await ProductDataSetup.ProductModel();
+            mock.Setup(m => m.AddProductAsync(productModel))
+                .Throws(new Exception("blabla"));
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var actualResult = await controller.AddProductAsync(productModel);
+
+            // Assert
+            actualResult.Should().BeOfType<BadRequestObjectResult>();
+        }
+        #endregion 
     }
 }

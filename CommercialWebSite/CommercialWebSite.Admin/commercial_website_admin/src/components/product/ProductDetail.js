@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import {
    useEffect,
    useState,
@@ -11,11 +11,18 @@ import { useForm } from "react-hook-form";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const ProductDetail = () => {
    const { productId } = useParams();
    const [product, setProduct] = useState({});
+   const [show, setShow] = useState(false);
+   const [deleteSucceeded, setDeleteSucceeded] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
    const context = useContext(AppContext);
    const categories = context.categories;
 
@@ -66,6 +73,23 @@ const ProductDetail = () => {
                error)
          });
    }
+
+   const deleteProduct = async () => {
+      await ProductService.deleteAsync(product.productId)
+         .then(data => {
+            console.log("ProductDetail_ delete product api succeeded: ", data);
+            setDeleteSucceeded(true);
+         })
+         .catch(error => {
+            console.log("ProductDetail_ delete product api error: ", error);
+         });
+   }
+
+   if (deleteSucceeded) {
+      return (
+         <Navigate to="/" replace />
+      );
+   };
 
    return (
       <div className="container-fluid pb-5">
@@ -132,18 +156,35 @@ const ProductDetail = () => {
                            <p className="text-danger">{errors.description?.message}</p>
                         </Col>
                      </Row>
-                     <div className="d-flex align-items-center mb-4 pt-2">
-                        <button className="btn btn-primary px-3">
-                           <i className="fa fa-shopping-cart mr-1"></i>
+                     <div className="d-flex justify-content-center mb-4 pt-2">
+                        <Button type="submit" variant="primary" className="px-3">
                            Update Product
-                        </button>
+                        </Button>
+                        <Button variant="danger" className="px-3 ms-3"
+                           onClick={handleShow}>
+                           Delete Product
+                        </Button>
                      </div>
-
                   </div>
                </div>
             </div>
 
          </Form>
+
+         <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+               <Modal.Title>Confirm Delete</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Do you want to delete?</Modal.Body>
+            <Modal.Footer>
+               <Button variant="secondary" onClick={handleClose}>
+                  No
+               </Button>
+               <Button variant="primary" onClick={deleteProduct}>
+                  Yes
+               </Button>
+            </Modal.Footer>
+         </Modal>
       </div>
    );
 }

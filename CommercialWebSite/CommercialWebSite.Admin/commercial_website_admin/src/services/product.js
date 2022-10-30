@@ -20,15 +20,22 @@ const updateAsync = async (patchProduct) => {
    let id = patchProduct.productId
    console.log("ProductService_ axios patch: ", `${baseUrl}/${id}`);
    const response = await axios.patch(`${baseUrl}/${id}`, patchProduct);
-   const data = response.data;
-   return data;
+
+   return response.data;
 }
 
 const addAsync = async (newProduct) => {
    console.log("ProductService_ axios post: ", `${baseUrl}`);
-   const response = await axios.post(`${baseUrl}`, newProduct);
-   const data = response.data;
-   return data;
+   const response = await axios.post(`${baseUrl}`, newProduct); 
+
+   return response.data;
+}
+
+const deleteAsync = async (id) => {
+   console.log("ProductService_ axios delete: ", `${baseUrl}/${id}`);
+   const response = await axios.delete(`${baseUrl}/${id}`);
+
+   return response.data;
 }
 
 const productSchema = yup.object({
@@ -55,6 +62,7 @@ const exportObject = {
    getByIdAsync,
    updateAsync,
    addAsync,
+   deleteAsync,
    productSchema
 };
 

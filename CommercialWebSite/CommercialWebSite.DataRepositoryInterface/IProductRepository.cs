@@ -18,5 +18,6 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<List<ProductModel>> FilterProductAsync(FilterProductModel filter);
         Task<ProductModel> UpdateProductAsync(ProductModel patchProduct);
         Task<ProductModel> AddProductAsync(ProductModel newProduct);
+        Task DeleteProductAsync(int id);  
     }
 }

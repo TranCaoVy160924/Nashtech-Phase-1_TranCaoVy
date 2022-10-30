@@ -23,8 +23,6 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
                     Description = "Product " + i,
                     ProductPicture = $"product-{i}.jpg",
                     Price = (Double)2000,
-                    CreateDate = new DateTime(2022, 10, 23),
-                    UpdateDate = new DateTime(2022, 10, 23),
                     CategoryId = 1
                 });
             }
@@ -41,8 +39,6 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
                 Description = "Product " + 1,
                 ProductPicture = $"product-{1}.jpg",
                 Price = (Double)2000,
-                CreateDate = new DateTime(2022, 10, 23),
-                UpdateDate = new DateTime(2022, 10, 23),
                 CategoryId = 1
             };
 
