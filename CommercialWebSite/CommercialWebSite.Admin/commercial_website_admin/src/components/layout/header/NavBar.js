@@ -1,4 +1,6 @@
 import CategoryDropdown from "./CategoryDropdown";
+import ProductManageDropdown from "./ProductManageDropdown";
+import CategoryManageDropdown from "./CategoryManageDropdown";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {

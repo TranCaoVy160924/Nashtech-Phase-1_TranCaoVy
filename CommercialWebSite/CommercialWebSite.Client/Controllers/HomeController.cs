@@ -49,17 +49,40 @@ namespace CommercialWebSite.Client.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Shop(ViewModel requestViewModel)
+        public async Task<IActionResult> Shop()
         {
-            List<ProductModel> products = requestViewModel.ProductModels;
-            if (products == null)
+            List<ProductModel> products;
+            int page = 1;
+            int pageCount = await _productClient.GetPageCount();
+            try
             {
-                products = await _productClient.GetAllProductAsync();
+                products = JsonConvert
+                    .DeserializeObject<List<ProductModel>>(
+                    TempData["ProductModels"].ToString());
+
+                page = JsonConvert
+                    .DeserializeObject<int>(
+                    TempData["Page"].ToString());
+            }
+            catch (NullReferenceException)
+            {
+                products = await _productClient.GetProductByPageAsync(1);
             }
 
             ViewModel respsonseViewModel = new ViewModel();
             respsonseViewModel.ProductModels = products;
+            respsonseViewModel.Page = page;
+            TempData["PageCount"] = pageCount;
             return View("Shop", respsonseViewModel);
+        }
+
+        public async Task<IActionResult> ShopByPage(int page)
+        {
+            List<ProductModel> products = await _productClient.GetProductByPageAsync(page);
+
+            TempData["ProductModels"] = JsonConvert.SerializeObject(products);
+            TempData["Page"] = JsonConvert.SerializeObject(page);
+            return RedirectToAction("Shop");
         }
 
         public async Task<IActionResult> ProductDetail(int id)
@@ -78,19 +101,17 @@ namespace CommercialWebSite.Client.Controllers
             List<ProductModel> products;
             if (categoryId == 0)
             {
-                products = await _productClient.GetAllProductAsync();
+                products = await _productClient.GetProductByPageAsync(1);
             }
             else
             {
                 products = await _productClient.GetProductByCategoryAsync(categoryId);
             }
 
-            ViewModel viewModel = new ViewModel
-            {
-                ProductModels = products
-            };
+            TempData["ProductModels"] = JsonConvert.SerializeObject(products);
+            TempData["Page"] = JsonConvert.SerializeObject(0);
 
-            return await Shop(viewModel);
+            return RedirectToAction("Shop");
         }
 
         public async Task<IActionResult> SearchProductByName(string prodName)
@@ -102,12 +123,10 @@ namespace CommercialWebSite.Client.Controllers
                     await _productClient.GetProductByNameAsync(prodName);
             }
 
-            ViewModel viewModel = new ViewModel
-            {
-                ProductModels = products
-            };
+            TempData["ProductModels"] = JsonConvert.SerializeObject(products);
+            TempData["Page"] = JsonConvert.SerializeObject(0);
 
-            return RedirectToAction("Shop", new { requestViewModel = viewModel });
+            return RedirectToAction("Shop");
         }
 
         [HttpPost]
@@ -154,12 +173,10 @@ namespace CommercialWebSite.Client.Controllers
                 _logger.LogInformation(ex.Content);
             }
 
-            ViewModel viewModel = new ViewModel
-            {
-                ProductModels = products
-            };
+            TempData["ProductModels"] = JsonConvert.SerializeObject(products);
+            TempData["Page"] = JsonConvert.SerializeObject(0);
 
-            return await Shop(viewModel);
+            return RedirectToAction("Shop");
         }
 
         [HttpPost]

@@ -32,6 +32,7 @@ builder.Services
 
 // For Identity
 builder.Services.AddIdentity<UserAccount, IdentityRole>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 

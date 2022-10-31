@@ -30,9 +30,23 @@ namespace CommercialWebSite.Data.Repository
         // Implement interface method
         public async Task<List<CategoryModel>> GetAllCategoryAsync()
         {
-            var categories = await _appDbContext.Categories.ToListAsync();
+            var categories = 
+                await _appDbContext.Categories
+                .Include(c => c.Products)
+                .ToListAsync();
 
             return _categoryMapper.MapCollection(categories).ToList();
+        }
+
+        public async Task<CategoryModel> GetByIdAsync(int id)
+        {
+            var category =
+                await _appDbContext.Categories
+                .Include(c => c.Products)
+                .Where(c => c.CategoryId == id)
+                .FirstOrDefaultAsync();
+
+            return _categoryMapper.MapSingleObject(category);
         }
 
         public async Task<List<CategoryModel>> GetFeatureCategoryAsync()
@@ -43,6 +57,58 @@ namespace CommercialWebSite.Data.Repository
                 .Take(4).ToListAsync();
 
             return _categoryMapper.MapCollection(categories).ToList();
+        }
+
+        public async Task<CategoryModel> UpdateCategoryAsync(CategoryModel patchCategory)
+        {
+            Category category =
+                await _appDbContext.Categories
+                    .Include(c => c.Products)
+                    .Where(c => c.CategoryId == patchCategory.CategoryId)
+                    .FirstOrDefaultAsync();
+
+            try
+            {
+                category.CategoryName = patchCategory.CategoryName;
+                category.CategoryPicture = TransformImage(patchCategory.CategoryPicture);
+
+                _appDbContext.SaveChanges();
+
+                return _categoryMapper.MapSingleObject(category);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task DeleteCategoryAsync(int id)
+        {
+            try
+            {
+                Category category =
+                    await _appDbContext.Categories
+                    .Where(c => c.CategoryId == id)
+                    .FirstOrDefaultAsync();
+
+                _appDbContext.Categories.Remove(category);
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        // Image transform helper
+        private static string TransformImage(string image)
+        {
+            string front = "http://res.cloudinary.com/dddvmxs3h/image/upload/";
+            int seperatePosition = front.Length;
+            string end = image.Substring(seperatePosition);
+            string final = front + "w_150,h_150/" + end;
+
+            return final;
         }
     }
 }

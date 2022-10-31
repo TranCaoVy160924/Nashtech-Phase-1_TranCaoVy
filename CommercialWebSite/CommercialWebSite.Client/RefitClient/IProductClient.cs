@@ -6,8 +6,11 @@ namespace CommercialWebSite.Client.RefitClient
 {
     public interface IProductClient
     {
-        [Get("/Product")]
-        Task<List<ProductModel>> GetAllProductAsync();
+        [Get("/Product/PageCount")]
+        Task<int> GetPageCount();
+
+        [Get("/Product/Page/{page}")]
+        Task<List<ProductModel>> GetProductByPageAsync(int page);
 
         [Get("/Product/Feature")]
         Task<List<ProductModel>> GetFeatureProductAsync();

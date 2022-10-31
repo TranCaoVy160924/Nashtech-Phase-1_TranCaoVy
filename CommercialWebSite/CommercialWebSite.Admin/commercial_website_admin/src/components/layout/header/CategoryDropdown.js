@@ -17,9 +17,9 @@ const CategoryDropdown = () => {
          <nav className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
             id="navbar-vertical" style={{ width: 'calc(100% - 30px)', zIndex: 999 }}>
             <div className="navbar-nav w-100">
-               <a href="#/" onClick={() => { setCatChoice(0) }} className="nav-item nav-link">
+               <Link to="/" onClick={() => { setCatChoice(0) }} className="nav-item nav-link">
                   All Category
-               </a>
+               </Link>
                {categories.map(c => (
                   <React.Fragment key={c.categoryId}>
                      <Link to="/" onClick={() => { setCatChoice(c.categoryId) }} className="nav-item nav-link">

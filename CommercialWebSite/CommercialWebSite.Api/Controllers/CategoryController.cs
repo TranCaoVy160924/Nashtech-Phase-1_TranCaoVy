@@ -16,6 +16,16 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            CategoryModel category =
+                await _categoryRepository.GetByIdAsync(id);
+
+            return Ok(category);
+        }
+
+        [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -33,6 +43,36 @@ namespace CommercialWebSite.API.Controllers
                 await _categoryRepository.GetFeatureCategoryAsync();
 
             return Ok(categories);
+        }
+
+        [HttpPatch]
+        [Route("")]
+        public async Task<IActionResult> UpdateCategoryAsync(CategoryModel categoryModel)
+        {
+            try
+            {
+                await _categoryRepository.UpdateCategoryAsync(categoryModel);
+                return Ok(categoryModel);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteCategoryAsync(int id)
+        {
+            try
+            {
+                await _categoryRepository.DeleteCategoryAsync(id);
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -20,10 +20,26 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpGet]
+        [Route("PageCount")]
+        public async Task<IActionResult> GetPageCountAsync()
+        {
+            int page = await _productRepository.GetPageCountAsync();
+            return Ok(page);
+        }
+
+        [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<ProductModel> products = await _productRepository.GetAllProductAsync();
+            List<ProductModel> products = await _productRepository.GetAllAsync();
+            return Ok(products);
+        }
+
+        [HttpGet]
+        [Route("Page/{page}")]
+        public async Task<IActionResult> GetByPageAsync(int page)
+        {
+            List<ProductModel> products = await _productRepository.GetProductByPageAsync(page);
             return Ok(products);
         }
 

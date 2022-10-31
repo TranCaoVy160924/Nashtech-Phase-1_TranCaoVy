@@ -2,18 +2,34 @@ import axios from 'axios';
 import * as yup from "yup";
 const baseUrl = "https://localhost:7281/Product";
 
+const getPageCountAsync = async () => {
+   let url = `${baseUrl}/PageCount`;
+   console.log("ProductService_ axios get: ", url);
+   const response = await axios.get(url);
+
+   return response.data
+}
+
+const getByPageAsync = async (page) => {
+   let url = `${baseUrl}/Page/${page}`;
+   console.log("ProductService_ axios get: ", url);
+   const response = await axios.get(url);
+   
+   return response.data;
+}
+
 const getAllAsync = async () => {
    console.log("ProductService_ axios get: ", baseUrl);
    const response = await axios.get(baseUrl);
-   const products = response.data;
-   return products;
+   
+   return response.data;
 }
 
 const getByIdAsync = async (id) => {
    console.log("ProductService_ axios get: ", `${baseUrl}/${id}`);
    const response = await axios.get(`${baseUrl}/${id}`);
-   const product = response.data;
-   return product;
+   
+   return response.data;
 }
 
 const updateAsync = async (patchProduct) => {
@@ -58,6 +74,8 @@ const productSchema = yup.object({
 }).required();
 
 const exportObject = {
+   getPageCountAsync,
+   getByPageAsync,
    getAllAsync,
    getByIdAsync,
    updateAsync,

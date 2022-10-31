@@ -31,12 +31,29 @@ namespace CommercialWebSite.Data.Repository
         }
 
         // Implement Interface method
-        public async Task<List<ProductModel>> GetAllProductAsync()
+        public async Task<int> GetPageCountAsync()
         {
-            //_appDbContext = new ApplicationDbContext();
+            int productsCount = _appDbContext.Products.Count();
+            return (int)Math.Ceiling((double)productsCount / (double)12);
+        }
+
+        public async Task<List<ProductModel>> GetAllAsync()
+        {
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
+                .ToListAsync();
+
+            return _productMapper.MapCollection(rawProducts).ToList();
+        }
+
+        public async Task<List<ProductModel>> GetProductByPageAsync(int page)
+        {
+            List<Product> rawProducts =
+                await _appDbContext.Products
+                .Include(p => p.Category)
+                .Skip(12*(page-1))
+                .Take(12)
                 .ToListAsync();
 
             return _productMapper.MapCollection(rawProducts).ToList();
@@ -56,7 +73,6 @@ namespace CommercialWebSite.Data.Repository
 
         public async Task<List<ProductModel>> GetProductByCategoryAsync(int categoryId)
         {
-            //_appDbContext = new ApplicationDbContext();
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)

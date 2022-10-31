@@ -21,46 +21,46 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
 {
     public class ProductControllerTest
     {
-        #region GetAllAsync
-        [Fact]
-        public async Task GetAllAsync_ReturnAllProductFromDatabase()
-        {
-            // Arrange
-            var mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.GetAllProductAsync()).Returns(ProductDataSetup.CollectionAsync());
-            ProductController controller = new ProductController(mock.Object);
+        //#region GetAllAsync
+        //[Fact]
+        //public async Task GetAllAsync_ReturnAllProductFromDatabase()
+        //{
+        //    // Arrange
+        //    var mock = new Mock<IProductRepository>();
+        //    mock.Setup(m => m.GetAllProductAsync()).Returns(ProductDataSetup.CollectionAsync());
+        //    ProductController controller = new ProductController(mock.Object);
 
-            // Act
-            var result = ConvertOkObject<List<ProductModel>>(
-                await controller.GetAllAsync());
+        //    // Act
+        //    var result = ConvertOkObject<List<ProductModel>>(
+        //        await controller.GetAllAsync());
 
-            string expectedResult = JsonConvert
-                .SerializeObject(await ProductDataSetup.CollectionAsync());
+        //    string expectedResult = JsonConvert
+        //        .SerializeObject(await ProductDataSetup.CollectionAsync());
 
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
+        //    // Assert
+        //    Assert.Equal(expectedResult, result);
+        //}
 
-        [Fact]
-        public async Task GetAllAsync_ReturnNoProductFromEmptyDatabase()
-        {
-            // Arrange
-            var mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.GetAllProductAsync())
-                .Returns(ProductDataSetup.EmptyCollectionAsync());
-            ProductController controller = new ProductController(mock.Object);
+        //[Fact]
+        //public async Task GetAllAsync_ReturnNoProductFromEmptyDatabase()
+        //{
+        //    // Arrange
+        //    var mock = new Mock<IProductRepository>();
+        //    mock.Setup(m => m.GetAllProductAsync())
+        //        .Returns(ProductDataSetup.EmptyCollectionAsync());
+        //    ProductController controller = new ProductController(mock.Object);
 
-            // Act
-            var result = ConvertOkObject<List<ProductModel>>(
-                await controller.GetAllAsync());
+        //    // Act
+        //    var result = ConvertOkObject<List<ProductModel>>(
+        //        await controller.GetAllAsync());
 
-            string expectedResult = JsonConvert
-                .SerializeObject(await ProductDataSetup.EmptyCollectionAsync());
+        //    string expectedResult = JsonConvert
+        //        .SerializeObject(await ProductDataSetup.EmptyCollectionAsync());
 
-            // Assert
-            Assert.Equal(expectedResult, result);
-        }
-        #endregion 
+        //    // Assert
+        //    Assert.Equal(expectedResult, result);
+        //}
+        //#endregion 
 
         #region GetFeatureProductAsync
         [Fact]

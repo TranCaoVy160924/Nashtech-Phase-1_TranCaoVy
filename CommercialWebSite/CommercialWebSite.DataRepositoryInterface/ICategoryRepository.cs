@@ -10,7 +10,9 @@ namespace CommercialWebSite.DataRepositoryInterface
     public interface ICategoryRepository
     {
         Task<List<CategoryModel>> GetAllCategoryAsync();
-
+        Task<CategoryModel> GetByIdAsync(int id);
         Task<List<CategoryModel>> GetFeatureCategoryAsync();
+        Task<CategoryModel> UpdateCategoryAsync(CategoryModel patchCategory);
+        Task DeleteCategoryAsync(int id);
     }
 }

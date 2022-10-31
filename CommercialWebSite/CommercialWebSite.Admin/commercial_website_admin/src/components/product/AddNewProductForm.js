@@ -3,6 +3,8 @@ import {
    useState,
    useContext
 } from "react";
+import React from 'react';
+import Header from "../layout/header/Header";
 import ProductService from '../../services/product';
 import CloudinaryService from "../../services/cloudinary";
 import { AppContext } from "../../App";
@@ -61,73 +63,76 @@ const AddNewProductForm = () => {
    }
 
    return (
-      <div className="container-fluid pb-5">
-         <Form onSubmit={handleSubmit(onSubmitForm)}>
-            <div className="row px-xl-5">
-               <div className="col-lg-5 mb-30">
-                  <img className="w-100 h-100" src="https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg" alt="Product" />
-                  <Form.Control {...register("productImage")}
-                     type="file" accept="image/*" defaultValue={""} />
-                  <p className="text-danger">{errors.productImage?.message}</p>
-               </div>
+      <React.Fragment>
+         <Header />
+         <div className="container-fluid pb-5">
+            <Form onSubmit={handleSubmit(onSubmitForm)}>
+               <div className="row px-xl-5">
+                  <div className="col-lg-5 mb-30">
+                     <img className="w-100 h-100" src="https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg" alt="Product" />
+                     <Form.Control {...register("productImage")}
+                        type="file" accept="image/*" defaultValue={""} />
+                     <p className="text-danger">{errors.productImage?.message}</p>
+                  </div>
 
-               <div className="col-lg-7 h-auto mb-30">
-                  <div className="h-100 bg-light p-30">
-                     <Row className="mb-3">
-                        <Col>
-                           <Form.Label>Product Name</Form.Label>
-                           <Form.Control {...register("productName")}
-                              className="mb-3" />
-                           <p className="text-danger">{errors.productName?.message}</p>
-                        </Col>
-                        <Col>
-                           <Form.Label>Product Price</Form.Label>
-                           <Form.Control {...register("productPrice")}
-                              className="mb-3" />
-                           <p className="text-danger">{errors.productPrice?.message}</p>
-                        </Col>
-                     </Row>
-                     <Row className="mb-3">
-                        <Col>
-                           <Form.Label>Number In Storage</Form.Label>
-                           <Form.Control {...register("numberInStorage")}
-                              className="mb-3" />
-                           <p className="text-danger">{errors.numberInStorage?.message}</p>
-                        </Col>
-                        <Col>
-                           <Form.Label>Category</Form.Label>
-                           <Form.Select {...register("productCategory")}
-                              className="mb-4" >
-                              <option value={0}>Choose a category</option>
-                              {categories.map(c => (
-                                 <option key={c.categoryId} value={c.categoryId}>{c.categoryName}</option>
-                              ))}
-                           </Form.Select>
-                           <p className="text-danger">{errors.productCategory?.message}</p>
-                        </Col>
-                     </Row>
-                     <Row className="mb-4">
-                        <Col>
-                           <Form.Label>Description</Form.Label>
-                           <Form.Control as="textarea" rows={5}
-                              {...register("description")}
-                              className="mb-3" />
-                           <p className="text-danger">{errors.description?.message}</p>
-                        </Col>
-                     </Row>
-                     <div className="d-flex align-items-center mb-4 pt-2">
-                        <button className="btn btn-primary px-3">
-                           <i className="fa fa-shopping-cart mr-1"></i>
-                           Update Product
-                        </button>
+                  <div className="col-lg-7 h-auto mb-30">
+                     <div className="h-100 bg-light p-30">
+                        <Row className="mb-3">
+                           <Col>
+                              <Form.Label>Product Name</Form.Label>
+                              <Form.Control {...register("productName")}
+                                 className="mb-3" />
+                              <p className="text-danger">{errors.productName?.message}</p>
+                           </Col>
+                           <Col>
+                              <Form.Label>Product Price</Form.Label>
+                              <Form.Control {...register("productPrice")}
+                                 className="mb-3" />
+                              <p className="text-danger">{errors.productPrice?.message}</p>
+                           </Col>
+                        </Row>
+                        <Row className="mb-3">
+                           <Col>
+                              <Form.Label>Number In Storage</Form.Label>
+                              <Form.Control {...register("numberInStorage")}
+                                 className="mb-3" />
+                              <p className="text-danger">{errors.numberInStorage?.message}</p>
+                           </Col>
+                           <Col>
+                              <Form.Label>Category</Form.Label>
+                              <Form.Select {...register("productCategory")}
+                                 className="mb-4" >
+                                 <option value={0}>Choose a category</option>
+                                 {categories.map(c => (
+                                    <option key={c.categoryId} value={c.categoryId}>{c.categoryName}</option>
+                                 ))}
+                              </Form.Select>
+                              <p className="text-danger">{errors.productCategory?.message}</p>
+                           </Col>
+                        </Row>
+                        <Row className="mb-4">
+                           <Col>
+                              <Form.Label>Description</Form.Label>
+                              <Form.Control as="textarea" rows={5}
+                                 {...register("description")}
+                                 className="mb-3" />
+                              <p className="text-danger">{errors.description?.message}</p>
+                           </Col>
+                        </Row>
+                        <div className="d-flex align-items-center mb-4 pt-2">
+                           <button className="btn btn-primary px-3">
+                              <i className="fa fa-shopping-cart mr-1"></i>
+                              Update Product
+                           </button>
+                        </div>
+
                      </div>
-
                   </div>
                </div>
-            </div>
 
-         </Form>
-      </div>
+            </Form>
+         </div>
+      </React.Fragment>
    );
 }
 

@@ -1,9 +1,10 @@
-import Header from "./components/layout/header/Header";
 import React, { useState, useEffect } from "react";
 import Shop from "./components/product/Shop";
 import Footer from "./components/layout/footer/Footer";
 import ProductDetail from "./components/product/ProductDetail";
 import CategoryService from "./services/category";
+import CategoryManage from "./components/category/CategoryManage";
+import CategoryDetail from "./components/category/CategoryDetail";
 import {
    BrowserRouter as Router,
    Routes,
@@ -21,7 +22,7 @@ const App = () => {
    useEffect(() => {
       CategoryService.getAllAsync()
          .then(data => {
-            console.log("api category response ", data);
+            console.log("App_ api category response ", data);
             setCategories(data)
          })
    }, []);
@@ -31,24 +32,22 @@ const App = () => {
       setProductName(data.productName);
    }
 
-   const headerStateControl = {
+   const contextStateControl = {
       categories,
+      setCategories,
       setCatChoice,
       onSubmitProductNameForm
    }
 
-   const productStateControl = {
-      categories
-   }
-
    return (
       <Router>
-         <AppContext.Provider value={headerStateControl}>
-            <Header />
+         <AppContext.Provider value={contextStateControl}>
             <Routes>
                <Route path="/" element={<Shop productName={productName} catChoice={catChoice} />} />
                <Route path="product/:productId" element={<ProductDetail />} />
                <Route path="newProduct" element={<AddNewProductForm />} />
+               <Route path="category" element={<CategoryManage />} />
+               <Route path="category/:categoryId" element={<CategoryDetail />} />
             </Routes>
          </AppContext.Provider>
          <Footer />
