@@ -43,6 +43,9 @@ namespace CommercialWebSite.Data.DataModel
 
             SeedCategory(builder);
             SeedProduct(builder);
+            SeedRoles(builder);
+            SeedUsers(builder);
+            SeedUserRoles(builder);
         }
 
         private void SeedCategory(ModelBuilder builder)
@@ -322,21 +325,43 @@ namespace CommercialWebSite.Data.DataModel
                 });
         }
 
-        private void SeedRoleAndUser(ModelBuilder builder)
+        private void SeedUsers(ModelBuilder builder)
         {
-            builder.Entity<IdentityRole>().HasData(new List<IdentityRole>
+            UserAccount user = new UserAccount()
             {
-                new IdentityRole {
-                    Id = "1",
-                    Name = "Admin",
-                    NormalizedName = "ADMIN"
-                },
-                new IdentityRole {
-                    Id = "2",
-                    Name = "User",
-                    NormalizedName = "USER"
-                },
-            });
+                Id = "b74ddd14-6340-4840-95c2-db12554843e5",
+                UserName = "admin",
+                Email = "admin@gmail.com",
+                LockoutEnabled = false,
+                PhoneNumber = "1234567890",
+                FirstName = "admin",
+                LastName = "admin",
+                UserAddress = "sdfasdfsadf",
+                Birthday = DateTime.Today,
+                NormalizedUserName = "ADMIN",
+                NormalizedEmail = "ADMIN@GMAIL.COM"
+            };
+
+            PasswordHasher<UserAccount> passwordHasher = new PasswordHasher<UserAccount>();
+            string password = passwordHasher.HashPassword(user, "M0untw3as3l@");
+            user.PasswordHash = password;
+
+            builder.Entity<UserAccount>().HasData(user);
+        }
+
+        private void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole() { Id = "fab4fac1-c546-41de-aebc-a14da6895711", Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                new IdentityRole() { Id = "c7b013f0-5201-4317-abd8-c211f91b7330", Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+            );
+        }
+
+        private void SeedUserRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>() { RoleId = "fab4fac1-c546-41de-aebc-a14da6895711", UserId = "b74ddd14-6340-4840-95c2-db12554843e5" }
+            );
         }
     }
 }

@@ -125,9 +125,6 @@ namespace CommercialWebSite.API.Controllers
                     StatusCodes.Status500InternalServerError,
                     CreateUserFailed);
 
-            await _authRepository.InitialUserRoleAsync(UserRoles.Admin);
-            await _authRepository.InitialUserRoleAsync(UserRoles.User);
-
             await _authRepository.AddRoleToUserAsync(user, UserRoles.Admin);
             await _authRepository.AddRoleToUserAsync(user, UserRoles.User);
 
