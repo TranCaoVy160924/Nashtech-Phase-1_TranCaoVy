@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../../../App";
 
 const SearchBar = () => {
+   const url = useLocation().pathname;
    const { register, handleSubmit, watch, formState: { errors } } = useForm();
    const context = useContext(AppContext);
    const onSubmitForm = context.onSubmitProductNameForm;
@@ -20,17 +21,18 @@ const SearchBar = () => {
                </Link>
             </div>
             <div className="col-lg-4 col-6 text-left">
-               <Form onSubmit={handleSubmit(onSubmitForm)}>
-                  <div className="input-group">
-                     <Form.Control defaultValue="" {...register("productName")}
-                        placeholder="Search for products" />
-                     <div className="input-group-append">
-                        <Button type="submit" className="input-group-text bg-transparent text-primary">
-                           <i className="fa fa-search"></i>
-                        </Button>
+               {url === "/" ?
+                  <Form onSubmit={handleSubmit(onSubmitForm)}>
+                     <div className="input-group">
+                        <Form.Control defaultValue="" {...register("productName")}
+                           placeholder="Search for products" />
+                        <div className="input-group-append">
+                           <Button type="submit" className="input-group-text bg-transparent text-primary">
+                              <i className="fa fa-search"></i>
+                           </Button>
+                        </div>
                      </div>
-                  </div>
-               </Form>
+                  </Form> : null}
             </div>
             <div className="col-lg-4 col-6 text-right">
                <p className="m-0">Customer Service</p>

@@ -88,7 +88,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 5,
                     CategoryName = "Book",
-                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-5_ijcxzw.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/w_150,h_150/v1666854128/cat-5_ijcxzw.jpg"
                 });
             builder.Entity<Category>()
                 .HasData(
@@ -96,7 +96,7 @@ namespace CommercialWebSite.Data.DataModel
                 {
                     CategoryId = 6,
                     CategoryName = "Pet",
-                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854128/cat-6_s3afnw.jpg"
+                    CategoryPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/w_150,h_150/v1666854128/cat-6_s3afnw.jpg"
                 });
         }
 
@@ -327,7 +327,10 @@ namespace CommercialWebSite.Data.DataModel
 
         private void SeedUsers(ModelBuilder builder)
         {
-            UserAccount user = new UserAccount()
+            Guid g = Guid.NewGuid();
+
+            // Admin
+            UserAccount admin = new UserAccount()
             {
                 Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                 UserName = "admin",
@@ -339,14 +342,35 @@ namespace CommercialWebSite.Data.DataModel
                 UserAddress = "sdfasdfsadf",
                 Birthday = DateTime.Today,
                 NormalizedUserName = "ADMIN",
-                NormalizedEmail = "ADMIN@GMAIL.COM"
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                RoleId = "fab4fac1-c546-41de-aebc-a14da6895711"
             };
-
             PasswordHasher<UserAccount> passwordHasher = new PasswordHasher<UserAccount>();
-            string password = passwordHasher.HashPassword(user, "M0untw3as3l@");
-            user.PasswordHash = password;
+            string passwordAdmin = passwordHasher.HashPassword(admin, "M0untw3as3l@");
+            admin.PasswordHash = passwordAdmin;
+            builder.Entity<UserAccount>().HasData(admin);
 
-            builder.Entity<UserAccount>().HasData(user);
+            for(int i = 0; i <= 10; i++)
+            {
+                UserAccount user = new UserAccount()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = "user" + i,
+                    Email = "user" + i + "@gmail.com",
+                    LockoutEnabled = false,
+                    PhoneNumber = "1234567890",
+                    FirstName = "user",
+                    LastName = i.ToString(),
+                    UserAddress = "sdfasdfsadf",
+                    Birthday = DateTime.Today,
+                    NormalizedUserName = "USER" + i,
+                    NormalizedEmail = "USER" + i + "@GMAIL.COM",
+                    RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330"
+                };
+                string password = passwordHasher.HashPassword(user, "M0untw3as3l@");
+                user.PasswordHash = password;
+                builder.Entity<UserAccount>().HasData(user);
+            }
         }
 
         private void SeedRoles(ModelBuilder builder)

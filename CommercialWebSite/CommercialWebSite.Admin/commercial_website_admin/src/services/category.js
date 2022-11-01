@@ -32,6 +32,14 @@ const deleteAsync = async (id) => {
    return response.data;
 }
 
+const addAsync = async (newProduct) => {
+   let url = baseUrl;
+   console.log("CategoryService_ axios post: ", url);
+   const response = await axios.post(url, newProduct);
+
+   return response.data;
+}
+
 const categorySchema = yup.object({
    categoryImage: yup.mixed()
       .required("file is required"),
@@ -44,6 +52,7 @@ const exportObject = {
    getByIdAsync,
    updateAsync,
    deleteAsync,
+   addAsync,
    categorySchema
 };
 

@@ -100,6 +100,27 @@ namespace CommercialWebSite.Data.Repository
             }
         }
 
+        public async Task<CategoryModel> AddCategoryAsync(CategoryModel categoryModel)
+        {
+            try
+            {
+                Category category = new Category
+                {
+                    CategoryName = categoryModel.CategoryName,
+                    CategoryPicture = TransformImage(categoryModel.CategoryPicture)
+                };
+
+                _appDbContext.Categories.Add(category);
+                _appDbContext.SaveChanges();
+
+                return _categoryMapper.MapSingleObject(category);
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Image transform helper
         private static string TransformImage(string image)
         {

@@ -9,6 +9,6 @@ namespace CommercialWebSite.DataRepositoryInterface
 {
     public interface IUserAccountRepository
     {
-        Task<UserAccountModel> GetUserById(string id);
+        Task<List<UserAccountModel>> GetAllAsync();
     }
 }

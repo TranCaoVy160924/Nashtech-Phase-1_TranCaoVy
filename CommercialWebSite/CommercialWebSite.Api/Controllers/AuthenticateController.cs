@@ -105,28 +105,28 @@ namespace CommercialWebSite.API.Controllers
             return Ok(CreateUserSucceeded);
         }
 
-        [HttpPost]
-        [Route("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterRequestModel model)
+        [HttpPatch]
+        [Route("register-admin/{id}")]
+        public async Task<IActionResult> RegisterAdmin(string id)
         {
-            string username = model.Username;
-            string email = model.Email;
-            string password = model.Password;
+            try
+            {
+                UserAccount userAccount =  await _authRepository.MakeAdmin(id);
 
-            if (await _authRepository.IsExistedAsync(username))
+                if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.Admin);
+                await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.User);
+            }
+            catch (Exception)
+            {
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     ExistedUserError);
-
-            UserAccount user = await _authRepository
-                .RegisterNewUserAsync(username, email, password);
-            if (user == null)
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    CreateUserFailed);
-
-            await _authRepository.AddRoleToUserAsync(user, UserRoles.Admin);
-            await _authRepository.AddRoleToUserAsync(user, UserRoles.User);
+            }
 
             return Ok(CreateUserSucceeded);
         }

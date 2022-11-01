@@ -1,14 +1,10 @@
-import CategoryDropdown from "./CategoryDropdown";
-import ProductManageDropdown from "./ProductManageDropdown";
-import CategoryManageDropdown from "./CategoryManageDropdown";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
+const UserNavBar = () => {
    return (
       <div className="sticky-top">
          <div className="container-fluid bg-dark mb-30">
-            <div className="row px-xl-5">
-               <CategoryDropdown />
+            <div className="row px-xl-5">             
                <div className="col-lg-9">
                   <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                      <Link to="/" className="text-decoration-none d-block d-lg-none">
@@ -20,8 +16,8 @@ const NavBar = () => {
                      </button>
                      <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div className="navbar-nav mr-auto py-0">
-                           <Link to="/" className="nav-item nav-link">Home</Link>
-                           <Link to="newProduct" className="nav-item nav-link">Add New Product</Link>
+                           <Link to="/product" className="nav-item nav-link">Manage Product</Link>
+                           <Link to="/category" className="nav-item nav-link">Manage Category</Link>
                         </div>
                      </div>
                   </nav>
@@ -32,4 +28,4 @@ const NavBar = () => {
    )
 }
 
-export default NavBar;
+export default UserNavBar;

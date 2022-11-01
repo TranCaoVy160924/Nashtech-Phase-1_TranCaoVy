@@ -4,7 +4,7 @@ import {
    useContext
 } from "react";
 import React from 'react';
-import Header from "../layout/header/Header";
+import ProductHeader from "../layout/header/product/ProductHeader";
 import ProductService from '../../services/product';
 import CloudinaryService from "../../services/cloudinary";
 import { AppContext } from "../../App";
@@ -21,7 +21,7 @@ const AddNewProductForm = () => {
    const schema = ProductService.productSchema;
 
    const [succeeded, setSucceeded] = useState(false);
-   const { register, handleSubmit, reset, formState: { errors } } = useForm({
+   const { register, handleSubmit, formState: { errors } } = useForm({
       resolver: yupResolver(schema)
    });
 
@@ -33,7 +33,7 @@ const AddNewProductForm = () => {
             .then(data => {
                imageUrl = data;
             })
-         console.log("ProductDetail_ uploaded image: ", imageUrl)
+         console.log("AddNewProductForm_ uploaded image: ", imageUrl)
       }
       let newProduct = {
          productName: data.productName,
@@ -43,15 +43,15 @@ const AddNewProductForm = () => {
          price: data.productPrice,
          categoryId: data.productCategory
       };
-      console.log("ProductDetail_ add : ", newProduct)
+      console.log("AddNewProductForm_ add : ", newProduct)
       ProductService.addAsync(newProduct)
          .then(data => {
-            console.log("ProductDetail_ updating product api resposne: ",
+            console.log("AddNewProductForm_ updating product api resposne: ",
                data);
             setSucceeded(true);
          })
          .catch(error => {
-            console.log("ProductDetail_ updating product api error: ",
+            console.log("AddNewProductForm_ updating product api error: ",
                error)
          });
    }
@@ -64,7 +64,7 @@ const AddNewProductForm = () => {
 
    return (
       <React.Fragment>
-         <Header />
+         <ProductHeader />
          <div className="container-fluid pb-5">
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">
@@ -122,7 +122,7 @@ const AddNewProductForm = () => {
                         <div className="d-flex align-items-center mb-4 pt-2">
                            <button className="btn btn-primary px-3">
                               <i className="fa fa-shopping-cart mr-1"></i>
-                              Update Product
+                              Add New Product Product
                            </button>
                         </div>
 

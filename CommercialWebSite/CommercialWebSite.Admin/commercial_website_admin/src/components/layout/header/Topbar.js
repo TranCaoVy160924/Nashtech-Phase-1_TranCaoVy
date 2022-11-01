@@ -1,32 +1,33 @@
-const Topbar = ({ jwtToken }) => {
+import { useContext } from "react";
+import { AppContext } from '../../../App';
+import LoginForm from './LoginForm';
+
+const Topbar = () => {
+   const context = useContext(AppContext);
+   let jwtToken = context.jwtToken;
+
    return (
       <div className="container-fluid" >
          <div className="row bg-secondary py-1 px-xl-5">
             <div className="col-lg-12 text-center text-lg-right">
                <div className="d-inline-flex align-items-center">
                   <div className="btn-group">
-                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                     <div class="dropdown-menu dropdown-menu-right">
+                     <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                     <div className="dropdown-menu dropdown-menu-right">
                         {jwtToken !== "" &&
                            <form method="get" asp-controller="Auth" asp-action="Logout">
-                              <button class="dropdown-item btn" type="submit">
+                              <button className="dropdown-item btn" type="submit">
                                  Logout
                               </button>
                            </form>
                         }
                         {jwtToken === "" &&
                            <>
-                              <button class="dropdown-item btn" type="button"
+                              <button className="dropdown-item btn" type="button"
                                  data-bs-toggle="modal"
                                  data-bs-target="#loginModal"
                                  data-bs-whatever="@mdo">
                                  Sign in
-                              </button>
-                              <button class="dropdown-item" type="button"
-                                 data-bs-toggle="modal"
-                                 data-bs-target="#registerModal"
-                                 data-bs-whatever="@mdo">
-                                 Sign up
                               </button>
                            </>
                         }
@@ -45,6 +46,8 @@ const Topbar = ({ jwtToken }) => {
                </div>
             </div>
          </div>
+
+         <LoginForm />
       </div >
    )
 }

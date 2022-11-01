@@ -10,6 +10,8 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using CommercialWebSite.Data.AutoMapperHelper;
 using CommercialWebSite.ShareDTO;
+using Microsoft.AspNetCore.Authorization;
+using CommercialWebSite.ShareDTO.Auth;
 
 namespace CommercialWebSite.Data.Repository
 {

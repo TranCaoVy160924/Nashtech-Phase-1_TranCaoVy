@@ -21,5 +21,6 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task InitialUserRoleAsync(string role);
 
         Task AddRoleToUserAsync(T user, string role);
+        Task<T> MakeAdmin(string id);
     }
 }

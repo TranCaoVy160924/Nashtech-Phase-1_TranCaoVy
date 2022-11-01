@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductService from "../../services/product";
 import ProductDisplay from "./ProductDisplay";
 import ShopPagination from './ShopPagination';
-import Header from "../layout/header/Header";
+import ProductHeader from "../layout/header/product/ProductHeader";
 
 const Shop = ({ catChoice, productName }) => {
    const [allProduct, setAllProduct] = useState([]);
@@ -64,7 +64,7 @@ const Shop = ({ catChoice, productName }) => {
 
    return (
       <React.Fragment>
-         <Header />
+         <ProductHeader />
          <div className="container-fluid pt-5 pb-3">
             <div className="row px-xl-5">
                {filteredProducts.map(p => (

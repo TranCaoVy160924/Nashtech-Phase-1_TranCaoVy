@@ -5,7 +5,7 @@ import {
    useContext
 } from "react";
 import React from 'react';
-import Header from "../layout/header/Header";
+import ProductHeader from "../layout/header/product/ProductHeader";
 import ProductService from '../../services/product';
 import CloudinaryService from "../../services/cloudinary";
 import { AppContext } from "../../App";
@@ -96,7 +96,7 @@ const ProductDetail = () => {
 
    return (
       <React.Fragment>
-         <Header />
+         <ProductHeader />
          <div className="container-fluid pb-5">
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">

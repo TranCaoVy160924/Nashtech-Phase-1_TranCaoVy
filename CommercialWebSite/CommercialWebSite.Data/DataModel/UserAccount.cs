@@ -15,6 +15,9 @@ namespace CommercialWebSite.Data.DataModel
         public DateTime Birthday { get; set; }
         public string UserAddress { get; set; }
 
+        public virtual string? RoleId { get; set; }
+        public virtual IdentityRole Role { get; set; }
+
         public virtual List<Order>? Orders { get; set; }
         public virtual List<ProductReview>? ProductReviews { get; set; }
     }

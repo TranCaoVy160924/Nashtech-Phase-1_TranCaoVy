@@ -11,10 +11,10 @@ const CategoryManageDropdown = () => {
          <nav className="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
             id="navbar-category" style={{ width: 'calc(100% - 30px)', zIndex: 999 }}>
             <div className="navbar-nav w-100">
-               <Link to="category" className="nav-item nav-link">
+               <Link to="/category" className="nav-item nav-link">
                   Category
                </Link>
-               <Link to="newCategory" className="nav-item nav-link">
+               <Link to="/newCategory" className="nav-item nav-link">
                   Add New Category
                </Link>
             </div>

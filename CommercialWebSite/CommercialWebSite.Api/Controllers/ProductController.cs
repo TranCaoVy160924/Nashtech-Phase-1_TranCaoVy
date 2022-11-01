@@ -3,6 +3,7 @@ using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO;
 using CommercialWebSite.ShareDTO.Auth;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,7 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> GetAllAsync()
         {
             List<ProductModel> products = await _productRepository.GetAllAsync();
@@ -111,6 +113,10 @@ namespace CommercialWebSite.API.Controllers
         {
             try
             {
+                if (newProduct.ProductPicture.Equals(""))
+                {
+                    throw new Exception("Product Image Is Required");
+                }
                 var product = await _productRepository.AddProductAsync(newProduct);
                 return Ok(newProduct);
             }

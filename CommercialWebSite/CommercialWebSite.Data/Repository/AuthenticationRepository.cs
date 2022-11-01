@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.DataRepositoryInterface;
+using CommercialWebSite.ShareDTO.Auth;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace CommercialWebSite.Data.Repository
@@ -16,14 +18,17 @@ namespace CommercialWebSite.Data.Repository
     {
         private UserManager<UserAccount> _userManager;
         private RoleManager<IdentityRole> _roleManager;
+        private ApplicationDbContext _appDbContext;
 
         // Implement interface function
         public AuthenticationRepository(
             UserManager<UserAccount> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext appDbContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _appDbContext = appDbContext;
         }
 
         public async Task<List<Claim>>? AuthenticateLoginAsync(
@@ -61,7 +66,8 @@ namespace CommercialWebSite.Data.Repository
                 FirstName = "asdsa",
                 LastName = "dsfdsfsd",
                 Birthday = DateTime.Today,
-                UserAddress = "dsfdsfa"
+                UserAddress = "dsfdsfa",
+                RoleId = UserRoles.UserId
             };
             var result = await _userManager.CreateAsync(user, password);
 
@@ -85,6 +91,33 @@ namespace CommercialWebSite.Data.Repository
             if (await _roleManager.RoleExistsAsync(role))
             {
                 await _userManager.AddToRoleAsync(user, role);
+            }
+        }
+
+        public async Task<UserAccount> MakeAdmin(string id)
+        {
+            try
+            {
+                UserAccount account =
+                await _appDbContext.UserAccounts
+                .Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+
+                IdentityRole role =
+                    await _appDbContext.Roles
+                    .Where(r => r.Name.Equals(UserRoles.Admin))
+                    .FirstOrDefaultAsync();
+
+                account.Role = role;
+                account.RoleId = UserRoles.AdminId;
+
+                _appDbContext.SaveChanges();
+
+                return account;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

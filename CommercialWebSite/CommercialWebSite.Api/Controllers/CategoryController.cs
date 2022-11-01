@@ -74,5 +74,21 @@ namespace CommercialWebSite.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddCategoryAsync(CategoryModel newCategory)
+        {
+            try
+            {
+                CategoryModel category = 
+                    await _categoryRepository.AddCategoryAsync(newCategory);
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

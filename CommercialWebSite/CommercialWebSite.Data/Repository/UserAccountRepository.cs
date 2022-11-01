@@ -29,15 +29,14 @@ namespace CommercialWebSite.Data.Repository
             _userMapper = _mapperProvider.CreateUserAccountMapper();
         }
 
-        public async Task<UserAccountModel> GetUserById(string id)
+        public async Task<List<UserAccountModel>> GetAllAsync()
         {
-            UserAccount user =
+            List<UserAccount> users =
                 await _appDbContext.UserAccounts
-                .Include(u => u.ProductReviews)
-                .Where(u => u.Id == id)
-                .FirstOrDefaultAsync();
+                .Include(u => u.Role)
+                .ToListAsync();
 
-            return _userMapper.MapSingleObject(user);
+            return _userMapper.MapCollection(users).ToList();
         }
     }
 }

@@ -96,8 +96,21 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                     act => act.MapFrom(src =>
                         _reviewMapper
                         .MapCollection(src.ProductReviews)
-                        .ToList()))
-                );
+                        .ToList())
+                )
+                .ForMember(
+                    dest => dest.Role,
+                    act => act.MapFrom(src => src.Role.Name)
+                )
+                .ForMember(
+                    dest => dest.Id,
+                    act => act.MapFrom(src => src.Id)
+                )
+                .ForMember(
+                    dest => dest.Username,
+                    act => act.MapFrom(src => src.UserName)
+                ));
+
             _userAccountMapper = new MapperHelper<UserAccount, UserAccountModel>(userAccountConfig);
             return _userAccountMapper;
         }

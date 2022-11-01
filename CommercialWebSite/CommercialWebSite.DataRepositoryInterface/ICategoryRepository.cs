@@ -14,5 +14,6 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<List<CategoryModel>> GetFeatureCategoryAsync();
         Task<CategoryModel> UpdateCategoryAsync(CategoryModel patchCategory);
         Task DeleteCategoryAsync(int id);
+        Task<CategoryModel> AddCategoryAsync(CategoryModel categoryModel);
     }
 }
