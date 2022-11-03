@@ -37,6 +37,11 @@ namespace CommercialWebSite.API.Controllers
             Status = "Success",
             Message = "User created successfully!"
         };
+        private static StatusResponse UpdateFailed = new StatusResponse
+        {
+            Status = "Error",
+            Message = "Update user failed"
+        };
 
         public AuthenticateController(
             UserManager<UserAccount> userManager,
@@ -59,10 +64,10 @@ namespace CommercialWebSite.API.Controllers
                 var authClaim = await _authRepository
                 .AuthenticateLoginAsync(model.Username, model.Password);
                 
-                if (authClaim == null)
-                {
-                    throw new NullReferenceException();
-                }
+                //if (authClaim == null)
+                //{
+                //    throw new NullReferenceException();
+                //}
                 
                 var token = GetToken(authClaim);
 
@@ -108,34 +113,34 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpPatch]
         [Route("register-admin/{id}")]
-        public async Task<IActionResult> RegisterAdmin(string id)
+        public async Task<IActionResult> RegisterAdminAsync(string id)
         {
             try
             {
                 UserAccount userAccount =  await _authRepository.MakeAdmin(id);
 
-                if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-                if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                //if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                //    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                //if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                //    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
                 await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.Admin);
                 await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.User);
+
+                return Ok(userAccount);
             }
             catch (Exception)
             {
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
-                    ExistedUserError);
+                    UpdateFailed);
             }
-
-            return Ok(CreateUserSucceeded);
         }
 
         [HttpGet]
         [Route("checkToken")]
         [Authorize(Roles = UserRoles.Admin)]
-        public async Task<IActionResult> CheckToken() => Ok(true);
+        public async Task<IActionResult> CheckTokenAsync() => Ok(true);
 
 
         // helper method

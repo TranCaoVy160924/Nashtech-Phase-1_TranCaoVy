@@ -19,10 +19,17 @@ namespace CommercialWebSite.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            CategoryModel category =
-                await _categoryRepository.GetByIdAsync(id);
+            try
+            {
+                CategoryModel category =
+                    await _categoryRepository.GetByIdAsync(id);
 
-            return Ok(category);
+                return Ok(category);
+            }
+            catch (NullReferenceException ex)
+            {
+                return NoContent();
+            }
         }
 
         [HttpGet]
@@ -51,8 +58,9 @@ namespace CommercialWebSite.API.Controllers
         {
             try
             {
-                await _categoryRepository.UpdateCategoryAsync(categoryModel);
-                return Ok(categoryModel);
+                CategoryModel updatedCategory = 
+                    await _categoryRepository.UpdateCategoryAsync(categoryModel);
+                return Ok(updatedCategory);
             }
             catch (Exception ex)
             {

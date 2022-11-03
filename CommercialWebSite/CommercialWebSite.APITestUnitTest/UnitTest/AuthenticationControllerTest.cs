@@ -39,6 +39,11 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             Status = "Success",
             Message = "User created successfully!"
         };
+        private static StatusResponse UpdateFailed = new StatusResponse
+        {
+            Status = "Error",
+            Message = "Update user failed"
+        };
 
         // Example test user
         RegisterRequestModel userRegister = new RegisterRequestModel
@@ -167,6 +172,141 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
 
             // Assert
             result.Should().BeOfType<UnauthorizedResult>();
+        }
+        #endregion
+
+        #region RegisterAdminAsync
+        [Fact]
+        public async Task RegisterAdminAsync_Success_ReturnAdminAccount()
+        {
+            // Arrange
+            UserAccount user = await AuthDataSetup.UserAccountAsync();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
+            mock.Setup(
+                m => m.MakeAdmin("1"))
+                .Returns(Task.FromResult(user));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.Admin));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.User));
+            AuthenticateController controller =
+                new AuthenticateController(null, null, null, mock.Object);
+
+            // Act
+            string result = ConvertOkObject<UserAccount>(
+                await controller.RegisterAdminAsync("1"));
+
+            string expectedResult = JsonConvert.SerializeObject(user);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task RegisterAdminAsync_FailToUpdateUserRole_ReturnErrorStatusCode()
+        {
+            // Arrange
+            UserAccount user = await AuthDataSetup.UserAccountAsync();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
+            mock.Setup(
+                m => m.MakeAdmin("1"))
+                .Throws(new Exception("dsfasdf"));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.Admin));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.User));
+            AuthenticateController controller =
+                new AuthenticateController(null, null, null, mock.Object);
+
+            // Act
+            string result = ConvertStatusCode(
+                await controller.RegisterAdminAsync("1"));
+
+            string expectedResult = JsonConvert.SerializeObject(UpdateFailed);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task RegisterAdminAsync_FailToAddRoleAdmin_ReturnErrorStatusCode()
+        {
+            // Arrange
+            UserAccount user = await AuthDataSetup.UserAccountAsync();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
+            mock.Setup(
+                m => m.MakeAdmin("1"))
+                .Returns(Task.FromResult(user));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.Admin))
+                .Throws(new Exception("sdfasdfa"));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.User));
+            AuthenticateController controller =
+                new AuthenticateController(null, null, null, mock.Object);
+
+            // Act
+            string result = ConvertStatusCode(
+                await controller.RegisterAdminAsync("1"));
+
+            string expectedResult = JsonConvert.SerializeObject(UpdateFailed);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task RegisterAdminAsync_FailToAddRoleUser_ReturnErrorStatusCode()
+        {
+            // Arrange
+            UserAccount user = await AuthDataSetup.UserAccountAsync();
+            var mock = new Mock<IAuthenticationRepository<UserAccount>>();
+            mock.Setup(
+                m => m.MakeAdmin("1"))
+                .Returns(Task.FromResult(user));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.Admin));
+            mock.Setup(
+                m => m.AddRoleToUserAsync(
+                    user, UserRoles.User))
+            .Throws(new Exception("sdfasdfa"));
+            AuthenticateController controller =
+                new AuthenticateController(null, null, null, mock.Object);
+
+            // Act
+            string result = ConvertStatusCode(
+                await controller.RegisterAdminAsync("1"));
+
+            string expectedResult = JsonConvert.SerializeObject(UpdateFailed);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+        #endregion
+
+        #region CheckTokenAsync
+        [Fact]
+        public async Task CheckTokenAsync_ReturnOkWhenTokenIsValid()
+        {
+            // Arrange
+            AuthenticateController controller =
+                new AuthenticateController(null, null, null, null);
+
+            // Act
+            string result = ConvertOkObject<bool>(
+                await controller.CheckTokenAsync());
+
+            string expectedResult = JsonConvert.SerializeObject(true);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
         }
         #endregion
 

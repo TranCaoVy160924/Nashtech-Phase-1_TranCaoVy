@@ -21,46 +21,46 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
 {
     public class ProductControllerTest
     {
-        //#region GetAllAsync
-        //[Fact]
-        //public async Task GetAllAsync_ReturnAllProductFromDatabase()
-        //{
-        //    // Arrange
-        //    var mock = new Mock<IProductRepository>();
-        //    mock.Setup(m => m.GetAllProductAsync()).Returns(ProductDataSetup.CollectionAsync());
-        //    ProductController controller = new ProductController(mock.Object);
+        #region GetAllAsync
+        [Fact]
+        public async Task GetAllAsync_ReturnAllProductFromDatabase()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.GetAllAsync()).Returns(ProductDataSetup.CollectionAsync());
+            ProductController controller = new ProductController(mock.Object);
 
-        //    // Act
-        //    var result = ConvertOkObject<List<ProductModel>>(
-        //        await controller.GetAllAsync());
+            // Act
+            var result = ConvertOkObject<List<ProductModel>>(
+                await controller.GetAllAsync());
 
-        //    string expectedResult = JsonConvert
-        //        .SerializeObject(await ProductDataSetup.CollectionAsync());
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.CollectionAsync());
 
-        //    // Assert
-        //    Assert.Equal(expectedResult, result);
-        //}
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
 
-        //[Fact]
-        //public async Task GetAllAsync_ReturnNoProductFromEmptyDatabase()
-        //{
-        //    // Arrange
-        //    var mock = new Mock<IProductRepository>();
-        //    mock.Setup(m => m.GetAllProductAsync())
-        //        .Returns(ProductDataSetup.EmptyCollectionAsync());
-        //    ProductController controller = new ProductController(mock.Object);
+        [Fact]
+        public async Task GetAllAsync_ReturnNoProductFromEmptyDatabase()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.GetAllAsync())
+                .Returns(ProductDataSetup.EmptyCollectionAsync());
+            ProductController controller = new ProductController(mock.Object);
 
-        //    // Act
-        //    var result = ConvertOkObject<List<ProductModel>>(
-        //        await controller.GetAllAsync());
+            // Act
+            var result = ConvertOkObject<List<ProductModel>>(
+                await controller.GetAllAsync());
 
-        //    string expectedResult = JsonConvert
-        //        .SerializeObject(await ProductDataSetup.EmptyCollectionAsync());
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.EmptyCollectionAsync());
 
-        //    // Assert
-        //    Assert.Equal(expectedResult, result);
-        //}
-        //#endregion 
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+        #endregion 
 
         #region GetFeatureProductAsync
         [Fact]
@@ -101,7 +101,70 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             // Assert
             Assert.Equal(expectedResult, result);
         }
-        #endregion 
+        #endregion
+
+        #region GetPageCountAsync
+        [Fact]
+        public async Task GetPageCountAsync_ReturnPageCount()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.GetPageCountAsync())
+                .Returns(Task.FromResult(1));
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<int>(
+                await controller.GetPageCountAsync());
+
+            string expectedResult = "1";
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+        #endregion
+
+        #region GetByPageAsync
+        [Fact]
+        public async Task GetByPageAsync_ReturnProductFromDatabase()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.GetProductByPageAsync(1))
+                .Returns(ProductDataSetup.CollectionAsync());
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<List<ProductModel>>(
+                await controller.GetByPageAsync(1));
+
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.CollectionAsync());
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task GetByPageAsync_ReturnNoProduct()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.GetProductByPageAsync(1))
+                .Returns(ProductDataSetup.EmptyCollectionAsync());
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var result = ConvertOkObject<List<ProductModel>>(
+                await controller.GetByPageAsync(1));
+
+            string expectedResult = JsonConvert
+                .SerializeObject(await ProductDataSetup.EmptyCollectionAsync());
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+        #endregion
 
         #region GetProductByIdAsync
         [Fact]
@@ -370,6 +433,23 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             ProductModel productModel = await ProductDataSetup.ProductModel();
             mock.Setup(m => m.AddProductAsync(productModel))
                 .Throws(new Exception("blabla"));
+            ProductController controller = new ProductController(mock.Object);
+
+            // Act
+            var actualResult = await controller.AddProductAsync(productModel);
+
+            // Assert
+            actualResult.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        [Fact]
+        public async Task AddProductAsync_LackImage_ReturnBadRequestStatusCode()
+        {
+            // Arrange
+            var mock = new Mock<IProductRepository>();
+            ProductModel productModel = await ProductDataSetup.ProductModelWithoutImage();
+            mock.Setup(m => m.AddProductAsync(productModel))
+                .Returns(ProductDataSetup.ProductModelWithoutImage());
             ProductController controller = new ProductController(mock.Object);
 
             // Act

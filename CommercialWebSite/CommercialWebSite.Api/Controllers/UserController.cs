@@ -17,7 +17,7 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetByPageAsync(int page)
+        public async Task<IActionResult> GetAllAsync()
         {
             List<UserAccountModel> products = await _userRepository.GetAllAsync();
             return Ok(products);

@@ -45,6 +45,21 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
             return model;
         }
 
+        public async static Task<ProductModel> ProductModelWithoutImage()
+        {
+            ProductModel model = new ProductModel
+            {
+                ProductId = 1,
+                ProductName = "Product " + 1,
+                Description = "Product " + 1,
+                ProductPicture = "",
+                Price = (Double)2000,
+                CategoryId = 1
+            };
+
+            return model;
+        }
+
         public async static Task<List<ProductModel>> EmptyCollectionAsync()
         {
             List<ProductModel> products = new List<ProductModel>();

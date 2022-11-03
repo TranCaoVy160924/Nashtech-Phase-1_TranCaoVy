@@ -9,6 +9,14 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
 {
     public class CategoryDataSetup
     {
+        public static async Task<CategoryModel> SingleObjectAsync() =>
+            new CategoryModel
+            {
+                CategoryId = 1,
+                CategoryName = "Clothes",
+                CategoryPicture = "cat-1.jpg"
+            };
+
         public static async Task<List<CategoryModel>> CollectionAsync()
         {
             List<CategoryModel> categories = new List<CategoryModel>();

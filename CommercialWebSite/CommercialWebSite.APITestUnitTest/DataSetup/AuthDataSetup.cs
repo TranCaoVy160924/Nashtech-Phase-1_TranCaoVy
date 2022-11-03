@@ -1,4 +1,5 @@
 ﻿using CommercialWebSite.Data.DataModel;
+using CommercialWebSite.ShareDTO.Business;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -17,6 +18,7 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
         {
             UserAccount user = new UserAccount
             {
+                Id = "257b61be-ccbd-452e-be18-cc235c3cc083",
                 Email = "1@gmail.com",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = "cong ga",
@@ -29,23 +31,24 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
             return user;
         }
 
-        public static Object GetToken(List<Claim> authClaims)
+        public static async Task<List<UserAccountModel>> ModelCollectionAsync()
         {
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JWTAuthenticationHIGHsecuredPasswordVVVp1OH7Xzyr"));
-
-            var token = new JwtSecurityToken(
-                issuer: "http://localhost:5000",
-                audience: "http://localhost:4200",
-                expires: DateTime.Now.AddHours(3),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
-
-            return new
+            List<UserAccountModel> userAccounts = new List<UserAccountModel>();
+            userAccounts.Add(new UserAccountModel
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                Expiration = token.ValidTo
-            };
+                Id = "257b61be-ccbd-452e-be18-cc235c3cc083",
+                FirstName = "asdsa",
+                LastName = "dsfdsfsd",
+                Birthday = DateTime.Today,
+                UserAddress = "dsfdsfa"
+            });
+            return userAccounts;
+        }
+
+        public static async Task<List<UserAccountModel>> EmptyModelCollectionAsync()
+        {
+            List<UserAccountModel> userAccounts = new List<UserAccountModel>();
+            return userAccounts;
         }
 
         public static async Task<List<Claim>> GetClaimAsync()
