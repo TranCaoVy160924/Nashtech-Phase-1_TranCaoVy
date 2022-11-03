@@ -1,11 +1,11 @@
-import axios from 'axios';
+import api from './api';
 import * as yup from "yup";
 const baseUrl = "https://localhost:7281/Product";
 
 const getPageCountAsync = async () => {
    let url = `${baseUrl}/PageCount`;
    console.log("ProductService_ axios get: ", url);
-   const response = await axios.get(url);
+   const response = await api.get(url);
 
    return response.data
 }
@@ -13,21 +13,21 @@ const getPageCountAsync = async () => {
 const getByPageAsync = async (page) => {
    let url = `${baseUrl}/Page/${page}`;
    console.log("ProductService_ axios get: ", url);
-   const response = await axios.get(url);
+   const response = await api.get(url);
    
    return response.data;
 }
 
 const getAllAsync = async () => {
    console.log("ProductService_ axios get: ", baseUrl);
-   const response = await axios.get(baseUrl);
+   const response = await api.get(baseUrl);
    
    return response.data;
 }
 
 const getByIdAsync = async (id) => {
    console.log("ProductService_ axios get: ", `${baseUrl}/${id}`);
-   const response = await axios.get(`${baseUrl}/${id}`);
+   const response = await api.get(`${baseUrl}/${id}`);
    
    return response.data;
 }
@@ -35,21 +35,21 @@ const getByIdAsync = async (id) => {
 const updateAsync = async (patchProduct) => {
    let id = patchProduct.productId
    console.log("ProductService_ axios patch: ", `${baseUrl}/${id}`);
-   const response = await axios.patch(`${baseUrl}/${id}`, patchProduct);
+   const response = await api.patch(`${baseUrl}/${id}`, patchProduct);
 
    return response.data;
 }
 
 const addAsync = async (newProduct) => {
    console.log("ProductService_ axios post: ", `${baseUrl}`);
-   const response = await axios.post(`${baseUrl}`, newProduct); 
+   const response = await api.post(`${baseUrl}`, newProduct); 
 
    return response.data;
 }
 
 const deleteAsync = async (id) => {
    console.log("ProductService_ axios delete: ", `${baseUrl}/${id}`);
-   const response = await axios.delete(`${baseUrl}/${id}`);
+   const response = await api.delete(`${baseUrl}/${id}`);
 
    return response.data;
 }

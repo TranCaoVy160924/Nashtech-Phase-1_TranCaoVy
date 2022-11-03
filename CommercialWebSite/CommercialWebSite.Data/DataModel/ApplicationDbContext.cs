@@ -115,9 +115,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-1_iyqgel.jpg",
                     Price = (Double)2000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 4
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 4,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -132,9 +133,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-2_wds2xq.jpg",
                     Price = (Double)2000,
-                    CreateDate = DateTime.Today,
-                    UpdateDate = DateTime.Today,
-                    CategoryId = 4
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 4,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -149,9 +151,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-3_ysbo6f.jpg",
                     Price = (Double)10000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 1
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 1,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -166,9 +169,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-4_w2yb1f.jpg",
                     Price = (Double)10000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 1
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 1,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -183,9 +187,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-5_nhbfgf.jpg",
                     Price = (Double)10000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 1
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 1,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -200,9 +205,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-6_rsti5j.jpg",
                     Price = (Double)10000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 1
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 1,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -217,9 +223,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-7_ykpjce.jpg",
                     Price = (Double)10000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 1
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 1,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -234,9 +241,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-8_wu5jzf.jpg",
                     Price = (Double)2300,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 3
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 3,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -251,9 +259,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-9_pik3wm.jpg",
                     Price = (Double)2300,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 3
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 3,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -268,9 +277,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-10_buoi29.jpg",
                     Price = (Double)2300,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 3
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 3,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -285,9 +295,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-11_zpxzs7.jpg",
                     Price = (Double)2300,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 3
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 3,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -302,9 +313,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-12_s0abhz.jpg",
                     Price = (Double)30000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 2
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 2,
+                    IsActive = true
                 });
             builder.Entity<Product>().HasData(
                 new
@@ -319,9 +331,10 @@ namespace CommercialWebSite.Data.DataModel
                         " Welcome to the Weber family.",
                     ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-13_p3fpxz.jpg",
                     Price = (Double)30000,
-                    CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now,
-                    CategoryId = 2
+                    CreateDate = GetFormattedDate(),
+                    UpdateDate = GetFormattedDate(),
+                    CategoryId = 2,
+                    IsActive = true
                 });
         }
 
@@ -387,5 +400,7 @@ namespace CommercialWebSite.Data.DataModel
                 new IdentityUserRole<string>() { RoleId = "fab4fac1-c546-41de-aebc-a14da6895711", UserId = "b74ddd14-6340-4840-95c2-db12554843e5" }
             );
         }
+
+        private string GetFormattedDate() => DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
     }
 }

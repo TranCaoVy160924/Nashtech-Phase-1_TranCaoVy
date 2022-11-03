@@ -23,7 +23,7 @@ namespace CommercialWebSite.Data.Repository
         private IMapperProvider _mapperProvider;
 
         public ProductRepository(
-            ApplicationDbContext appDbContext, 
+            ApplicationDbContext appDbContext,
             IMapperProvider mapperProvider)
         {
             _mapperProvider = mapperProvider;
@@ -35,7 +35,8 @@ namespace CommercialWebSite.Data.Repository
         // Implement Interface method
         public async Task<int> GetPageCountAsync()
         {
-            int productsCount = _appDbContext.Products.Count();
+            int productsCount = _appDbContext.Products
+                .Where(p => p.IsActive).Count();
             return (int)Math.Ceiling((double)productsCount / (double)12);
         }
 
@@ -44,6 +45,7 @@ namespace CommercialWebSite.Data.Repository
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
+                .Where(p => p.IsActive)
                 .ToListAsync();
 
             return _productMapper.MapCollection(rawProducts).ToList();
@@ -54,7 +56,8 @@ namespace CommercialWebSite.Data.Repository
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
-                .Skip(12*(page-1))
+                .Where(p => p.IsActive)
+                .Skip(12 * (page - 1))
                 .Take(12)
                 .ToListAsync();
 
@@ -67,6 +70,7 @@ namespace CommercialWebSite.Data.Repository
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
+                .Where(p => p.IsActive)
                 .Take(8)
                 .ToListAsync();
 
@@ -78,7 +82,8 @@ namespace CommercialWebSite.Data.Repository
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
-                .Where(p => p.Category.CategoryId == categoryId)
+                .Where(p => p.Category.CategoryId == categoryId && 
+                    p.IsActive)
                 .ToListAsync();
 
             return _productMapper.MapCollection(rawProducts).ToList();
@@ -91,7 +96,8 @@ namespace CommercialWebSite.Data.Repository
                 .Include(p => p.Category)
                 .Include(p => p.ProductReviews)
                 .ThenInclude(r => r.UserAccount)
-                .Where(p => p.ProductId == id)
+                .Where(p => p.ProductId == id && 
+                    p.IsActive)
                 .FirstOrDefaultAsync();
 
             return _productMapper.MapSingleObject(rawProduct);
@@ -102,7 +108,8 @@ namespace CommercialWebSite.Data.Repository
             List<Product> rawProducts =
                 await _appDbContext.Products
                 .Include(p => p.Category)
-                .Where(p => p.ProductName.Contains(prodName))
+                .Where(p => p.ProductName.Contains(prodName) && 
+                    p.IsActive)
                 .ToListAsync();
 
             return _productMapper.MapCollection(rawProducts).ToList();
@@ -144,7 +151,7 @@ namespace CommercialWebSite.Data.Repository
                 product.ProductPicture = TransformImage(patchProduct.ProductPicture);
                 product.NumberInStorage = patchProduct.NumberInStorage;
                 product.Price = patchProduct.Price;
-                product.UpdateDate = DateTime.Today;
+                product.UpdateDate = GetFormattedDate();
                 product.Category =
                     await _appDbContext.Categories
                     .Where(c => c.CategoryId == patchProduct.CategoryId)
@@ -154,7 +161,7 @@ namespace CommercialWebSite.Data.Repository
 
                 return _productMapper.MapSingleObject(product);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -175,8 +182,8 @@ namespace CommercialWebSite.Data.Repository
                 ProductPicture = TransformImage(newProduct.ProductPicture),
                 NumberInStorage = newProduct.NumberInStorage,
                 Price = newProduct.Price,
-                CreateDate = DateTime.Today,
-                UpdateDate = DateTime.Today,
+                CreateDate = GetFormattedDate(),
+                UpdateDate = GetFormattedDate(),
                 Category = category,
                 Orders = new List<Order>(),
                 ProductReviews = new List<ProductReview>()
@@ -206,7 +213,7 @@ namespace CommercialWebSite.Data.Repository
                 .Where(p => p.ProductId == id)
                 .FirstOrDefaultAsync();
 
-                _appDbContext.Products.Remove(product);
+                product.IsActive = false;
                 _appDbContext.SaveChanges();
             }
             catch (Exception ex)
@@ -225,5 +232,7 @@ namespace CommercialWebSite.Data.Repository
 
             return final;
         }
+
+        private string GetFormattedDate() => DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
     }
 }

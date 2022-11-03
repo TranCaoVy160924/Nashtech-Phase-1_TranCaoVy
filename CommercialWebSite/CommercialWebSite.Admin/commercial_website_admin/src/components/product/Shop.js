@@ -74,7 +74,7 @@ const Shop = ({ catChoice, productName }) => {
                ))}
 
             </div>
-            {pagination.doPaginate ? (
+            {pagination.doPaginate && pagination.pageCount > 1 ? (
                <div className="col-12">
                   <nav>
                      <ul className="pagination justify-content-center">

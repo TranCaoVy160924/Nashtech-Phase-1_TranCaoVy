@@ -16,12 +16,17 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { format } from 'date-fns';
 
 const ProductDetail = () => {
    const { productId } = useParams();
    const [product, setProduct] = useState({});
    const [show, setShow] = useState(false);
    const [deleteSucceeded, setDeleteSucceeded] = useState(false);
+   console.log(product.createDate);
+   // const formattedCreateDate = format(new Date(product.createDate), 'MM/dd/yyyy');
+   // const formattedUpdateDate = format(product.updateDate, 'MM/dd/yyyy');
+   
 
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);

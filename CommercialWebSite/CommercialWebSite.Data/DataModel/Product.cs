@@ -14,8 +14,9 @@ namespace CommercialWebSite.Data.DataModel
         public string ProductPicture { get; set; }
         public int NumberInStorage { get; set; }
         public double Price { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public string CreateDate { get; set; }
+        public string UpdateDate { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public virtual Category Category { get; set; }
 

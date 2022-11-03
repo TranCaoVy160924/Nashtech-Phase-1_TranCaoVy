@@ -6,7 +6,9 @@ import './resource/css/style.css';
 import './resource/lib/animate/animate.min.css';
 import './resource/lib/owlcarousel/assets/owl.carousel.min.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(
+   <App />
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.Data.DataModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CommercialWebSite.API.Controllers
 {
@@ -130,6 +131,11 @@ namespace CommercialWebSite.API.Controllers
 
             return Ok(CreateUserSucceeded);
         }
+
+        [HttpGet]
+        [Route("checkToken")]
+        [Authorize(Roles = UserRoles.Admin)]
+        public async Task<IActionResult> CheckToken() => Ok(true);
 
 
         // helper method

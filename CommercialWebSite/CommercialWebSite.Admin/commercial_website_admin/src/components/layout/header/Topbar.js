@@ -1,10 +1,19 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from '../../../App';
-import LoginForm from './LoginForm';
 
 const Topbar = () => {
    const context = useContext(AppContext);
    let jwtToken = context.jwtToken;
+   let setJwtToken = context.setJwtToken;
+   let setLoginAttemp = context.setLoginAttemp;
+   let navigate = useNavigate();
+
+   const signOut = () => {
+      setJwtToken("");
+      setLoginAttemp(-1);
+      navigate("/");
+   }
 
    return (
       <div className="container-fluid" >
@@ -14,14 +23,13 @@ const Topbar = () => {
                   <div className="btn-group">
                      <button type="button" className="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                      <div className="dropdown-menu dropdown-menu-right">
-                        {jwtToken !== "" &&
-                           <form method="get" asp-controller="Auth" asp-action="Logout">
-                              <button className="dropdown-item btn" type="submit">
-                                 Logout
-                              </button>
-                           </form>
+                        {jwtToken !== "none" &&
+                           <button className="dropdown-item btn"
+                              onClick={signOut}>
+                              Logout
+                           </button>
                         }
-                        {jwtToken === "" &&
+                        {jwtToken === "none" &&
                            <>
                               <button className="dropdown-item btn" type="button"
                                  data-bs-toggle="modal"
@@ -35,19 +43,9 @@ const Topbar = () => {
                   </div>
                </div>
                <div className="d-inline-flex align-items-center d-block d-lg-none">
-                  {/* <a href="#" className="btn px-0 ml-2">
-                     <i className="fas fa-heart text-dark"></i>
-                     <span className="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                  </a>
-                  <a href="#" className="btn px-0 ml-2">
-                     <i className="fas fa-shopping-cart text-dark"></i>
-                     <span className="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                  </a> */}
                </div>
             </div>
          </div>
-
-         <LoginForm />
       </div >
    )
 }

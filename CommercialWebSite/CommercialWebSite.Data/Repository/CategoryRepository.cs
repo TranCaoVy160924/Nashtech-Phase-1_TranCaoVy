@@ -32,6 +32,7 @@ namespace CommercialWebSite.Data.Repository
         {
             var categories = 
                 await _appDbContext.Categories
+                .Where(c => c.IsActive)
                 .Include(c => c.Products)
                 .ToListAsync();
 
@@ -43,7 +44,8 @@ namespace CommercialWebSite.Data.Repository
             var category =
                 await _appDbContext.Categories
                 .Include(c => c.Products)
-                .Where(c => c.CategoryId == id)
+                .Where(c => c.CategoryId == id &&
+                    c.IsActive)
                 .FirstOrDefaultAsync();
 
             return _categoryMapper.MapSingleObject(category);
@@ -53,6 +55,7 @@ namespace CommercialWebSite.Data.Repository
         {
             var categories = await _appDbContext.Categories
                 .Include(c => c.Products)
+                .Where(c => c.IsActive)
                 .OrderByDescending(c => c.Products.Count())
                 .Take(4).ToListAsync();
 
@@ -91,7 +94,7 @@ namespace CommercialWebSite.Data.Repository
                     .Where(c => c.CategoryId == id)
                     .FirstOrDefaultAsync();
 
-                _appDbContext.Categories.Remove(category);
+                category.IsActive = false;
                 _appDbContext.SaveChanges();
             }
             catch (Exception ex)

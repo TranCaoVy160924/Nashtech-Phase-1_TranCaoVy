@@ -11,6 +11,7 @@ namespace CommercialWebSite.Data.DataModel
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryPicture { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public virtual List<Product> Products { get; set; }
     }

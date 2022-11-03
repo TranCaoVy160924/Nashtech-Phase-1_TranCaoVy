@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./api";
 
 const uploadImage = async (imageFile) => {
    console.log("ProductDetail_ uploading image: ", imageFile);
@@ -6,7 +6,7 @@ const uploadImage = async (imageFile) => {
    formData.append('file', imageFile);
    formData.append('upload_preset', "mchs1zmt")
 
-   let response = await axios.post("https://api.cloudinary.com/v1_1/dddvmxs3h/image/upload", formData)
+   let response = await api.post("https://api.cloudinary.com/v1_1/dddvmxs3h/image/upload", formData)
    return response.data.url;
 }
 
