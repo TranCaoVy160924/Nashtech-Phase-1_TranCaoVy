@@ -1,5 +1,7 @@
 ﻿using CommercialWebSite.DataRepositoryInterface;
+using CommercialWebSite.ShareDTO.Auth;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommercialWebSite.API.Controllers
@@ -53,6 +55,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("")]
         public async Task<IActionResult> UpdateCategoryAsync(CategoryModel categoryModel)
         {
@@ -69,6 +72,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("{id}")]
         public async Task<IActionResult> DeleteCategoryAsync(int id)
         {
@@ -84,6 +88,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("")]
         public async Task<IActionResult> AddCategoryAsync(CategoryModel newCategory)
         {

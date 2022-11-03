@@ -26,6 +26,11 @@ const App = () => {
    const [jwtToken, setJwtToken] = useState(localStorage.getItem("jwtToken") || "none");
    const [authorized, setAuthorized] = useState(true);
    const [loginAttemp, setLoginAttemp] = useState(-1);
+   const [pagination, setPagination] = useState({
+      doPaginate: true,
+      pageCount: 0,
+      page: 1
+   });
 
    useEffect(() => {
       CategoryService.getAllAsync()
@@ -54,7 +59,7 @@ const App = () => {
    }, [jwtToken])
 
    const onSubmitProductNameForm = data => {
-      console.log("App_ product form dat ", data.productName);
+      console.log("App_ product form data ", data.productName);
       setProductName(data.productName);
    }
 
@@ -63,6 +68,8 @@ const App = () => {
       jwtToken,
       authorized,
       loginAttemp,
+      pagination,
+      setPagination,
       setLoginAttemp,
       setJwtToken,
       setCategories,
@@ -73,27 +80,29 @@ const App = () => {
    return (
       <Router>
          <AppContext.Provider value={contextStateControl}>
-            <Routes>
-               {!authorized ?
-                  (
-                     <React.Fragment>
-                        <Route path="/" element={<LoginPage />} />
-                     </React.Fragment>
-                  ) : (
-                     <React.Fragment>
-                        <Route path="/" element={<Shop productName={productName} catChoice={catChoice} />} />
-                        <Route path="product/:productId" element={<ProductDetail />} />
-                        <Route path="newProduct" element={<AddNewProductForm />} />
-                        <Route path="category" element={<CategoryManage />} />
-                        <Route path="category/:categoryId" element={<CategoryDetail />} />
-                        <Route path="newCategory" element={<AddNewCategoryForm />} />
-                        <Route path="user" element={<UserManage />} />
-                     </React.Fragment>
-                  )
-               }
-               <Route path="login" element={<LoginPage />} />
-               <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            <div style={{ minHeight: "80vh" }}>
+               <Routes>
+                  {!authorized ?
+                     (
+                        <React.Fragment>
+                           <Route path="/" element={<LoginPage />} />
+                        </React.Fragment>
+                     ) : (
+                        <React.Fragment>
+                           <Route path="/" element={<Shop productName={productName} catChoice={catChoice} />} />
+                           <Route path="product/:productId" element={<ProductDetail />} />
+                           <Route path="newProduct" element={<AddNewProductForm />} />
+                           <Route path="category" element={<CategoryManage />} />
+                           <Route path="category/:categoryId" element={<CategoryDetail />} />
+                           <Route path="newCategory" element={<AddNewCategoryForm />} />
+                           <Route path="user" element={<UserManage />} />
+                        </React.Fragment>
+                     )
+                  }
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+               </Routes>
+            </div>
             {authorized ? (
                <Footer />
             ) : null}

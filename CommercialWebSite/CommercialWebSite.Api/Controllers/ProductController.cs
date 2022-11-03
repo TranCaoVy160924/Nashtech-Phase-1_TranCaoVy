@@ -29,8 +29,8 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("")]
-        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> GetAllAsync()
         {
             List<ProductModel> products = await _productRepository.GetAllAsync();
@@ -93,6 +93,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("{id}")]
         public async Task<IActionResult> UpdateProductAsync(ProductModel patchProduct)
         {
@@ -108,6 +109,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("")]
         public async Task<IActionResult> AddProductAsync(ProductModel newProduct)
         {
@@ -127,6 +129,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("{id}")]
         public async Task<IActionResult> DeleteProductAsync(int id)
         {

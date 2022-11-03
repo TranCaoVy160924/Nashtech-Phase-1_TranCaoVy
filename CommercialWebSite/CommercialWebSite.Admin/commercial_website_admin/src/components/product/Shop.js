@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ProductService from "../../services/product";
 import ProductDisplay from "./ProductDisplay";
 import ShopPagination from './ShopPagination';
 import ProductHeader from "../layout/header/product/ProductHeader";
+import { AppContext } from '../../App';
 
 const Shop = ({ catChoice, productName }) => {
    const [allProduct, setAllProduct] = useState([]);
+   const [currentPageProduct, setCurrentPageProduct] = useState([]);
    const [filteredProducts, setFilteredProducts] = useState([]);
-   const [pagination, setPagination] = useState({
-      doPaginate: true,
-      pageCount: 0,
-      page: 1
-   });
+   const context = useContext(AppContext);
+   const pagination = context.pagination;
+   const setPagination = context.setPagination;
+   
 
    useEffect(() => {
       console.log("Shop_ pagination: ", pagination.doPaginate);
@@ -25,6 +26,7 @@ const Shop = ({ catChoice, productName }) => {
             console.log("Shop_ page: ", pagination.page);
             console.log("Shop_ api product data by page", data);
             if (pagination.doPaginate) {
+               setCurrentPageProduct(data);
                setFilteredProducts(data);
             }
          });
@@ -53,6 +55,7 @@ const Shop = ({ catChoice, productName }) => {
          setFilteredProducts(filtered);
          setPagination({ ...pagination, doPaginate: false });
       } else {
+         setFilteredProducts(currentPageProduct);
          setPagination({ ...pagination, doPaginate: true });
       }
    }, [productName, catChoice]);

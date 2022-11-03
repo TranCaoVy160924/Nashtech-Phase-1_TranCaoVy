@@ -2,7 +2,7 @@ import React from "react"
 
 const Footer = () => {
    return (
-      <React.Fragment>
+      <footer className="mt-auto">
          <div className="container-fluid bg-dark text-secondary mt-5 pt-5">
             <div className="row border-top mx-xl-5 py-4" style={{borderColor: 'rgba(256, 256, 256, .1)', important: true}}>
                <div className="col-md-6 px-xl-0">
@@ -19,7 +19,7 @@ const Footer = () => {
          </div>
 
          <a href="#/" className="btn btn-primary back-to-top"><i className="fa fa-angle-double-up"></i></a>
-      </React.Fragment>
+      </footer>
    )
 }
 

@@ -112,6 +112,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPatch]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("register-admin/{id}")]
         public async Task<IActionResult> RegisterAdminAsync(string id)
         {

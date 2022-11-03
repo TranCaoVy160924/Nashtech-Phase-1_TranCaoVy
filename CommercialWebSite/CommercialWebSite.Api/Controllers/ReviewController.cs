@@ -2,6 +2,7 @@
 using CommercialWebSite.Data.Repository;
 using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommercialWebSite.API.Controllers
@@ -18,6 +19,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("")]
         public async Task<IActionResult> PostReviewAsync([FromBody] ProductReviewModel reviewModel)
         {

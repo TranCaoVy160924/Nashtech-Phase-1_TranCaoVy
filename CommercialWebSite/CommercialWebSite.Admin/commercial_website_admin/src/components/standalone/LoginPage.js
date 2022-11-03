@@ -38,6 +38,7 @@ const LoginPage = () => {
          .then(data => {
             console.log("LoginForm_ login success: ", data);
             setJwtToken(data.token);
+            setLoginError("");
          })
          .catch(error => {
             console.log("LoginForm_ login failed: ", error);

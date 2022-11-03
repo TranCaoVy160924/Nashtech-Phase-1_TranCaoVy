@@ -1,5 +1,7 @@
 ﻿using CommercialWebSite.DataRepositoryInterface;
+using CommercialWebSite.ShareDTO.Auth;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommercialWebSite.API.Controllers
@@ -16,6 +18,7 @@ namespace CommercialWebSite.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = UserRoles.Admin)]
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
