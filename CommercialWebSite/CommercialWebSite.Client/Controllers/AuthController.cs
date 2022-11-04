@@ -7,6 +7,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using CommercialWebSite.ShareDTO;
 using System.Web;
+using CommercialWebSite.Client.Helper;
+using CommercialWebSite.ShareDTO.Business;
 
 namespace CommercialWebSite.Client.Controllers
 {
@@ -14,12 +16,14 @@ namespace CommercialWebSite.Client.Controllers
     {
         private readonly ILogger<AuthController> _logger;
         private readonly IAuthenticateClient _authClient;
+        private readonly IOrderClient _orderClient;
         private readonly string baseUrl = "https://localhost:7281";
 
         public AuthController(ILogger<AuthController> logger)
         {
             _logger = logger;
             _authClient = RestService.For<IAuthenticateClient>(baseUrl);
+            _orderClient = RestService.For<IOrderClient>(baseUrl);
         }
 
         public IActionResult Login()
@@ -44,6 +48,12 @@ namespace CommercialWebSite.Client.Controllers
 
                     // Add token to session
                     session.SetString("JwtAuthToken", responseToken.Token);
+                    JwtManager jwtManager = new JwtManager(session);
+
+                    var userId = jwtManager.GetUserId();
+
+                    List<OrderModel> orders = await _orderClient.GetByBuyerIdAsync(userId);
+                    session.SetString("Orders", JsonConvert.SerializeObject(orders));
                 }
             }
             catch (ApiException ex)

@@ -10,5 +10,8 @@ namespace CommercialWebSite.DataRepositoryInterface
     public interface IOrderRepository
     {
         Task<List<OrderModel>> GetByBuyerIdAsync(string buyerId);
+        Task<OrderModel> IncreaseProductNumAsync(int orderId);
+        Task<OrderModel> SubProductNumAsync(int orderId);
+        Task CreateOrderAsync(OrderModel newOrder);
     }
 }

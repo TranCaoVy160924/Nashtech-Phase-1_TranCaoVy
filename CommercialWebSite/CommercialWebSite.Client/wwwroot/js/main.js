@@ -1,8 +1,8 @@
 console.log(window.username);
 
 (function ($) {
-    "use strict";
-    
+    const baseUrl = "https://localhost:7281";
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -19,8 +19,8 @@ console.log(window.username);
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -30,36 +30,81 @@ console.log(window.username);
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
-    // Product Quantity
     $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
+        let button = $(this);
+        let numOfProd = button.parent().parent().find('input.num-of-prod');
+        let orderId = button.parent().parent().find('input.order-id');
+        let orderTotalPrice = $("#order-total-price-" + orderId.val());
+        let totalCartPrice = $("#total-cart-price");
+        let cartItemNum = $("#cart-item-num");
+        let url = "";
+        let actionType = "none";
+
+        const changeProdNum = async (url) => {
+            button.prop("disabled", true);
+            let response = await fetch(url, {
+                method: 'PATCH',
+            });
+            return response.json();
+        }
+
         if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
+            url = baseUrl + "/Order/Incre/" + orderId.val();
+            actionType = "incre";
+            console.log("Incre order product number: " + url);
+        }
+        else {
+            if (parseInt(numOfProd.val()) > 1) {
+                url = baseUrl + "/Order/Sub/" + orderId.val();
+                actionType = "sub";
+                console.log("Sub order product number: " + url);
             }
         }
-        button.parent().parent().find('input').val(newVal);
+        console.log("Button: ", actionType);
+        if (actionType !== "none") {
+            changeProdNum(url)
+                .then(data => {
+                    console.log("Update succeeded: ", data);
+                    let newTotal = data.numOfGood * data.productPrice
+                    button.prop("disabled", false);
+                    orderTotalPrice.html("$" + newTotal);
+                    numOfProd.val(data.numOfGood);
+
+                    let cartTotalPriceValue = parseInt(totalCartPrice.html().substring(1));
+                    let productPriceValue = parseInt(data.productPrice);
+                    let newCartTotal;
+                    let newCartNum;
+
+                    if (actionType === "incre") {
+                        newCartTotal = cartTotalPriceValue + productPriceValue;
+                        newCartNum = parseInt(cartItemNum.html()) + 1;
+                        console.log(newCartNum);
+                    }
+                    else {
+                        newCartTotal = cartTotalPriceValue - productPriceValue;
+                        newCartNum = parseInt(cartItemNum.html()) - 1;
+                        console.log(newCartNum);
+                    }
+                    totalCartPrice.html("$" + newCartTotal);
+                    cartItemNum.html(newCartNum);
+                });
+        }
     });
-    
+
 })(jQuery);
 
 function submitForm(formId) {
-    var form = document.getElementById(formId);
+    let form = document.getElementById(formId);
     form.submit();
 }
 
 function setMinValue(minId, maxId) {
-    var max = document.getElementById(maxId);
-    var min = document.getElementById(minId);
+    let max = document.getElementById(maxId);
+    let min = document.getElementById(minId);
     max.min = min.value;
     alert("set min: ", min.value);
 }

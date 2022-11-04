@@ -12,7 +12,7 @@ const Shop = ({ catChoice, productName }) => {
    const context = useContext(AppContext);
    const pagination = context.pagination;
    const setPagination = context.setPagination;
-   
+
 
    useEffect(() => {
       console.log("Shop_ pagination: ", pagination.doPaginate);
@@ -25,9 +25,14 @@ const Shop = ({ catChoice, productName }) => {
          .then(data => {
             console.log("Shop_ page: ", pagination.page);
             console.log("Shop_ api product data by page", data);
-            if (pagination.doPaginate) {
-               setCurrentPageProduct(data);
-               setFilteredProducts(data);
+            if (data.length === 0) {
+               setPagination({ ...pagination, page: pagination.page - 1 });
+            }
+            else {
+               if (pagination.doPaginate) {
+                  setCurrentPageProduct(data);
+                  setFilteredProducts(data);
+               }
             }
          });
       ProductService.getAllAsync()

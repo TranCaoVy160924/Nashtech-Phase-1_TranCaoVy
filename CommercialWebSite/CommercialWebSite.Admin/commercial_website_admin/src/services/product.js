@@ -70,7 +70,7 @@ const productSchema = yup.object({
       .min(0, "Number in storage must be positive")
       .required("Number in storage is required"),
    description: yup.string()
-      .required("Description is required"),
+      .required("Description is required")
 }).required();
 
 const exportObject = {

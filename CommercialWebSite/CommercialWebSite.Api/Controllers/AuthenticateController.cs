@@ -63,12 +63,12 @@ namespace CommercialWebSite.API.Controllers
             {
                 var authClaim = await _authRepository
                 .AuthenticateLoginAsync(model.Username, model.Password);
-                
-                //if (authClaim == null)
-                //{
-                //    throw new NullReferenceException();
-                //}
-                
+
+                if (authClaim == null)
+                {
+                    throw new NullReferenceException();
+                }
+
                 var token = GetToken(authClaim);
 
                 return Ok(new

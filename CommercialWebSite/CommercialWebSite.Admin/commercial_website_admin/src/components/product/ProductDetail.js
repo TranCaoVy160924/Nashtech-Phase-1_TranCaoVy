@@ -16,17 +16,13 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { format } from 'date-fns';
 
 const ProductDetail = () => {
    const { productId } = useParams();
    const [product, setProduct] = useState({});
    const [show, setShow] = useState(false);
    const [deleteSucceeded, setDeleteSucceeded] = useState(false);
-   console.log(product.createDate);
-   // const formattedCreateDate = format(new Date(product.createDate), 'MM/dd/yyyy');
-   // const formattedUpdateDate = format(product.updateDate, 'MM/dd/yyyy');
-   
+   const [displayImage, setDisplayImage] = useState("");
 
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
@@ -35,15 +31,30 @@ const ProductDetail = () => {
 
    const schema = ProductService.productSchema;
 
-   const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm({
+   const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm({
       resolver: yupResolver(schema)
    });
+
+   useEffect(() => {
+      // create the preview
+      let objectUrl;
+      let tempImageData = watch("productImage");
+      console.log("ProductDetail_ chosen image: ", tempImageData)
+      if (tempImageData !== null && tempImageData.length > 0) {
+         objectUrl = URL.createObjectURL(watch("productImage")[0]);
+         setDisplayImage(objectUrl);
+      }
+
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl)
+   }, [watch("productImage")])
 
    useEffect(() => {
       ProductService.getByIdAsync(productId)
          .then(data => {
             console.log("ProductDetail_ product: ", data);
             setProduct(data);
+            setDisplayImage(data.productPicture);
             reset(data);
          });
    }, [reset])
@@ -106,7 +117,7 @@ const ProductDetail = () => {
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">
                   <div className="col-lg-5 mb-30">
-                     <img className="w-100 h-100" src={product.productPicture} alt="Product" />
+                     <img className="w-100 h-100" src={displayImage} alt="Product" />
                      <Form.Control {...register("productImage")}
                         type="file" accept="image/*" />
                   </div>
@@ -157,6 +168,7 @@ const ProductDetail = () => {
                               <Form.Label>Category</Form.Label>
                               <Form.Select {...register("productCategory")}
                                  className="mb-4" defaultValue={product.categoryId}>
+                                    <option value="-1">Choose A Category</option>
                                  {categories.map(c => {
                                     if (product.categoryId === c.categoryId) {
                                        return (
@@ -170,6 +182,7 @@ const ProductDetail = () => {
                                     }
                                  })}
                               </Form.Select>
+                              <p className="text-danger">{errors.productCategory?.message}</p>
                            </Col>
                         </Row>
                         <Row className="mb-4">

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using CommercialWebSite.Client.RefitClient;
 using Refit;
 using CommercialWebSite.ShareDTO;
-using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
 
 namespace CommercialWebSite.Client.Controllers

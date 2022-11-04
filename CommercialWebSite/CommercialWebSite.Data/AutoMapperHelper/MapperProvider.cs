@@ -37,14 +37,20 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                     act => act.MapFrom(src => src.ProductReviews
                         .Select(r => r.ProductRating)
                         .DefaultIfEmpty()
-                        .Average()))
+                        .Average())
+                )
                 .ForMember(
                     dest => dest.Reviews,
                     act => act.MapFrom(src =>
                         _reviewMapper
                         .MapCollection(src.ProductReviews)
-                        .ToList()))
-                );
+                        .ToList())
+                )
+                .ForMember(
+                    dest => dest.CategoryId,
+                    act => act.MapFrom(src =>
+                        src.Category.IsActive ? src.Category.CategoryId : -1)
+                ));
             _productMapper = new MapperHelper<Product, ProductModel>(productConfig);
             return _productMapper;
         }
@@ -134,6 +140,20 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                     dest => dest.ProductId,
                     act => act.MapFrom(src =>
                         src.Product.ProductId)
+                )
+                .ForMember(
+                    dest => dest.ProductName,
+                    act => act.MapFrom(src =>
+                        src.Product.ProductName)
+                )
+                .ForMember(
+                    dest => dest.ProductPrice,
+                    act => act.MapFrom(src =>
+                        src.Product.Price)
+                ).ForMember(
+                    dest => dest.ProductPicture,
+                    act => act.MapFrom(src =>
+                        src.Product.ProductPicture)
                 ));
 
             _orderMapper = new MapperHelper<Order, OrderModel>(orderConfig);

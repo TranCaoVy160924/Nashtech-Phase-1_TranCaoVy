@@ -32,7 +32,7 @@ namespace CommercialWebSite.Client.Controllers
             var userId = jwtManager.GetUserId();
 
             List<OrderModel> orders = await _orderClient.GetByBuyerIdAsync(userId);
-            TempData["Orders"] = orders;
+            session.SetString("Orders", JsonConvert.SerializeObject(orders));
 
             ViewModel viewModel = new ViewModel();
             return View(viewModel);

@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import {
    useState,
-   useContext
+   useContext,
+   useEffect
 } from "react";
 import React from 'react';
 import ProductHeader from "../layout/header/product/ProductHeader";
@@ -21,9 +22,24 @@ const AddNewProductForm = () => {
    const schema = ProductService.productSchema;
 
    const [succeeded, setSucceeded] = useState(false);
-   const { register, handleSubmit, formState: { errors } } = useForm({
+   const [displayImage, setDisplayImage] = useState("https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg");
+   const { register, handleSubmit, watch, formState: { errors } } = useForm({
       resolver: yupResolver(schema)
    });
+
+   useEffect(() => {
+      // create the preview
+      let objectUrl;
+      let tempImageData = watch("productImage");
+      console.log("ProductDetail_ chosen image: ", tempImageData)
+      if (tempImageData !== null && tempImageData.length > 0) {
+         objectUrl = URL.createObjectURL(watch("productImage")[0]);
+         setDisplayImage(objectUrl);
+      }
+
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl)
+   }, [watch("productImage")])
 
    const onSubmitForm = async data => {
       let imageUrl;
@@ -69,7 +85,7 @@ const AddNewProductForm = () => {
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">
                   <div className="col-lg-5 mb-30">
-                     <img className="w-100 h-100" src="https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg" alt="Product" />
+                     <img className="w-100 h-100" src={displayImage} alt="Product" />
                      <Form.Control {...register("productImage")}
                         type="file" accept="image/*" defaultValue={""} />
                      <p className="text-danger">{errors.productImage?.message}</p>

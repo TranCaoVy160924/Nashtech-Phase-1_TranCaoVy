@@ -36,5 +36,67 @@ namespace CommercialWebSite.Data.Repository
 
             return _orderMapper.MapCollection(orderModels).ToList();
         }
+
+        public async Task<OrderModel> IncreaseProductNumAsync(int orderId)
+        {
+            try
+            {
+                var order =
+                await _appDbContext.Orders
+                .Include(o => o.Product)
+                .Include(o => o.Buyer)
+                .Where(o => o.OrderId == orderId &&
+                    !o.IsCheckedOut)
+                .FirstOrDefaultAsync();
+
+                order.NumOfGood++;
+                _appDbContext.SaveChanges();
+
+                return _orderMapper.MapSingleObject(order);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<OrderModel> SubProductNumAsync(int orderId)
+        {
+            try
+            {
+                var order =
+                await _appDbContext.Orders
+                .Include(o => o.Product)
+                .Include(o => o.Buyer)
+                .Where(o => o.OrderId == orderId &&
+                    !o.IsCheckedOut)
+                .FirstOrDefaultAsync();
+
+                order.NumOfGood--;
+                _appDbContext.SaveChanges();
+
+                return _orderMapper.MapSingleObject(order);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task CreateOrderAsync(OrderModel newOrder)
+        {
+            //try
+            //{
+            //    UserAccount buyer =
+            //        await _appDbContext.UserAccounts
+            //        .Where(u => u.Id == newOrder.BuyerId)
+            //        .FirstOrDefaultAsync();
+
+            //    Order order = new Order
+            //    {
+                    
+            //    }
+            //}
+        }
     }
 }

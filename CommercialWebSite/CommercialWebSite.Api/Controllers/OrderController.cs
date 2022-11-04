@@ -25,5 +25,39 @@ namespace CommercialWebSite.API.Controllers
 
             return Ok(orderModels);
         }
+
+        [HttpPatch]
+        [Route("Incre/{orderId}")]
+        public async Task<IActionResult> IncreOrderProductNumAsync(int orderId)
+        {
+            try
+            {
+                OrderModel orderModels =
+                    await _orderRepository.IncreaseProductNumAsync(orderId);
+
+                return Ok(orderModels);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Route("Sub/{orderId}")]
+        public async Task<IActionResult> SubOrderProductNumAsync(int orderId)
+        {
+            try
+            {
+                OrderModel orderModels =
+                    await _orderRepository.SubProductNumAsync(orderId);
+
+                return Ok(orderModels);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

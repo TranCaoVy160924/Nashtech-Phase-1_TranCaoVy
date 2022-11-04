@@ -20,6 +20,9 @@ const CategoryDropdown = () => {
                <Link to="/" onClick={() => { setCatChoice(0) }} className="nav-item nav-link">
                   All Category
                </Link>
+               <Link to="/" onClick={() => { setCatChoice(-1) }} className="nav-item nav-link">
+                  No Category
+               </Link>
                {categories.map(c => (
                   <React.Fragment key={c.categoryId}>
                      <Link to="/" onClick={() => { setCatChoice(c.categoryId) }} className="nav-item nav-link">
