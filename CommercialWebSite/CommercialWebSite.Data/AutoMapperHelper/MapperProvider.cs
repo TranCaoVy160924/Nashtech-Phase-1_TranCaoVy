@@ -17,6 +17,7 @@ namespace CommercialWebSite.Data.AutoMapperHelper
         private MapperHelper<ProductReview, ProductReviewModel> _reviewMapper;
         private MapperHelper<Category, CategoryModel> _categoryMapper;
         private MapperHelper<UserAccount, UserAccountModel> _userAccountMapper;
+        private MapperHelper<Order, OrderModel> _orderMapper;
 
         public MapperHelper<Product, ProductModel> CreateProductMapper()
         {
@@ -113,6 +114,30 @@ namespace CommercialWebSite.Data.AutoMapperHelper
 
             _userAccountMapper = new MapperHelper<UserAccount, UserAccountModel>(userAccountConfig);
             return _userAccountMapper;
+        }
+
+        public MapperHelper<Order, OrderModel> CreateOrderMapper()
+        {
+            var orderConfig = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Order, OrderModel>()
+                .ForMember(
+                    dest => dest.TotalPrice,
+                    act => act.MapFrom(src =>
+                        src.Product.Price * src.NumOfGood)
+                )
+                .ForMember(
+                    dest => dest.BuyerId,
+                    act => act.MapFrom(src =>
+                        src.Buyer.Id)
+                )
+                .ForMember(
+                    dest => dest.ProductId,
+                    act => act.MapFrom(src =>
+                        src.Product.ProductId)
+                ));
+
+            _orderMapper = new MapperHelper<Order, OrderModel>(orderConfig);
+            return _orderMapper;
         }
     }
 }

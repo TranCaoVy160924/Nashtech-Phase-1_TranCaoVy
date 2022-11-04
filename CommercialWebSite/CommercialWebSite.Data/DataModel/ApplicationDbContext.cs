@@ -46,6 +46,7 @@ namespace CommercialWebSite.Data.DataModel
             SeedRoles(builder);
             SeedUsers(builder);
             SeedUserRoles(builder);
+            SeedOrder(builder);
         }
 
         private void SeedCategory(ModelBuilder builder)
@@ -402,5 +403,21 @@ namespace CommercialWebSite.Data.DataModel
         }
 
         private string GetFormattedDate() => DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
+
+        private void SeedOrder(ModelBuilder builder)
+        {
+            for(int i = 1; i < 10; i++)
+            {
+                builder.Entity<Order>()
+                    .HasData(new 
+                    {
+                        OrderId = i,
+                        NumOfGood = 2,
+                        IsCheckedOut = i%2 == 0 ? true: false,
+                        BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
+                        ProductId = i
+                    });
+            }
+        }
     }
 }

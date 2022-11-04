@@ -18,6 +18,7 @@ const UserNavBar = () => {
                         <div className="navbar-nav mr-auto py-0">
                            <Link to="/" className="nav-item nav-link">Manage Product</Link>
                            <Link to="/category" className="nav-item nav-link">Manage Category</Link>
+                           <Link to="/category" className="nav-item nav-link active">Manage User</Link>
                         </div>
                      </div>
                   </nav>

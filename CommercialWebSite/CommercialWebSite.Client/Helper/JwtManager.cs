@@ -40,7 +40,7 @@ namespace CommercialWebSite.Client.Helper
             }
             else
             {
-                return null;
+                return "";
             }
         }
 
@@ -56,7 +56,7 @@ namespace CommercialWebSite.Client.Helper
             }
             else
             {
-                return null;
+                return "";
             }
         }
     }

@@ -14,5 +14,6 @@ namespace CommercialWebSite.Data.AutoMapperHelper
         MapperHelper<ProductReview, ProductReviewModel> CreateReviewMapper();
         MapperHelper<Category, CategoryModel> CreateCategoryMapper();
         MapperHelper<UserAccount, UserAccountModel> CreateUserAccountMapper();
+        MapperHelper<Order, OrderModel> CreateOrderMapper();
     }
 }

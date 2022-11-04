@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommercialWebSite.Data.DataModel
+namespace CommercialWebSite.ShareDTO.Business
 {
-    public class Order
+    public class OrderModel
     {
         public int OrderId { get; set; }
         public int NumOfGood { get; set; }
-
+        public double TotalPrice { get; set; }
         // Unchecked out order is in cart
         public Boolean IsCheckedOut { get; set; }
-
-        public virtual UserAccount Buyer { get; set; }
-
-        public virtual Product Product { get; set; }
+        public string BuyerId { get; set; }
+        public int ProductId { get; set; }
     }
 }
