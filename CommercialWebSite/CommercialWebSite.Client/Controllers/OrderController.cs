@@ -37,5 +37,30 @@ namespace CommercialWebSite.Client.Controllers
             ViewModel viewModel = new ViewModel();
             return View(viewModel);
         }
+
+        public async Task<IActionResult> CreateOrder(ViewModel viewModel) 
+        {
+            var session = Request.HttpContext.Session;
+            OrderModel newOrder = viewModel.NewOrder;
+            try
+            {
+                OrderModel order = await _orderClient.CreateOrderAsync(newOrder);
+                List<OrderModel> orders = JsonConvert
+                    .DeserializeObject<List<OrderModel>>(
+                        session.GetString("Orders"));
+
+                orders.Add(order);
+
+                session.SetString("Orders", JsonConvert.SerializeObject(orders));
+
+                TempData["CreateOrderStatus"] = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
+
+            return RedirectToAction("ProductDetail", "Home", new { id = newOrder.ProductId });
+        }
     }
 }

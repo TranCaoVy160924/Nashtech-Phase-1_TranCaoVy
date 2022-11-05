@@ -83,20 +83,36 @@ namespace CommercialWebSite.Data.Repository
             }
         }
 
-        public async Task CreateOrderAsync(OrderModel newOrder)
+        public async Task<OrderModel> CreateOrderAsync(OrderModel newOrder)
         {
-            //try
-            //{
-            //    UserAccount buyer =
-            //        await _appDbContext.UserAccounts
-            //        .Where(u => u.Id == newOrder.BuyerId)
-            //        .FirstOrDefaultAsync();
+            try
+            {
+                UserAccount buyer =
+                    await _appDbContext.UserAccounts
+                    .Where(u => u.Id == newOrder.BuyerId)
+                    .FirstOrDefaultAsync();
 
-            //    Order order = new Order
-            //    {
-                    
-            //    }
-            //}
+                Product product =
+                    await _appDbContext.Products
+                    .Where(p => p.ProductId == newOrder.ProductId)
+                    .FirstOrDefaultAsync();
+
+                Order order = new Order
+                {
+                    NumOfGood = newOrder.NumOfGood,
+                    Product = product,
+                    Buyer = buyer
+                };
+
+                _appDbContext.Orders.Add(order);
+                _appDbContext.SaveChanges();
+
+                return _orderMapper.MapSingleObject(order);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

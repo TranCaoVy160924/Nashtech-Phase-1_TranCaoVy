@@ -13,7 +13,7 @@ namespace CommercialWebSite.API.Controllers
 
         public OrderController(IOrderRepository orderRepository)
         {
-            _orderRepository = orderRepository; 
+            _orderRepository = orderRepository;
         }
 
         [HttpGet]
@@ -57,6 +57,22 @@ namespace CommercialWebSite.API.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> CreateOrderAsync([FromBody] OrderModel newOrder)
+        {
+            try
+            {
+                OrderModel order = await _orderRepository.CreateOrderAsync(newOrder);
+
+                return Ok(order);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

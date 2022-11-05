@@ -12,6 +12,6 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<List<OrderModel>> GetByBuyerIdAsync(string buyerId);
         Task<OrderModel> IncreaseProductNumAsync(int orderId);
         Task<OrderModel> SubProductNumAsync(int orderId);
-        Task CreateOrderAsync(OrderModel newOrder);
+        Task<OrderModel> CreateOrderAsync(OrderModel newOrder);
     }
 }

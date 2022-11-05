@@ -95,6 +95,30 @@ console.log(window.username);
         }
     });
 
+    $("#btn-plus-new-order").on("click", () => {
+        let button = $(this);
+        let numOfProd = $("#new-order-prod-num");
+        let oldValue = numOfProd.val();
+        let newValue = parseInt(oldValue) + 1;
+
+        console.log("new Value: ", newValue);
+        numOfProd.val(newValue);
+    })
+
+    $("#btn-minus-new-order").on("click", () => {
+        let button = $(this);
+        let numOfProd = $("#new-order-prod-num");
+        let oldValue = numOfProd.val();
+        let newValue = parseInt(oldValue);
+
+        if (oldValue > 1) {
+            newValue = parseInt(oldValue) - 1;
+        }
+
+        console.log("new Value: ", newValue);
+        numOfProd.val(newValue);
+    })
+
 })(jQuery);
 
 function submitForm(formId) {

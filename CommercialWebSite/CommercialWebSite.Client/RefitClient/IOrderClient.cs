@@ -7,5 +7,8 @@ namespace CommercialWebSite.Client.RefitClient
     {
         [Get("/Order/{buyerId}")]
         Task<List<OrderModel>> GetByBuyerIdAsync(string buyerId);
+
+        [Post("/Order/")]
+        Task<OrderModel> CreateOrderAsync(OrderModel newOrder);
     }
 }

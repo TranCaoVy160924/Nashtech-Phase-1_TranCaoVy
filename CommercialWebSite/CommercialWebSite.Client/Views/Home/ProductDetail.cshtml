@@ -42,25 +42,30 @@
                 <p class="mb-4">
                     @product.Description
                 </p>
-                <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
-                                <i class="fa fa-minus"></i>
-                            </button>
+                <form asp-controller="Order" asp-action="CreateOrder">
+                    <div class="d-flex align-items-center mb-4 pt-2">
+                        <div class="input-group new-order-quantity mr-3" style="width: 130px;">
+                            <div class="input-group-btn">
+                                <button id="btn-minus-new-order" type="button" class="btn btn-primary btn-minus">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input id="new-order-prod-num" type="text" asp-for="NewOrder.NumOfGood"
+                                   class="form-control bg-secondary border-0 text-center" value=@(1)>
+                            <div class="input-group-btn">
+                                <button id="btn-plus-new-order" type="button" class="btn btn-primary btn-plus">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
+                        <input type="hidden" asp-for="NewOrder.BuyerId" value=@(userId) />
+                        <input type="hidden" asp-for="NewOrder.ProductId" value=@(product.ProductId) />
+                        <button class="btn btn-primary px-3" type="submit" @(isAuthenticated? null : "disabled")>
+                            <i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart
+                        </button>
                     </div>
-                    <button class="btn btn-primary px-3">
-                        <i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart
-                    </button>
-                </div>
+                </form>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Share on:</strong>
                     <div class="d-inline-flex">
@@ -173,3 +178,23 @@
     </div>
 </div>
 <!-- Shop Detail End -->
+
+<!-- Create Order Success Modal Start -->
+<div class="modal fade" id="orderSucessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Create Order Success Modal End -->

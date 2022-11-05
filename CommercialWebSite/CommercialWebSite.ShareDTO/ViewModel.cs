@@ -18,5 +18,6 @@ namespace CommercialWebSite.ShareDTO
         public ProductReviewModel ProductReviewInputModel { get; set; }
         public List<ProductReviewModel> ProductReviewModels { get; set; }
         public int Page { get; set; }
+        public OrderModel NewOrder { get; set; }
     }
 }

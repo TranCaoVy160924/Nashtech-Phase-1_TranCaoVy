@@ -25,12 +25,12 @@ const Shop = ({ catChoice, productName }) => {
          .then(data => {
             console.log("Shop_ page: ", pagination.page);
             console.log("Shop_ api product data by page", data);
-            if (data.length === 0) {
+            if (data.length < 1) {
                setPagination({ ...pagination, page: pagination.page - 1 });
             }
             else {
+               setCurrentPageProduct(data);
                if (pagination.doPaginate) {
-                  setCurrentPageProduct(data);
                   setFilteredProducts(data);
                }
             }
@@ -46,6 +46,7 @@ const Shop = ({ catChoice, productName }) => {
    }, [pagination.page])
 
    useEffect(() => {
+      console.log("Shop_ chosen category: ", catChoice);
       if (productName !== "" || catChoice !== 0) {
          console.log("Shop_ filtering by name: ", productName);
          console.log("Shop_ filtering by category: ", catChoice);
@@ -61,7 +62,7 @@ const Shop = ({ catChoice, productName }) => {
          setPagination({ ...pagination, doPaginate: false });
       } else {
          setFilteredProducts(currentPageProduct);
-         setPagination({ ...pagination, doPaginate: true });
+         setPagination({ ...pagination, page: 1, doPaginate: true });
       }
    }, [productName, catChoice]);
 
