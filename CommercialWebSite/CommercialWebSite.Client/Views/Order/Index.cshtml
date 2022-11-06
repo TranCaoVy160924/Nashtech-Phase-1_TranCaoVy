@@ -47,6 +47,7 @@
                             <table class="table table-light table-borderless table-hover text-center mb-0">
                                 <thead class="thead-dark">
                                     <tr>
+                                        <th></th>
                                         <th>Products</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
@@ -61,7 +62,10 @@
                                             if (!order.IsCheckedOut)
                                             {
                                                 <tr>
-                                                    <td class="align-content-start"><img class="align-self-start" src=@(order.ProductPicture) alt="" style="width: 50px;">@(order.ProductName)</td>
+                                                    <td>
+                                                        <img class="align-self-start" src=@(order.ProductPicture) alt="" style="width: 50px;">
+                                                    </td>
+                                                    <td class="align-content-start">@(order.ProductName)</td>
                                                     <td id="order-product-price-@(order.OrderId)" class="align-middle">$@(order.ProductPrice)</td>
                                                     <td class="align-middle">
                                                         <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -70,12 +74,12 @@
                                                                     <i class="fa fa-minus"></i>
                                                                 </button>
                                                             </div>
-                                                            <input type="text" class="num-of-prod form-control
-                                                                                form-control-sm bg-secondary border-0
-                                                                                text-center" value=@(order.NumOfGood)>
+                                                            <input disabled type="text" class="num-of-prod form-control
+                                                                form-control-sm bg-secondary border-0
+                                                                text-center" value=@(order.NumOfGood)>
                                                             <input type="hidden" class="order-id form-control
-                                                                                form-control-sm bg-secondary border-0
-                                                                                text-center" value=@(order.OrderId)>
+                                                                form-control-sm bg-secondary border-0
+                                                                text-center" value=@(order.OrderId)>
                                                             <div class="input-group-btn">
                                                                 <button class="btn btn-sm btn-primary btn-plus">
                                                                     <i class="fa fa-plus"></i>
@@ -107,6 +111,7 @@
                             <table class="table table-light table-borderless table-hover text-center mb-0">
                                 <thead class="thead-dark">
                                     <tr>
+                                        <th></th>
                                         <th>Products</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
@@ -120,7 +125,10 @@
                                             if (order.IsCheckedOut)
                                             {
                                                 <tr>
-                                                    <td class="align-content-start"><img class="align-self-start" src=@(order.ProductPicture) alt="" style="width: 50px;">@(order.ProductName)</td>
+                                                    <td>
+                                                        <img class="align-self-start" src=@(order.ProductPicture) alt="" style="width: 50px;">
+                                                    </td>
+                                                    <td class="align-content-start">@(order.ProductName)</td>
                                                     <td class="align-middle">$@(order.ProductPrice)</td>
                                                     <td class="align-middle">
                                                         <div class="input-group quantity mx-auto" style="width: 100px;">

@@ -5,7 +5,6 @@
     <div class="product-img position-relative overflow-hidden">
         <img class="img-fluid w-100" src="@Model.ProductPicture" alt="">
         <div class="product-action">
-            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
             <form id="productDetailForm-@(Model.ProductId)" asp-controller="Home" asp-action="ProductDetail">
                 <input type="hidden" name="id" value="@Model.ProductId" />
             </form>
@@ -26,7 +25,7 @@
             <small class="fa fa-star text-primary mr-1"></small>
             <small class="fa fa-star text-primary mr-1"></small>
             <small class="fa fa-star text-primary mr-1"></small>
-            <small>@Model.NumberInStorage</small>
+            <small>@Model.AgregateUserRate</small>
         </div>
     </div>
 </div>

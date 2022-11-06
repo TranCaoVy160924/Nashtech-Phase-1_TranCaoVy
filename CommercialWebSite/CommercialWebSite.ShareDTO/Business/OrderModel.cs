@@ -18,5 +18,6 @@ namespace CommercialWebSite.ShareDTO.Business
         public string? ProductName { get; set; }
         public string? ProductPrice { get; set; }
         public string? ProductPicture { get; set; }
+        public bool? IsNew { get; set; } = false; 
     }
 }

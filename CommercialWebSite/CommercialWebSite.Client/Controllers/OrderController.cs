@@ -48,9 +48,19 @@ namespace CommercialWebSite.Client.Controllers
                 List<OrderModel> orders = JsonConvert
                     .DeserializeObject<List<OrderModel>>(
                         session.GetString("Orders"));
-
-                orders.Add(order);
-
+                if (order.IsNew.Value == true)
+                {
+                    // Add order to cart if new 
+                    orders.Add(order);
+                }
+                else
+                {
+                    // Find exsited order and update
+                    OrderModel existedOrder = orders
+                        .Where(o => o.OrderId == order.OrderId)
+                        .FirstOrDefault();
+                    existedOrder = order;
+                }
                 session.SetString("Orders", JsonConvert.SerializeObject(orders));
 
                 TempData["CreateOrderStatus"] = true;

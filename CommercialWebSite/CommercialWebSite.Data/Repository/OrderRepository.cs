@@ -87,27 +87,53 @@ namespace CommercialWebSite.Data.Repository
         {
             try
             {
-                UserAccount buyer =
+                OrderModel responseOrder;
+                // Find of order for product already exist that is in cart
+                Order order =
+                    await _appDbContext.Orders
+                    .Where(o => o.Buyer.Id.Equals(newOrder.BuyerId) &&
+                        o.Product.ProductId == newOrder.ProductId &&
+                        o.IsCheckedOut == false)
+                    .FirstOrDefaultAsync();
+
+                if (order != null)
+                {
+                    // Update order product number when order exist
+                    order.NumOfGood += newOrder.NumOfGood;
+                    responseOrder = _orderMapper.MapSingleObject(order);
+                }
+                else
+                {
+                    // Order not exist 
+                    // Find buyer for order
+                    UserAccount buyer =
                     await _appDbContext.UserAccounts
                     .Where(u => u.Id == newOrder.BuyerId)
                     .FirstOrDefaultAsync();
 
-                Product product =
-                    await _appDbContext.Products
-                    .Where(p => p.ProductId == newOrder.ProductId)
-                    .FirstOrDefaultAsync();
+                    // Find product for order
+                    Product product =
+                        await _appDbContext.Products
+                        .Where(p => p.ProductId == newOrder.ProductId)
+                        .FirstOrDefaultAsync();
 
-                Order order = new Order
-                {
-                    NumOfGood = newOrder.NumOfGood,
-                    Product = product,
-                    Buyer = buyer
-                };
+                    // Create new order
+                    order = new Order
+                    {
+                        NumOfGood = newOrder.NumOfGood,
+                        Product = product,
+                        Buyer = buyer,
+                        IsCheckedOut = false
+                    };
 
-                _appDbContext.Orders.Add(order);
+                    _appDbContext.Orders.Add(order);
+                    responseOrder = _orderMapper.MapSingleObject(order);
+
+                    // Mark response order as new
+                    responseOrder.IsNew = true;
+                }
                 _appDbContext.SaveChanges();
-
-                return _orderMapper.MapSingleObject(order);
+                return responseOrder;
             }
             catch(Exception ex)
             {

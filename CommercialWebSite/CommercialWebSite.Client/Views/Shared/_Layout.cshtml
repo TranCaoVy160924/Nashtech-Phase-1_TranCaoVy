@@ -9,6 +9,12 @@
     string jwtAuthToken = session.GetString("JwtAuthToken");
     string loginErrorMessage = (string)TempData["LoginErrorMessage"];
     string registerErrorMessage = (string)TempData["RegisterErrorMessage"];
+    bool createOrderStatus = false;
+    try
+    {
+        createOrderStatus = (bool)TempData["CreateOrderStatus"];
+    }
+    catch (Exception ex) { }
 }
 
 <!DOCTYPE html>
@@ -76,13 +82,21 @@
                 });
             </script>
         }
-    }
-    @{
+    
         if (registerErrorMessage != null)
         {
             <script type="text/javascript">
                 window.addEventListener('DOMContentLoaded', (event) => {
                     $('#registerModal').modal('show');
+                });
+            </script>
+        }
+
+        if (createOrderStatus)
+        {
+            <script type="text/javascript">
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    $('#orderSucessModal').modal('show');
                 });
             </script>
         }
