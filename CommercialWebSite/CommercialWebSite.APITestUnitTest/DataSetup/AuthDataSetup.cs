@@ -1,6 +1,8 @@
 ﻿using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -56,5 +58,34 @@ namespace CommercialWebSite.APITestUnitTest.DataSetup
             var claims = new List<Claim>();
             return claims;
         }
+
+        public static void SetUpContextValidToken(ControllerBase controller)
+        {
+            CreateContext(controller);
+            controller.ControllerContext.HttpContext.Items["isValidToken"] = true;
+        }
+
+        public static void SetUpContextInvalidToken(ControllerBase controller)
+        {
+            CreateContext(controller);
+            controller.ControllerContext.HttpContext.Items["isValidToken"] = false;
+        }
+
+        public static void SetUpAuthHeader(ControllerBase controller)
+        {
+            CreateContext(controller);
+            controller.ControllerContext.HttpContext.Request.Headers["Authorization"] = "abcxyz";
+        }
+
+        private static void CreateContext(ControllerBase controller)
+        {
+            if (controller.ControllerContext.HttpContext == null)
+            {
+                controller.ControllerContext = new ControllerContext()
+                {
+                    HttpContext = new DefaultHttpContext()
+                };
+            }
+        } 
     }
 }

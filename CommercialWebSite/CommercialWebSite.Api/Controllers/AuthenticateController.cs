@@ -66,7 +66,7 @@ namespace CommercialWebSite.API.Controllers
             try
             {
                 var authClaim = await _authRepository
-                .AuthenticateLoginAsync(model.Username, model.Password);
+                    .AuthenticateLoginAsync(model.Username, model.Password);
 
                 if (authClaim == null)
                 {

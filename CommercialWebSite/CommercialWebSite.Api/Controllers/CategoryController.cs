@@ -12,14 +12,10 @@ namespace CommercialWebSite.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly ITokenManager _tokenManager;
 
-        public CategoryController(
-            ICategoryRepository categoryRepository,
-            ITokenManager tokenManager)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
-            _tokenManager = tokenManager;
         }
 
         [HttpGet]

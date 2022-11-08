@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static CommercialWebSite.APITestUnitTest.DataSetup.AuthDataSetup;
 
 namespace CommercialWebSite.APITestUnitTest.UnitTest
 {
@@ -35,6 +36,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
                 .Returns(Task.FromResult(true));
             ReviewController controller =
                 new ReviewController(mock.Object);
+            SetUpContextValidToken(controller);
 
             // Act
             var resultRespsonse = await controller.PostReviewAsync(review);
@@ -56,6 +58,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
                 .Returns(Task.FromResult(false));
             ReviewController controller =
                 new ReviewController(mock.Object);
+            SetUpContextValidToken(controller);
 
             // Act
             var resultRespsonse = await controller.PostReviewAsync(review);

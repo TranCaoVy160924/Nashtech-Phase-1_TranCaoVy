@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using static CommercialWebSite.APITestUnitTest.TestHelper.ConverterFromIActionResult;
+using static CommercialWebSite.APITestUnitTest.DataSetup.AuthDataSetup;
 
 namespace CommercialWebSite.APITestUnitTest.UnitTest
 {
@@ -26,6 +27,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             mock.Setup(m => m.GetAllAsync())
                 .Returns(AuthDataSetup.ModelCollectionAsync());
             UserController controller = new UserController(mock.Object);
+            SetUpContextValidToken(controller);
 
             // Act
             var result = ConvertOkObject<List<UserAccountModel>>(
@@ -46,6 +48,7 @@ namespace CommercialWebSite.APITestUnitTest.UnitTest
             mock.Setup(m => m.GetAllAsync())
                 .Returns(AuthDataSetup.EmptyModelCollectionAsync());
             UserController controller = new UserController(mock.Object);
+            SetUpContextValidToken(controller);
 
             // Act
             var result = ConvertOkObject<List<UserAccountModel>>(
