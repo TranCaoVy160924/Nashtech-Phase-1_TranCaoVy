@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CommercialWebSite.Data.Repository;
 using CommercialWebSite.Data.AutoMapperHelper;
+using CommercialWebSite.API.AuthHelper;
+using CommercialWebSite.API.Middleware;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -66,6 +68,7 @@ builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IUserAccountRepository, UserAccountRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IMapperProvider, MapperProvider>();
+builder.Services.AddScoped<ITokenManager, ValidTokenManager>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -90,5 +93,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<TokenValidator>();
 
 app.Run();

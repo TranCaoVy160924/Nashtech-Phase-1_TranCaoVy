@@ -2,13 +2,17 @@
 using CommercialWebSite.Client.RefitClient;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Refit;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using CommercialWebSite.ShareDTO;
 using System.Web;
+using Refit;
 using CommercialWebSite.Client.Helper;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute;
 
 namespace CommercialWebSite.Client.Controllers
 {
@@ -49,11 +53,21 @@ namespace CommercialWebSite.Client.Controllers
                     // Add token to session
                     session.SetString("JwtAuthToken", responseToken.Token);
                     JwtManager jwtManager = new JwtManager(session);
+                    string authHeader = jwtManager.GetAuthHeader();
 
                     var userId = jwtManager.GetUserId();
 
-                    List<OrderModel> orders = await _orderClient.GetByBuyerIdAsync(userId);
+                    List<OrderModel> orders = await _orderClient
+                        .GetByBuyerIdAsync(userId, authHeader);
                     session.SetString("Orders", JsonConvert.SerializeObject(orders));
+
+                    // Http Login
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Sid, userId));
+                    var claimsIdentity = new ClaimsIdentity(
+                        claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrinciple);
                 }
             }
             catch (ApiException ex)
@@ -110,13 +124,20 @@ namespace CommercialWebSite.Client.Controllers
             return RedirectToAction("Index", "Home", viewModel);
         }
 
-        [HttpGet]
-
-        public IActionResult Logout()
+        [Authorize]
+        public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync();
             var session = Request.HttpContext.Session;
+            await _authClient.LogoutAsync(
+                new JwtManager(session).GetAuthHeader());
             session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

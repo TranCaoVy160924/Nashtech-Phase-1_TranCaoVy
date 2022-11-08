@@ -26,5 +26,9 @@ namespace CommercialWebSite.Client.RefitClient
 
         [Get("/Product/Filter")]
         Task<List<ProductModel>> FilterProductAsync([Body] FilterProductModel filter);
+
+        [Get("/Product/CheckBuyer")]
+        Task<bool> CheckBuyerAsync(string buyerId, int productId, 
+            [Header("Authorization")] string jwtToken);
     }
 }

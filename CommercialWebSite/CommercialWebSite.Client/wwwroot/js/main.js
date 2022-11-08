@@ -43,11 +43,16 @@ console.log(window.username);
         let cartItemNum = $("#cart-item-num");
         let url = "";
         let actionType = "none";
+        let myHeader = new Headers();
+        let jwtToken = localStorage.getItem("jwtToken");
+        myHeader.append("Authorization", jwtToken);
+        console.log("Token", jwtToken);
 
         const changeProdNum = async (url) => {
             button.prop("disabled", true);
             let response = await fetch(url, {
                 method: 'PATCH',
+                headers: myHeader,
             });
             return response.json();
         }
@@ -118,7 +123,6 @@ console.log(window.username);
         console.log("new Value: ", newValue);
         numOfProd.val(newValue);
     })
-
 })(jQuery);
 
 function submitForm(formId) {
@@ -138,5 +142,11 @@ function setMaxValue(minId, maxId) {
     var min = document.getElementById(minId);
     min.max = max.value;
     alert("set max: ", max.value);
+}
+
+const setCancelOrder = (orderId) => {
+    let button = document.getElementById("confirmCancelBtn");
+    button.value = orderId;
+    console.log(button.value)
 }
 

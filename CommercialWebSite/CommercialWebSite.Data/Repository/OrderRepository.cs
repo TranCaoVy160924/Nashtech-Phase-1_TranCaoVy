@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CommercialWebSite.Data.Repository
 {
-    public class OrderRepository: IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private ApplicationDbContext _appDbContext;
         private MapperHelper<Order, OrderModel> _orderMapper;
@@ -32,6 +32,8 @@ namespace CommercialWebSite.Data.Repository
                 await _appDbContext.Orders
                 .Include(o => o.Buyer)
                 .Include(o => o.Product)
+                .Where(o => o.Buyer.Id.Equals(buyerId) &&
+                    o.IsActive)
                 .ToListAsync();
 
             return _orderMapper.MapCollection(orderModels).ToList();
@@ -46,7 +48,8 @@ namespace CommercialWebSite.Data.Repository
                 .Include(o => o.Product)
                 .Include(o => o.Buyer)
                 .Where(o => o.OrderId == orderId &&
-                    !o.IsCheckedOut)
+                    !o.IsCheckedOut &&
+                    o.IsActive)
                 .FirstOrDefaultAsync();
 
                 order.NumOfGood++;
@@ -69,7 +72,8 @@ namespace CommercialWebSite.Data.Repository
                 .Include(o => o.Product)
                 .Include(o => o.Buyer)
                 .Where(o => o.OrderId == orderId &&
-                    !o.IsCheckedOut)
+                    !o.IsCheckedOut &&
+                    o.IsActive)
                 .FirstOrDefaultAsync();
 
                 order.NumOfGood--;
@@ -93,7 +97,8 @@ namespace CommercialWebSite.Data.Repository
                     await _appDbContext.Orders
                     .Where(o => o.Buyer.Id.Equals(newOrder.BuyerId) &&
                         o.Product.ProductId == newOrder.ProductId &&
-                        o.IsCheckedOut == false)
+                        o.IsCheckedOut == false &&
+                        o.IsActive)
                     .FirstOrDefaultAsync();
 
                 if (order != null)
@@ -123,7 +128,8 @@ namespace CommercialWebSite.Data.Repository
                         NumOfGood = newOrder.NumOfGood,
                         Product = product,
                         Buyer = buyer,
-                        IsCheckedOut = false
+                        IsCheckedOut = false,
+                        IsActive = true
                     };
 
                     _appDbContext.Orders.Add(order);
@@ -135,7 +141,56 @@ namespace CommercialWebSite.Data.Repository
                 _appDbContext.SaveChanges();
                 return responseOrder;
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task DeleteOrderAsync(int orderId)
+        {
+            try
+            {
+                Order order =
+                    await _appDbContext.Orders
+                    .Where(o => o.OrderId == orderId)
+                    .FirstOrDefaultAsync();
+
+                order.IsActive = false;
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task CheckoutAsync(List<int> checkingOutOrderIds)
+        {
+            try
+            {
+                checkingOutOrderIds.ForEach(id =>
+                {
+                    Order order =
+                        _appDbContext.Orders
+                        .Where(o => o.OrderId == id &&
+                            o.IsActive &&
+                            !o.IsCheckedOut)
+                        .FirstOrDefault();
+
+                    if (order != null)
+                    {
+                        order.IsCheckedOut = true;
+                    }
+                    else
+                    {
+                        throw new Exception("Order not found");
+                    }
+                });
+
+                _appDbContext.SaveChanges();
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

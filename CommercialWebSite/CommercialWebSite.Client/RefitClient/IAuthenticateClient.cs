@@ -13,5 +13,8 @@ namespace CommercialWebSite.Client.RefitClient
 
         [Post("/Authenticate/Login")]
         Task<string> Login([Body] LoginRequestModel model);
+
+        [Delete("/Authenticate/Logout")]
+        Task LogoutAsync([Header("Authorization")] string jwtToken);
     }
 }

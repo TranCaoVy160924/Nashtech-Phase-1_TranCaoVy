@@ -1,4 +1,5 @@
-﻿using CommercialWebSite.Data.DataModel;
+﻿using CommercialWebSite.API.AuthHelper;
+using CommercialWebSite.Data.DataModel;
 using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO;
 using CommercialWebSite.ShareDTO.Auth;
@@ -23,7 +24,7 @@ namespace CommercialWebSite.API.Controllers
         [HttpGet]
         [Route("PageCount")]
         public async Task<IActionResult> GetPageCountAsync()
-        {
+        {          
             int page = await _productRepository.GetPageCountAsync();
             return Ok(page);
         }
@@ -33,8 +34,15 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<ProductModel> products = await _productRepository.GetAllAsync();
-            return Ok(products);
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                List<ProductModel> products = await _productRepository.GetAllAsync();
+                return Ok(products);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpGet]
@@ -97,14 +105,21 @@ namespace CommercialWebSite.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> UpdateProductAsync(ProductModel patchProduct)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                var product = await _productRepository.UpdateProductAsync(patchProduct);
-                return Ok(product);
+                try
+                {
+                    var product = await _productRepository.UpdateProductAsync(patchProduct);
+                    return Ok(product);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
             }
         }
 
@@ -113,18 +128,25 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> AddProductAsync(ProductModel newProduct)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                if (newProduct.ProductPicture.Equals(""))
+                try
                 {
-                    throw new Exception("Product Image Is Required");
+                    if (newProduct.ProductPicture.Equals(""))
+                    {
+                        throw new Exception("Product Image Is Required");
+                    }
+                    var product = await _productRepository.AddProductAsync(newProduct);
+                    return Ok(newProduct);
                 }
-                var product = await _productRepository.AddProductAsync(newProduct);
-                return Ok(newProduct);
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
             }
         }
 
@@ -141,6 +163,31 @@ namespace CommercialWebSite.API.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("CheckBuyer")]
+        [Authorize]
+        public async Task<IActionResult> CheckBuyerAsync(string buyerId, int productId)
+        {
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                try
+                {
+                    bool isBuyer = await _productRepository
+                        .CheckBuyerAsync(buyerId, productId);
+
+                    return Ok(isBuyer);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return Unauthorized();
             }
         }
     }

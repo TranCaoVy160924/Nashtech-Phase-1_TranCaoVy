@@ -13,6 +13,7 @@ namespace CommercialWebSite.Data.DataModel
 
         // Unchecked out order is in cart
         public Boolean IsCheckedOut { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual UserAccount Buyer { get; set; }
 

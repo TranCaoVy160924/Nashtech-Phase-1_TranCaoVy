@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from '../../../App';
+import AuthService from '../../../services/auth';
 
 const Topbar = () => {
    const context = useContext(AppContext);
@@ -10,6 +11,7 @@ const Topbar = () => {
    let navigate = useNavigate();
 
    const signOut = () => {
+      AuthService.logoutAsync();
       setJwtToken("");
       setLoginAttemp(-1);
       navigate("/");

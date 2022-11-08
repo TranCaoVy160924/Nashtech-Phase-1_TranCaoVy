@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import {
    useState,
-   useContext
+   useContext,
+   useEffect
 } from "react";
 import React from "react";
 import { AppContext } from '../../App';
@@ -19,13 +20,27 @@ const AddNewCategoryForm = () => {
    const context = useContext(AppContext);
    const categories = context.categories;
    const setCategories = context.setCategories;
-
    const schema = CategoryService.categorySchema;
 
    const [succeeded, setSucceeded] = useState(false);
-   const { register, handleSubmit, formState: { errors } } = useForm({
+   const [displayImage, setDisplayImage] = useState("https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg");
+   const { register, handleSubmit, watch, formState: { errors } } = useForm({
       resolver: yupResolver(schema)
    });
+
+   useEffect(() => {
+      // create the preview
+      let objectUrl;
+      let tempImageData = watch("categoryImage");
+      console.log("AddNewCategoryForm_ chosen image: ", tempImageData)
+      if (tempImageData !== null && tempImageData.length > 0) {
+         objectUrl = URL.createObjectURL(watch("categoryImage")[0]);
+         setDisplayImage(objectUrl);
+      }
+
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl)
+   }, [watch("categoryImage")])
 
    const onSubmitForm = async data => {
       let imageUrl;
@@ -65,7 +80,7 @@ const AddNewCategoryForm = () => {
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">
                   <div className="col-lg-5 mb-30">
-                     <img className="w-100 h-100" src="https://res.cloudinary.com/dddvmxs3h/image/upload/v1667030485/background_dui8e3.jpg" alt="Category" />
+                     <img className="w-100 h-100" src={displayImage} alt="Category" />
                      <Form.Control {...register("categoryImage")}
                         type="file" accept="image/*" />
                   </div>

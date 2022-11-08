@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Refit;
 using System.IdentityModel.Tokens.Jwt;
+using AuthorizeAttribute = Microsoft.AspNetCore.Authorization.AuthorizeAttribute;
 
 namespace CommercialWebSite.Client.Controllers
 {
@@ -23,28 +24,36 @@ namespace CommercialWebSite.Client.Controllers
             _orderClient = RestService.For<IOrderClient>(baseUrl);
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var session = Request.HttpContext.Session;
             JwtManager jwtManager = new JwtManager(session);
+            string authHeader = jwtManager.GetAuthHeader();
             bool isAuthenticated = jwtManager.IsAuthenticated;
 
             var userId = jwtManager.GetUserId();
 
-            List<OrderModel> orders = await _orderClient.GetByBuyerIdAsync(userId);
+            List<OrderModel> orders = await _orderClient
+                .GetByBuyerIdAsync(userId, authHeader);
             session.SetString("Orders", JsonConvert.SerializeObject(orders));
 
             ViewModel viewModel = new ViewModel();
             return View(viewModel);
         }
 
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateOrder(ViewModel viewModel) 
         {
             var session = Request.HttpContext.Session;
+            JwtManager jwtManager = new JwtManager(session);
+            string authHeader = jwtManager.GetAuthHeader();
             OrderModel newOrder = viewModel.NewOrder;
             try
             {
-                OrderModel order = await _orderClient.CreateOrderAsync(newOrder);
+                OrderModel order = await _orderClient
+                    .CreateOrderAsync(newOrder, authHeader);
                 List<OrderModel> orders = JsonConvert
                     .DeserializeObject<List<OrderModel>>(
                         session.GetString("Orders"));
@@ -61,7 +70,8 @@ namespace CommercialWebSite.Client.Controllers
                         .FirstOrDefault();
                     existedOrder = order;
                 }
-                session.SetString("Orders", JsonConvert.SerializeObject(orders));
+                session.SetString("Orders", 
+                    JsonConvert.SerializeObject(orders));
 
                 TempData["CreateOrderStatus"] = true;
             }
@@ -71,6 +81,52 @@ namespace CommercialWebSite.Client.Controllers
             }
 
             return RedirectToAction("ProductDetail", "Home", new { id = newOrder.ProductId });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> CancelOrder(int orderId)
+        {
+            try
+            {
+                var session = Request.HttpContext.Session;
+                string authHeader = new JwtManager(session).GetAuthHeader();
+
+                _logger.LogInformation("Deleting order: " + orderId);
+                _orderClient.CancelOrderAsync(orderId, authHeader);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
+
+            return RedirectToAction("Index", "Order");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> CheckOut()
+        {
+            try
+            {
+                var session = Request.HttpContext.Session;
+                string authHeader = new JwtManager(session).GetAuthHeader();
+                List<OrderModel> orders = JsonConvert
+                    .DeserializeObject<List<OrderModel>>(
+                        session.GetString("Orders"));
+
+                List<int> checkingOutOrderIds = orders
+                    .Where(o => !o.IsCheckedOut)
+                    .Select(o => o.OrderId)
+                    .ToList();
+
+                await _orderClient
+                    .CheckoutAsync(checkingOutOrderIds, authHeader);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+            }
+
+            return RedirectToAction("Index", "Order");
         }
     }
 }

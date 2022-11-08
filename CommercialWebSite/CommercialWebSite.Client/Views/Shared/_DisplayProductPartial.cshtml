@@ -1,6 +1,10 @@
 ﻿@using CommercialWebSite.ShareDTO.Business
 @model ProductModel
 
+@{
+    int starRating = Model.AgregateUserRate;
+}
+
 <div class="product-item bg-light mb-4">
     <div class="product-img position-relative overflow-hidden">
         <img class="img-fluid w-100" src="@Model.ProductPicture" alt="">
@@ -20,12 +24,7 @@
             <h5>$@Model.Price</h5><h6 class="text-muted ml-2"><del>$@Model.Price</del></h6>
         </div>
         <div class="d-flex align-items-center justify-content-center mb-1">
-            <small class="fa fa-star text-primary mr-1"></small>
-            <small class="fa fa-star text-primary mr-1"></small>
-            <small class="fa fa-star text-primary mr-1"></small>
-            <small class="fa fa-star text-primary mr-1"></small>
-            <small class="fa fa-star text-primary mr-1"></small>
-            <small>@Model.AgregateUserRate</small>
+            In storage: @Model.NumberInStorage
         </div>
     </div>
 </div>

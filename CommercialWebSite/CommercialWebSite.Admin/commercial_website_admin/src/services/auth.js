@@ -19,10 +19,18 @@ const loginAsync = async (user) => {
    return response.data;
 }
 
-const checkToken = async () => {
+const checkTokenAsync = async () => {
    let url = baseUrl + "/checkToken";
    console.log("AuthService_ axios get: ", url);
    const response = await api.get(url);
+
+   return response.data;
+}
+
+const logoutAsync = async () => {
+   let url = baseUrl + "/logout";
+   console.log("AuthService_ axios delete: ", url);
+   const response = await api.delete(url);
 
    return response.data;
 }
@@ -38,7 +46,8 @@ const exportObject = {
    loginSchema,
    loginAsync,
    makeAdminAsync,
-   checkToken
+   checkTokenAsync,
+   logoutAsync,
 };
 
 export default exportObject

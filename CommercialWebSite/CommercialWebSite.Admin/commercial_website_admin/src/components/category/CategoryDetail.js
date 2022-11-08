@@ -16,13 +16,17 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from "react-router-dom";
 
 const CategoryDetail = () => {
    const { categoryId } = useParams();
    const [category, setCategory] = useState({});
    const [show, setShow] = useState(false);
+   const [updateSucceeded, setUpdateSucceeded] = useState(false);
    const [deleteSucceeded, setDeleteSucceeded] = useState(false);
+   const [displayImage, setDisplayImage] = useState("");
 
+   const handleCloseUpdateSuccess = () => setUpdateSucceeded(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const context = useContext(AppContext);
@@ -31,15 +35,30 @@ const CategoryDetail = () => {
 
    const schema = CategoryService.categorySchema;
 
-   const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm({
+   const { register, handleSubmit, setValue, watch, reset, formState: { errors } } = useForm({
       resolver: yupResolver(schema)
    });
+
+   useEffect(() => {
+      // create the preview
+      let objectUrl;
+      let tempImageData = watch("categoryImage");
+      console.log("CategoryDetail_ chosen image: ", tempImageData)
+      if (tempImageData !== null && tempImageData.length > 0) {
+         objectUrl = URL.createObjectURL(watch("categoryImage")[0]);
+         setDisplayImage(objectUrl);
+      }
+
+      // free memory when ever this component is unmounted
+      return () => URL.revokeObjectURL(objectUrl)
+   }, [watch("categoryImage")])
 
    useEffect(() => {
       CategoryService.getByIdAsync(categoryId)
          .then(data => {
             console.log("CategoryDetail_ category: ", data);
             setCategory(data);
+            setDisplayImage(data.categoryPicture);
             reset(data);
          })
    }, [reset])
@@ -67,9 +86,10 @@ const CategoryDetail = () => {
             setCategory({ ...data });
             setValue('categoryImage', null);
             setCategories(categories.map(c => (
-               c.categoryId === category.categoryId 
-               ? patchCategory : c
+               c.categoryId === category.categoryId
+                  ? data : c
             )))
+            setUpdateSucceeded(true);
          })
          .catch(error => {
             console.log("CategoryDetail_ updating category api error: ", error)
@@ -101,7 +121,7 @@ const CategoryDetail = () => {
             <Form onSubmit={handleSubmit(onSubmitForm)}>
                <div className="row px-xl-5">
                   <div className="col-lg-5 mb-30">
-                     <img className="w-100 h-100" src={category.categoryPicture} alt="Product" />
+                     <img className="w-100 h-100" src={displayImage} alt="Product" />
                      <Form.Control {...register("categoryImage")}
                         type="file" accept="image/*" />
                   </div>
@@ -148,6 +168,20 @@ const CategoryDetail = () => {
                   <Button variant="primary" onClick={deleteCategory}>
                      Yes
                   </Button>
+               </Modal.Footer>
+            </Modal>
+
+            <Modal show={updateSucceeded} onHide={handleCloseUpdateSuccess}>
+               <Modal.Header closeButton>
+                  <Modal.Title>Update Succeeded</Modal.Title>
+               </Modal.Header>
+               <Modal.Body>{category.categoryName} has been update!</Modal.Body>
+               <Modal.Footer>
+                  <Link variant="primary" to="/category">
+                     <Button>
+                        Return To Category
+                     </Button>
+                  </Link>
                </Modal.Footer>
             </Modal>
          </div>

@@ -9,6 +9,7 @@ namespace CommercialWebSite.Client.Helper
         public Boolean IsAuthenticated { get; set; }
         private readonly ISession _session;
         private readonly JwtSecurityToken _secureToken;
+        public string JwtTokenString { get; set; } = "";
 
         public JwtManager(ISession session)
         {
@@ -16,10 +17,10 @@ namespace CommercialWebSite.Client.Helper
 
             try
             {
-                string jwtAuthToken = _session.GetString("JwtAuthToken");
+                JwtTokenString = _session.GetString("JwtAuthToken");
 
                 var handler = new JwtSecurityTokenHandler();
-                _secureToken = handler.ReadJwtToken(jwtAuthToken);
+                _secureToken = handler.ReadJwtToken(JwtTokenString);
                 IsAuthenticated = true;
             }
             catch(Exception)
@@ -58,6 +59,11 @@ namespace CommercialWebSite.Client.Helper
             {
                 return "";
             }
+        }
+
+        public string GetAuthHeader()
+        {
+            return $"Bearer {JwtTokenString}";
         }
     }
 }

@@ -41,7 +41,7 @@ const App = () => {
    }, []);
 
    useEffect(() => {
-      AuthService.checkToken()
+      AuthService.checkTokenAsync()
          .then(data => {
             console.log("App_ api check token response: ", data);
             setAuthorized(data);

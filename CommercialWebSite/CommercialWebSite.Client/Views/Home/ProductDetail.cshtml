@@ -12,6 +12,8 @@
     var session = HttpContextAccessor.HttpContext.Session;
     JwtManager jwtManager = new JwtManager(session);
     bool isAuthenticated = jwtManager.IsAuthenticated;
+    bool isBuyer = (bool)TempData["IsBuyer"];
+    int starRating = product.AgregateUserRate;
 
     var userId = "";
     var username = "";
@@ -34,7 +36,14 @@
                 <h3>@product.ProductName</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="far fa-star"></small>@product.AgregateUserRate
+                        @for (int i = 0; i < starRating; i++)
+                        {
+                            <small class="fas fa-star text-primary mr-1"></small>
+                        }
+                        @for (int i = starRating; i < 5; i++)
+                        {
+                            <small class="far fa-star text-primary mr-1"></small>
+                        }
                     </div>
                     <small class="pt-1">(@product.Reviews.Count Reviews)</small>
                 </div>
@@ -42,7 +51,7 @@
                 <p class="mb-4">
                     @product.Description
                 </p>
-                <form asp-controller="Order" asp-action="CreateOrder">
+                <form asp-controller="Order" asp-action="CreateOrder" method="post">
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group new-order-quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -154,9 +163,18 @@
                                     @{
                                         if (@isAuthenticated)
                                         {
-                                            <div class="form-group mb-0">
-                                                <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                            </div>
+                                            if (@isBuyer)
+                                            {
+                                                <div class="form-group mb-0">
+                                                    <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-group mb-0">
+                                                    <input disabled type="submit" value="You need to buy this product to review" class="btn btn-primary px-3">
+                                                </div>
+                                            }
                                         }
                                         if (!@isAuthenticated)
                                         {

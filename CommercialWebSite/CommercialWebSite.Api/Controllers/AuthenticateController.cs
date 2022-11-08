@@ -8,6 +8,7 @@ using System.Text;
 using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.Data.DataModel;
 using Microsoft.AspNetCore.Authorization;
+using CommercialWebSite.API.AuthHelper;
 
 namespace CommercialWebSite.API.Controllers
 {
@@ -19,6 +20,7 @@ namespace CommercialWebSite.API.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IAuthenticationRepository<UserAccount> _authRepository;
+        private readonly ITokenManager _tokenManager;
 
         // Common response
         private static StatusResponse ExistedUserError = new StatusResponse
@@ -47,11 +49,13 @@ namespace CommercialWebSite.API.Controllers
             UserManager<UserAccount> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration,
+            ITokenManager tokenManager,
             IAuthenticationRepository<UserAccount> authenticationRepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _tokenManager = tokenManager;
             _authRepository = authenticationRepository;
         }
 
@@ -71,13 +75,33 @@ namespace CommercialWebSite.API.Controllers
 
                 var token = GetToken(authClaim);
 
-                return Ok(new
+                var response = new
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     Expiration = token.ValidTo
-                });
+                };
+
+                _tokenManager.AddToken("Bearer " + response.Token);
+                return Ok(response);
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete]
+        [Route("logout")]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            Request.Headers.TryGetValue("Authorization", out var authHeader);
+            string token = authHeader.ToString();
+            if (_tokenManager.IsValid(token))
+            {
+                _tokenManager.DeleteToken(token);
+                return Ok();
+            }
+            else
             {
                 return Unauthorized();
             }
@@ -116,33 +140,44 @@ namespace CommercialWebSite.API.Controllers
         [Route("register-admin/{id}")]
         public async Task<IActionResult> RegisterAdminAsync(string id)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                UserAccount userAccount =  await _authRepository.MakeAdmin(id);
+                try
+                {
+                    UserAccount userAccount = await _authRepository.MakeAdmin(id);
 
-                //if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                //    await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-                //if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                //    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                    await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.Admin);
+                    await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.User);
 
-                await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.Admin);
-                await _authRepository.AddRoleToUserAsync(userAccount, UserRoles.User);
-
-                return Ok(userAccount);
+                    return Ok(userAccount);
+                }
+                catch (Exception)
+                {
+                    return StatusCode(
+                        StatusCodes.Status500InternalServerError,
+                        UpdateFailed);
+                }
             }
-            catch (Exception)
+            else
             {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    UpdateFailed);
+                return Unauthorized();
             }
         }
 
         [HttpGet]
         [Route("checkToken")]
         [Authorize(Roles = UserRoles.Admin)]
-        public async Task<IActionResult> CheckTokenAsync() => Ok(true);
-
+        public async Task<IActionResult> CheckTokenAsync()
+        {
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
 
         // helper method
         private JwtSecurityToken GetToken(List<Claim> authClaims)

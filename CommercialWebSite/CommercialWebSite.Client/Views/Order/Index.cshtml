@@ -3,6 +3,7 @@
 @using CommercialWebSite.ShareDTO.Business
 @inject IHttpContextAccessor HttpContextAccessor
 @using Newtonsoft.Json
+@using System.Linq;
 @{
     ViewData["Title"] = "Index";
     ISession session = HttpContextAccessor.HttpContext.Session;
@@ -44,6 +45,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <!-- Cart Start -->
+
                             <table class="table table-light table-borderless table-hover text-center mb-0">
                                 <thead class="thead-dark">
                                     <tr>
@@ -74,12 +76,12 @@
                                                                     <i class="fa fa-minus"></i>
                                                                 </button>
                                                             </div>
-                                                            <input disabled type="text" class="num-of-prod form-control
-                                                                form-control-sm bg-secondary border-0
-                                                                text-center" value=@(order.NumOfGood)>
-                                                            <input type="hidden" class="order-id form-control
-                                                                form-control-sm bg-secondary border-0
-                                                                text-center" value=@(order.OrderId)>
+                                                            <input disabled type="text"
+                                                               class="num-of-prod form-control form-control-sm bg-secondary border-0 text-center"
+                                                               value=@(order.NumOfGood)>
+                                                            <input type="hidden"
+                                                               class="order-id form-control form-control-sm bg-secondary border-0 text-center"
+                                                               value=@(order.OrderId)>
                                                             <div class="input-group-btn">
                                                                 <button class="btn btn-sm btn-primary btn-plus">
                                                                     <i class="fa fa-plus"></i>
@@ -88,7 +90,16 @@
                                                         </div>
                                                     </td>
                                                     <td id="order-total-price-@(order.OrderId)" class="align-middle">$@(order.TotalPrice)</td>
-                                                    <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                                    <td class="align-middle">
+                                                        <button class="btn btn-sm btn-danger"
+                                                        onclick="setCancelOrder('@(order.OrderId)')"
+                                                        value=@(order.OrderId)
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#orderCancelOrder"
+                                                        data-bs-whatever="@("@mdo")">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             }
                                         }
@@ -116,6 +127,7 @@
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="align-middle">
@@ -136,6 +148,14 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">$@(order.TotalPrice)</td>
+                                                    <td>
+                                                        <form asp-controller="Home" asp-action="ProductDetail">
+                                                            <button class="btn btn-sm btn-primary"
+                                                            name="id" value=@(order.ProductId)>
+                                                                Review
+                                                            </button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             }
                                         }
@@ -167,7 +187,7 @@
                         <h6>@(cartProductType)</h6>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <h6 class="font-weight-medium">x</h6>
+                        <h6 class="font-weight-medium">Number of items:</h6>
                         <h6 id="cart-item-num" class="font-weight-medium">@(cartProduct)</h6>
                     </div>
                 </div>
@@ -176,12 +196,40 @@
                         <h5>Total</h5>
                         <h5 id="total-cart-price">$@(totalCartPrice)</h5>
                     </div>
-                    <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    <form asp-controller="Order" asp-action="Checkout">
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">
+                            Proceed To Checkout
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
         <!-- Checkout Form End -->
+    </div>
 
+    <div class="modal fade" id="orderCancelOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="orderSucessModalLabel">Canceling order</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you want to cancel this order?
+                </div>
+                <div class="modal-footer">
+                    <form asp-controller="Order" asp-action="CancelOrder">
+                        <button id="confirmCancelBtn" class="btn btn-danger" name="orderId" value="0">
+                            Yes
+                        </button>
+                    </form>
+                    <button class="btn btn-secondary"
+                            data-bs-dismiss="modal" aria-label="Close">
+                        No
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Cart End -->

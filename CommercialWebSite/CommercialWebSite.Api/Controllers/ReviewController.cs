@@ -23,14 +23,21 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> PostReviewAsync([FromBody] ProductReviewModel reviewModel)
         {
-            bool isSucceeded = await _reviewRepository.PostReviewAsync(reviewModel);
-            if (isSucceeded)
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                return StatusCode(StatusCodes.Status201Created);
+                bool isSucceeded = await _reviewRepository.PostReviewAsync(reviewModel);
+                if (isSucceeded)
+                {
+                    return StatusCode(StatusCodes.Status201Created);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                }
             }
             else
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                return Unauthorized();
             }
         }
     }

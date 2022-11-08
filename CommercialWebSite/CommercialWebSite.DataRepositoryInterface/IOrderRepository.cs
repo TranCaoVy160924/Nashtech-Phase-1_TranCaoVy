@@ -13,5 +13,7 @@ namespace CommercialWebSite.DataRepositoryInterface
         Task<OrderModel> IncreaseProductNumAsync(int orderId);
         Task<OrderModel> SubProductNumAsync(int orderId);
         Task<OrderModel> CreateOrderAsync(OrderModel newOrder);
+        Task DeleteOrderAsync(int orderId);
+        Task CheckoutAsync(List<int> checkingOutOrderIds);
     }
 }

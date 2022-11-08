@@ -31,7 +31,7 @@ const AddNewProductForm = () => {
       // create the preview
       let objectUrl;
       let tempImageData = watch("productImage");
-      console.log("ProductDetail_ chosen image: ", tempImageData)
+      console.log("AddNewProductForm_ chosen image: ", tempImageData)
       if (tempImageData !== null && tempImageData.length > 0) {
          objectUrl = URL.createObjectURL(watch("productImage")[0]);
          setDisplayImage(objectUrl);

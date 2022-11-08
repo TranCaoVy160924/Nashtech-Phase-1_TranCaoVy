@@ -82,7 +82,7 @@
                 });
             </script>
         }
-    
+
         if (registerErrorMessage != null)
         {
             <script type="text/javascript">
@@ -98,6 +98,20 @@
                 window.addEventListener('DOMContentLoaded', (event) => {
                     $('#orderSucessModal').modal('show');
                 });
+            </script>
+        }
+    }
+    @{
+        if (jwtAuthToken != null)
+        {
+            <script type="text/javascript">
+                localStorage.setItem("jwtToken", 'Bearer @(jwtAuthToken)');
+            </script>
+        }
+        else
+        {
+            <script type="text/javascript">
+                localStorage.removeItem("jwtToken");
             </script>
         }
     }

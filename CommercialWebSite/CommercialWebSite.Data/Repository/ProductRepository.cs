@@ -222,6 +222,30 @@ namespace CommercialWebSite.Data.Repository
             }
         }
 
+        public async Task<bool> CheckBuyerAsync(string buyerId, int productId)
+        {
+            try
+            {
+                UserAccount buyer =
+                    await _appDbContext.UserAccounts
+                    .Include(u => u.Orders)
+                    .ThenInclude(o => o.Product)
+                    .Where(u => u.Id.Equals(buyerId))
+                    .FirstOrDefaultAsync();
+
+                bool isBuyer = buyer.Orders
+                    .Where(o => o.IsCheckedOut)
+                    .Select(o => o.Product.ProductId)
+                    .Contains(productId);
+
+                return isBuyer;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Image transform helper
         private static string TransformImage(string image)
         {

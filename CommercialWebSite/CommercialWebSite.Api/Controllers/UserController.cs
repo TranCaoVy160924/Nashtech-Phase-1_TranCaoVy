@@ -22,8 +22,15 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> GetAllAsync()
         {
-            List<UserAccountModel> products = await _userRepository.GetAllAsync();
-            return Ok(products);
+            if((bool)HttpContext.Items["isValidToken"])
+            {
+                List<UserAccountModel> products = await _userRepository.GetAllAsync();
+                return Ok(products);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
     }
 }

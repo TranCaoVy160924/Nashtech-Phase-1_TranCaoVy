@@ -16,14 +16,17 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
    const { productId } = useParams();
    const [product, setProduct] = useState({});
    const [show, setShow] = useState(false);
    const [deleteSucceeded, setDeleteSucceeded] = useState(false);
+   const [updateSucceeded, setUpdateSucceeded] = useState(false);
    const [displayImage, setDisplayImage] = useState("");
 
+   const handleCloseUpdateSuccess = () => setUpdateSucceeded(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
    const context = useContext(AppContext);
@@ -86,6 +89,7 @@ const ProductDetail = () => {
                data);
             setProduct({ ...data });
             setValue("productImage", null);
+            setUpdateSucceeded(true);
          })
          .catch(error => {
             console.log("ProductDetail_ updating product api error: ",
@@ -222,6 +226,20 @@ const ProductDetail = () => {
                   <Button variant="primary" onClick={deleteProduct}>
                      Yes
                   </Button>
+               </Modal.Footer>
+            </Modal>
+
+            <Modal show={updateSucceeded} onHide={handleCloseUpdateSuccess}>
+               <Modal.Header closeButton>
+                  <Modal.Title>Update Succeeded</Modal.Title>
+               </Modal.Header>
+               <Modal.Body>{product.productName} has been update!</Modal.Body>
+               <Modal.Footer>
+                  <Link variant="primary" to="/">
+                     <Button>
+                        Return To Product
+                     </Button>
+                  </Link>
                </Modal.Footer>
             </Modal>
          </div>

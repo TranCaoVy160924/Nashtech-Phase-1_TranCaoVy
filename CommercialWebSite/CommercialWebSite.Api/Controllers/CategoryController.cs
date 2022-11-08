@@ -1,4 +1,5 @@
-﻿using CommercialWebSite.DataRepositoryInterface;
+﻿using CommercialWebSite.API.AuthHelper;
+using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO.Auth;
 using CommercialWebSite.ShareDTO.Business;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +12,14 @@ namespace CommercialWebSite.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ITokenManager _tokenManager;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController(
+            ICategoryRepository categoryRepository,
+            ITokenManager tokenManager)
         {
             _categoryRepository = categoryRepository;
+            _tokenManager = tokenManager;
         }
 
         [HttpGet]
@@ -28,7 +33,7 @@ namespace CommercialWebSite.API.Controllers
 
                 return Ok(category);
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 return NoContent();
             }
@@ -59,15 +64,22 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> UpdateCategoryAsync(CategoryModel categoryModel)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                CategoryModel updatedCategory = 
-                    await _categoryRepository.UpdateCategoryAsync(categoryModel);
-                return Ok(updatedCategory);
+                try
+                {
+                    CategoryModel updatedCategory =
+                        await _categoryRepository.UpdateCategoryAsync(categoryModel);
+                    return Ok(updatedCategory);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
             }
         }
 
@@ -76,14 +88,21 @@ namespace CommercialWebSite.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteCategoryAsync(int id)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                await _categoryRepository.DeleteCategoryAsync(id);
-                return Ok(id);
+                try
+                {
+                    await _categoryRepository.DeleteCategoryAsync(id);
+                    return Ok(id);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
             }
         }
 
@@ -92,15 +111,22 @@ namespace CommercialWebSite.API.Controllers
         [Route("")]
         public async Task<IActionResult> AddCategoryAsync(CategoryModel newCategory)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                CategoryModel category = 
-                    await _categoryRepository.AddCategoryAsync(newCategory);
-                return Ok(category);
+                try
+                {
+                    CategoryModel category =
+                        await _categoryRepository.AddCategoryAsync(newCategory);
+                    return Ok(category);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
             }
         }
     }

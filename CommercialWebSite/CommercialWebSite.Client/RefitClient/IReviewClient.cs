@@ -7,6 +7,7 @@ namespace CommercialWebSite.Client.RefitClient
     public interface IReviewClient
     {
         [Post("/Review")]
-        Task<IActionResult> PostReviewAsync([Body] ProductReviewModel reviewModel);
+        Task<IActionResult> PostReviewAsync([Body] ProductReviewModel reviewModel,
+            [Header("Authorization")] string jwtToken);
     }
 }

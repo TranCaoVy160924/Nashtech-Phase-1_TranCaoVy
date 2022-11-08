@@ -1,5 +1,7 @@
-﻿using CommercialWebSite.DataRepositoryInterface;
+﻿using CommercialWebSite.API.AuthHelper;
+using CommercialWebSite.DataRepositoryInterface;
 using CommercialWebSite.ShareDTO.Business;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,61 +20,141 @@ namespace CommercialWebSite.API.Controllers
 
         [HttpGet]
         [Route("{buyerId}")]
+        [Authorize]
         public async Task<IActionResult> GetByBuyerIdAsync(string buyerId)
         {
-            List<OrderModel> orderModels =
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                List<OrderModel> orderModels =
                 await _orderRepository.GetByBuyerIdAsync(buyerId);
 
-            return Ok(orderModels);
+                return Ok(orderModels);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
 
         [HttpPatch]
         [Route("Incre/{orderId}")]
+        [Authorize]
         public async Task<IActionResult> IncreOrderProductNumAsync(int orderId)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                OrderModel orderModels =
-                    await _orderRepository.IncreaseProductNumAsync(orderId);
+                try
+                {
+                    OrderModel orderModels =
+                        await _orderRepository.IncreaseProductNumAsync(orderId);
 
-                return Ok(orderModels);
+                    return Ok(orderModels);
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return Unauthorized();
             }
         }
 
         [HttpPatch]
         [Route("Sub/{orderId}")]
+        [Authorize]
         public async Task<IActionResult> SubOrderProductNumAsync(int orderId)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                OrderModel orderModels =
-                    await _orderRepository.SubProductNumAsync(orderId);
+                try
+                {
+                    OrderModel orderModels =
+                        await _orderRepository.SubProductNumAsync(orderId);
 
-                return Ok(orderModels);
+                    return Ok(orderModels);
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return Unauthorized();
             }
         }
 
         [HttpPost]
         [Route("")]
+        [Authorize]
         public async Task<IActionResult> CreateOrderAsync([FromBody] OrderModel newOrder)
         {
-            try
+            if ((bool)HttpContext.Items["isValidToken"])
             {
-                OrderModel order = await _orderRepository.CreateOrderAsync(newOrder);
+                try
+                {
+                    OrderModel order = await _orderRepository.CreateOrderAsync(newOrder);
 
-                return Ok(order);
+                    return Ok(order);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return Unauthorized();
+            }
+        }
+
+        [HttpDelete]
+        [Route("{orderId}")]
+        [Authorize]
+        public async Task<IActionResult> CancelOrderAsync(int orderId)
+        {
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                try
+                {
+                    await _orderRepository.DeleteOrderAsync(orderId);
+
+                    return StatusCode(StatusCodes.Status200OK);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return Unauthorized();
+            }
+        }
+
+        [HttpPatch]
+        [Route("Checkout")]
+        [Authorize]
+        public async Task<IActionResult> CheckoutAsync([FromBody] List<int> checkingOutOrderIds)
+        {
+            if ((bool)HttpContext.Items["isValidToken"])
+            {
+                try
+                {
+                    await _orderRepository.CheckoutAsync(checkingOutOrderIds);
+
+                    return StatusCode(StatusCodes.Status200OK);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
+            {
+                return Unauthorized();
             }
         }
     }
