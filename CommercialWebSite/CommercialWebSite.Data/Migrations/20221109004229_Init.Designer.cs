@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommercialWebSite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221108021426_Init")]
+    [Migration("20221109004229_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,51 +159,6 @@ namespace CommercialWebSite.Data.Migrations
                             IsCheckedOut = true,
                             NumOfGood = 2,
                             ProductId = 4
-                        },
-                        new
-                        {
-                            OrderId = 5,
-                            BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
-                            IsActive = true,
-                            IsCheckedOut = false,
-                            NumOfGood = 2,
-                            ProductId = 5
-                        },
-                        new
-                        {
-                            OrderId = 6,
-                            BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
-                            IsActive = true,
-                            IsCheckedOut = true,
-                            NumOfGood = 2,
-                            ProductId = 6
-                        },
-                        new
-                        {
-                            OrderId = 7,
-                            BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
-                            IsActive = true,
-                            IsCheckedOut = false,
-                            NumOfGood = 2,
-                            ProductId = 7
-                        },
-                        new
-                        {
-                            OrderId = 8,
-                            BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
-                            IsActive = true,
-                            IsCheckedOut = true,
-                            NumOfGood = 2,
-                            ProductId = 8
-                        },
-                        new
-                        {
-                            OrderId = 9,
-                            BuyerId = "b74ddd14-6340-4840-95c2-db12554843e5",
-                            IsActive = true,
-                            IsCheckedOut = false,
-                            NumOfGood = 2,
-                            ProductId = 9
                         });
                 });
 
@@ -260,157 +215,157 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             ProductId = 1,
                             CategoryId = 4,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2000.0,
                             ProductName = "Product 1",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-1_iyqgel.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 2,
                             CategoryId = 4,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2000.0,
                             ProductName = "Product 2",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-2_wds2xq.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 3,
                             CategoryId = 1,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 10000.0,
                             ProductName = "Product 3",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-3_ysbo6f.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 4,
                             CategoryId = 1,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 10000.0,
                             ProductName = "Product 4",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-4_w2yb1f.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 5,
                             CategoryId = 1,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 10000.0,
                             ProductName = "Product 5",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-5_nhbfgf.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 6,
                             CategoryId = 1,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 10000.0,
                             ProductName = "Product 6",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-6_rsti5j.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 7,
                             CategoryId = 1,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 10000.0,
                             ProductName = "Product 7",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-7_ykpjce.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 8,
                             CategoryId = 3,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2300.0,
                             ProductName = "Product 8",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-8_wu5jzf.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 9,
                             CategoryId = 3,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2300.0,
                             ProductName = "Product 9",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854129/product-9_pik3wm.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 10,
                             CategoryId = 3,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2300.0,
                             ProductName = "Product 10",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-10_buoi29.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 11,
                             CategoryId = 3,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 2300.0,
                             ProductName = "Product 11",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-11_zpxzs7.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 12,
                             CategoryId = 2,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 30000.0,
                             ProductName = "Product 12",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-12_s0abhz.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         },
                         new
                         {
                             ProductId = 13,
                             CategoryId = 2,
-                            CreateDate = "11/08/2022 9:14 AM",
+                            CreateDate = "11/09/2022 7:42 AM",
                             Description = "Open your door to the world of grilling with the sleek Spirit II E-210 gas grill. This two burner grill is built to fit small spaces, and packed with features such as the powerful GS4 grilling system, iGrill capability, and convenient side tables for placing serving trays. Welcome to the Weber family.",
                             IsActive = true,
                             Price = 30000.0,
                             ProductName = "Product 13",
                             ProductPicture = "https://res.cloudinary.com/dddvmxs3h/image/upload/v1666854130/product-13_p3fpxz.jpg",
-                            UpdateDate = "11/08/2022 9:14 AM"
+                            UpdateDate = "11/09/2022 7:42 AM"
                         });
                 });
 
@@ -535,8 +490,8 @@ namespace CommercialWebSite.Data.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "54ec052c-696b-483a-840d-b9a6213ee3ef",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "3b227f73-edce-4a0a-8247-2e9d54dfd5dc",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "admin",
@@ -544,21 +499,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL4SXfZ//5fE1R3iuCwQ/U5Ou5SPKm5u35QAsbm1YrWdAitsv9lN+1kbdLhhRks9fA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDH50/zaNUKxuNAGp8AkSJofhcUAnnoSpU5Stdtt/8J5CScvFeiWgFILuzQ5WpblAg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "fab4fac1-c546-41de-aebc-a14da6895711",
-                            SecurityStamp = "963be52d-f948-493e-a917-836867a18a2c",
+                            SecurityStamp = "05e49380-8744-4c17-907b-e41101a45472",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "a5d5f27e-61fa-40b0-97d2-a41763bcc919",
+                            Id = "fb72903f-7432-4f54-a2a3-867627f727ab",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "78b17d06-4fce-4c89-87cc-f707d079fc18",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "5badee7e-43f6-45c2-889f-31ae63556167",
                             Email = "user0@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -566,21 +521,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER0@GMAIL.COM",
                             NormalizedUserName = "USER0",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFNtfz/ljmoQ+dw8xFSpo7fkt71fuyJh3rxvsIWnO6DLe/eE1nYb3lHzHesEmAzZ9A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENKngItaQidFbQcfRdVEVJ5cG1UTnopHhp7XKUAwTfhPhOTaRvBCUiKs1kDoQmSN5Q==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "73dbff83-8355-4669-9d62-cc97287adf3b",
+                            SecurityStamp = "cf9b066a-604e-4759-bac2-c95dfa5d73fb",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user0"
                         },
                         new
                         {
-                            Id = "e75f0b6e-e98e-4ddf-8f68-963a2ecd4228",
+                            Id = "e51bab40-550a-4cf8-8d3a-9c8fb28921f0",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "2ef61ed1-abd7-44ce-bcc3-37b23dc6e192",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "e0a87fcf-6efc-4e20-ad8a-f44600768715",
                             Email = "user1@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -588,21 +543,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@GMAIL.COM",
                             NormalizedUserName = "USER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC2uKrP5WtSc/qZvImWDYy4e0o5sqz1PTwGnYlc/otIisgiUKSDGv3Fd43wrHGgZmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL/gwmqM1Cu40xjHjRrD8V4SRSNaHFsgkjVpLibDylQWdjLDweXm1C9sZgBafPPInA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "ae80bee4-2794-45dd-959f-a3e60f11afb8",
+                            SecurityStamp = "45092b16-066f-48c9-bf5d-6e88e76a3d54",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user1"
                         },
                         new
                         {
-                            Id = "2892fb6e-c23c-4694-8344-55779c5ad511",
+                            Id = "5f5fb979-4b23-410e-a51a-bafa11b289ca",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "203d3f69-bbe4-4e13-9ae6-c88fc449a780",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "e76c5bae-6b84-402a-8174-e6a558be3e03",
                             Email = "user2@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -610,21 +565,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@GMAIL.COM",
                             NormalizedUserName = "USER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPraO0m+QYsZlIBFAKPmdsnwP5dpGJ4kf9ZNBXI1uA+mL8e9n2ZqGYHvugOQwkI3ZQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGx7GlaCMyxqopM9jwTp5xpv6xPy2RkYT4fvqR++z0tKu6Jyax04/cVwadbt8FUWSw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "8e0bd027-5c23-42cb-8c11-aeba3951cf69",
+                            SecurityStamp = "15cc6828-a68a-41ef-a5de-21217f37fac9",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user2"
                         },
                         new
                         {
-                            Id = "2374a79e-73d2-4977-a94e-5c6cd87a7891",
+                            Id = "1457c866-7bc6-4583-8f31-fc02b2035116",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "01433992-51d5-48b2-82ef-705a84d1a0c5",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "da1bfbf7-77b0-4464-948f-2d50e6f08906",
                             Email = "user3@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -632,21 +587,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER3@GMAIL.COM",
                             NormalizedUserName = "USER3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHBlMcXnPF0pZX1w7EG0khtOYEVeXMmb3dKfL8SSt7RkYpJqhS97ZCgY+0IuJbvHLg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBQopfeX5azhf+MOCpyGKZpUpXgO6qixazqMUjkugK8xOU4zjJt9AFaBt03l32hMYQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "4108e5d8-ff5e-4a50-b6c3-4aa477e2d8f1",
+                            SecurityStamp = "7c7771c5-603a-4177-a85c-5cd45ec94518",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user3"
                         },
                         new
                         {
-                            Id = "fecc1961-76ca-405b-957f-1a84de8351c0",
+                            Id = "a4a90be0-6a54-4225-9a90-ab441827d521",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "93a7409c-658b-460b-8086-81c044154d5a",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "32082482-f6a4-4360-b47a-49e23909ccd4",
                             Email = "user4@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -654,21 +609,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER4@GMAIL.COM",
                             NormalizedUserName = "USER4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH5nUCFbDnxV6ggxAuljRozSUyal90HyJ0BPXnYeK6bDz8s2tPjbnvVVRK4goffwxg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE8Zl0WiWJ8HIAMVIwJFeIAfjjU2Y7JfcoLT6WEeUyK0mBmFrprrgq4hAE/keLXB4g==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "3ddefacf-6622-4307-8938-e9096437ac20",
+                            SecurityStamp = "e87eaf76-9180-4750-8c8e-734a0297f715",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user4"
                         },
                         new
                         {
-                            Id = "06277a56-f91a-4bf0-a690-73dd77bc9abc",
+                            Id = "d0b2f204-eb21-4c87-9e10-1eb47b8e659a",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "165e95d3-d0e7-405c-b3d8-52603cbd84b7",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "0bf764a9-ac21-4ff3-b3b2-d96cef8f02cc",
                             Email = "user5@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -676,21 +631,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER5@GMAIL.COM",
                             NormalizedUserName = "USER5",
-                            PasswordHash = "AQAAAAEAACcQAAAAED0GD+K701umjwR3omRIOUO9vXciVrCgJaUcEW4pSdEkYFcu+sLoHZCCqQWcdfy16A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIDo1AJmLrogJlE+lTbdt36McrSrR/pULqp8+fNoGB/RQM6gjqV544IKjgFCt6sL6g==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "6cabb96c-acc1-492d-bfab-02b94099d691",
+                            SecurityStamp = "a7af0eac-8863-4bad-a21a-7d7f11c48932",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user5"
                         },
                         new
                         {
-                            Id = "3940fab0-aaa9-4913-ae21-9c2915ab77d5",
+                            Id = "bcbe06e4-ee60-41d4-8097-229ac73495fc",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "4b5e0f81-be35-4cb6-bedf-8bde34a3fb07",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "0e65ea53-61f4-48e6-8f32-77a7c33f45a9",
                             Email = "user6@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -698,21 +653,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER6@GMAIL.COM",
                             NormalizedUserName = "USER6",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGNAJFxIHmIwlB1RfOgmhvM4WqWhlQEW422blWloKYNR6nKVtLEoPFnchoJtdfYDpg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDEl5Irtxk/fMiLwmWv0catC9pE7JBIHeJqnRWca2XKiJecvIcXhUyOSIjHkKcf7vQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "a928c4e9-be10-4af1-b0b2-2b86cf19e58c",
+                            SecurityStamp = "a2e212cc-48f6-4529-952c-aeaeaef057d5",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user6"
                         },
                         new
                         {
-                            Id = "7a33a9f6-98ca-4dc2-bbce-da4474c5ec32",
+                            Id = "417815be-ada0-43c8-b2cc-8c9c2385d58d",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "4d29aeea-5070-411e-8f18-4cf877cbea7f",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "669fb66d-f30c-42ae-af66-013f8cd82c4f",
                             Email = "user7@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -720,21 +675,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER7@GMAIL.COM",
                             NormalizedUserName = "USER7",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPDjwVJB31ItPR6g2tevFgXsy7KSNxdlDxyx/HJvapLS9KQRIRyFVqYAkJVvggTHjw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB2vlI/fLg/W0eIu+Skhouw7CvJqU+nRccr6mZlCea6WouAoMycM7RIy+DV17UxmGg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "b1633951-0188-4058-ba15-47eeae753cc3",
+                            SecurityStamp = "de7fa41a-bf10-4a10-88e5-01ab83c68367",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user7"
                         },
                         new
                         {
-                            Id = "4d41151b-3c7c-4101-81fb-99d00ab884c0",
+                            Id = "a7cf8cdd-d1ac-4b96-9921-9b36f91aba4a",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "cf757900-6362-4cdf-af0e-b0c1812fb2bb",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "18ada692-7fef-4112-b7f3-78aa2075227c",
                             Email = "user8@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -742,21 +697,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER8@GMAIL.COM",
                             NormalizedUserName = "USER8",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGDzd6ANiEMHVx9oohKfQ9xmuqM2YV32dKPEi2TmoJHELCOs8/FHWE5qvn4bu4SZtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHrLCYl99QQeYvnL+V9Cl1quKAvkIM7jDIy0pGEyLwQWEJyxlFnpVdTqcS+UyKgkxw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "80e46ed2-ed9d-4112-8909-842d438e8515",
+                            SecurityStamp = "5daf95a5-ffdf-4b4e-8303-5c93b7709102",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user8"
                         },
                         new
                         {
-                            Id = "bccb83e5-bfda-43eb-bd4a-28b9ae25c209",
+                            Id = "cfe21517-b8ff-46b5-9619-9a9e96141f07",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "248d6f6c-8b1b-4760-8ea2-5b1e6d86c7de",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "f83288e2-28e1-4067-ada0-8f5a2d288a32",
                             Email = "user9@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -764,21 +719,21 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER9@GMAIL.COM",
                             NormalizedUserName = "USER9",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDnYKy4XBjh1KHiB8RhyDvO8Zje3vO2sIefl6JpLTKIeET3TXoHGz8q04Z/IOMExUg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBPkCFcrYLU8RbIgvEdi/EOVg4jLkpg6TyAfw3/l2OMldvCTp9meUOc8PBG9u3xVbQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "c8118e89-a687-4ae7-bbbb-808463e35d3f",
+                            SecurityStamp = "e2a030aa-6008-41e4-acac-b52f30a5ea9d",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user9"
                         },
                         new
                         {
-                            Id = "83ca93da-b52c-4c8c-84d8-a03ef72eb0c0",
+                            Id = "ba402e2b-807c-4b18-b4e2-c660165195a0",
                             AccessFailedCount = 0,
-                            Birthday = new DateTime(2022, 11, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "ac63bac0-cbec-4d81-95eb-82ac4fb2de5e",
+                            Birthday = new DateTime(2022, 11, 9, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "eecf1ffb-45df-4598-a2fb-4e766076bd3e",
                             Email = "user10@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "user",
@@ -786,11 +741,11 @@ namespace CommercialWebSite.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER10@GMAIL.COM",
                             NormalizedUserName = "USER10",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ9NmFY2JOcAwC3B+7VZ9Sf6AuJm9e/x6x+c//43EWPCU7LzdO6qbUhwCNR7VI0nkA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFl+N4UlXa8CPtHcHxPTx0Xud5/VO7LnyLpmxK9Ku8q9yKh/McdA5Lio5JumGsEmVg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330",
-                            SecurityStamp = "72b334a2-cb9a-4e14-b964-970fe249aa29",
+                            SecurityStamp = "6c0a0df2-9e62-4655-bfcf-fcb2349e3eab",
                             TwoFactorEnabled = false,
                             UserAddress = "sdfasdfsadf",
                             UserName = "user10"

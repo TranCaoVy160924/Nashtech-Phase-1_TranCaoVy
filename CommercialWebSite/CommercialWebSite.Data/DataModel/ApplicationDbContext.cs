@@ -406,7 +406,7 @@ namespace CommercialWebSite.Data.DataModel
 
         private void SeedOrder(ModelBuilder builder)
         {
-            for(int i = 1; i < 10; i++)
+            for(int i = 1; i < 5; i++)
             {
                 builder.Entity<Order>()
                     .HasData(new
