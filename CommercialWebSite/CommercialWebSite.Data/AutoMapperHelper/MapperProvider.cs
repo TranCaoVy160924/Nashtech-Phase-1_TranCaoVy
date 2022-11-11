@@ -50,6 +50,11 @@ namespace CommercialWebSite.Data.AutoMapperHelper
                     dest => dest.CategoryId,
                     act => act.MapFrom(src =>
                         src.Category.IsActive ? src.Category.CategoryId : -1)
+                )
+                .ForMember(
+                    dest => dest.CategoryName,
+                    act => act.MapFrom(src =>
+                        src.Category.IsActive ? src.Category.CategoryName : "No category")
                 ));
             _productMapper = new MapperHelper<Product, ProductModel>(productConfig);
             return _productMapper;

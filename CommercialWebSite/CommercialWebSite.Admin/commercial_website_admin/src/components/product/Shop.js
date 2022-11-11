@@ -116,7 +116,7 @@ const Shop = ({ catChoice, productName }) => {
                            <td className="text-center">{p.productId}</td>
                            <td className="text-center">{p.productName}</td>
                            <td className="text-center">{p.numberInStorage}</td>
-                           <td className="text-center">{p.categoryId}</td>
+                           <td className="text-center">{p.categoryName}</td>
                            <td className="text-center">{p.price}</td>
                            <td className="d-flex justify-content-center">
                               <Link to={`/product/${p.productId}`}>
